@@ -1,0 +1,22 @@
+body {
+    text-align: center;
+}
+
+a {
+    font-size: 1.5em;
+    color: royalblue;
+}
+
+a:visited {
+    color: royalblue;
+}
+
+a:hover {
+    color: cadetblue;
+}
+
+#title {
+    text-align: center;
+    font-size: 4em;
+    font-family: Helvetica, Arial, sans-serif;
+}
