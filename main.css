@@ -5,6 +5,7 @@ body {
 a {
     font-size: 1.5em;
     color: royalblue;
+    display: block;
 }
 
 a:visited {

@@ -6,7 +6,7 @@ let terrain = [];
 let car;
 
 function setup() {
-    createCanvas(1600, 1000);
+    createCanvas(innerWidth, innerHeight);
     initBackground();
 
     for (let i = 0; i < terrainPos.length; i++) {
