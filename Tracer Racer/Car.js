@@ -52,8 +52,10 @@ class Car {
 
                     this.loops++;
                 }
-                else
+                else {
                     this.forwardWay = true;
+                    this.startDate = new Date().getTime();
+                }
             } else if (this.pos.x > 50 && this.pos.x < 430 && this.pos.y < 600 && this.pos.y + this.vel.y > 600) {
                 this.forwardWay = false;
             }
