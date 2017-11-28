@@ -29,6 +29,8 @@ function setup() {
 function draw() {
     background(210);
 
+    text(car.loops, 30, 30);
+
     camera(car.pos.x - width / 2, car.pos.y - height / 2, 0, 0, 0, 0, 1, 0)
     //translate(100, 100);
     scale(1);
@@ -88,7 +90,7 @@ function keyPressed() {
     if (keyCode == 32) {
         car.vel.mult(0);
         car.pos.x = 260;
-        car.pos.y = 600;
+        car.pos.y = 700;
         car.angle = 0;
     }
 }

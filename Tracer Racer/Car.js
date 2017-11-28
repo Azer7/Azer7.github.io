@@ -8,6 +8,9 @@ class Car {
         this._angle = 0;
         this.crashed = false;
 
+        this.forwardWay = true;
+        this.loops = 0;
+
         this.rayNum = rayAmount;
         this.rays = [];
 
@@ -36,6 +39,14 @@ class Car {
             } else {
                 this.vel.mult(.985);
             }            
+            if (this.pos.x > 50 && this.pos.x < 430 && this.pos.y > 600 && this.pos.y + this.vel.y < 600) {
+                if (this.forwardWay)
+                    this.loops++;
+                else
+                    this.forwardWay = true;
+            } else if (this.pos.x > 50 && this.pos.x < 430 && this.pos.y < 600 && this.pos.y + this.vel.y > 600) {
+                this.forwardWay = false;
+            }
             this.pos.add(this.vel);
             this.acc.mult(0); // only do once
 
@@ -89,7 +100,10 @@ class Car {
         translate(this.pos.x, this.pos.y);
         rotate(this._angle);
         rectMode(CENTER);
-        fill("grey");
+        if (this.forwardWay)
+            fill("grey");
+        else
+            fill("red");
         rect(0, 0, 20, 40);
         pop();
     }
