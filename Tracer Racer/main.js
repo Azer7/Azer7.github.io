@@ -28,8 +28,11 @@ function setup() {
 
 function draw() {
     background(210);
+    textSize(20);
 
     text(car.loops, 30, 30);
+    text("time: " + Math.round(car.currentTime * 100) / 100, 30, 55);
+    text("best time: " + car.bestTime, 30, 80);
 
     camera(car.pos.x - width / 2, car.pos.y - height / 2, 0, 0, 0, 0, 1, 0)
     //translate(100, 100);

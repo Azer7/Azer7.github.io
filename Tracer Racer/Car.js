@@ -9,6 +9,9 @@ class Car {
         this.crashed = false;
 
         this.forwardWay = true;
+        this.startDate = new Date().getTime();
+        this.currentTime = 0;
+        this.bestTime = "N/A";
         this.loops = 0;
 
         this.rayNum = rayAmount;
@@ -31,17 +34,24 @@ class Car {
 
     process(objArr) {
         if (!this.crashed) {
+            this.currentTime = (new Date().getTime() - car.startDate) / 1000;
+
             //add movement
             this.acc.rotate(this._angle);
             this.vel.add(this.acc.div(this.slowDown));
             if (this.acc.x == 0 && this.acc.y == 0) {
-                this.vel.mult(.975);
+                this.vel.mult(.88);
             } else {
                 this.vel.mult(.985);
             }            
             if (this.pos.x > 50 && this.pos.x < 430 && this.pos.y > 600 && this.pos.y + this.vel.y < 600) {
-                if (this.forwardWay)
+                if (this.forwardWay) {
+                    this.startDate = new Date().getTime();
+                    if (this.loops == 0 || this.currentTime < this.bestTime)
+                        this.bestTime = this.currentTime;                   
+
                     this.loops++;
+                }
                 else
                     this.forwardWay = true;
             } else if (this.pos.x > 50 && this.pos.x < 430 && this.pos.y < 600 && this.pos.y + this.vel.y > 600) {
@@ -49,6 +59,7 @@ class Car {
             }
             this.pos.add(this.vel);
             this.acc.mult(0); // only do once
+            this.currentTime += 0.016;
 
             //process rays
 //            for (let i = 0; i < this.rays.length; i++) {
