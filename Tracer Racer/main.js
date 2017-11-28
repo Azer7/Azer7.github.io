@@ -5,6 +5,8 @@ let objects = [];
 let terrain = [];
 let car;
 
+let pressedDown = false;
+
 function setup() {
     createCanvas(innerWidth, innerHeight);
     initBackground();
@@ -62,7 +64,7 @@ function draw() {
 
     let compression = 0;
 
-    if (mouseIsPressed) {
+    if (mouseIsPressed || pressedDown) {
         car.acc.y -= car.speed;
     }
     if (keyIsDown(83)) {
@@ -97,3 +99,11 @@ function keyPressed() {
         car.angle = 0;
     }
 }
+
+window.addEventListener('touchstart', function() {
+  pressedDown = true;
+});
+
+window.addEventListener('touchend', function() {
+  pressedDown = false;
+});
