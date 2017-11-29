@@ -44,7 +44,7 @@ class Car {
             } else {
                 this.vel.mult(.985);
             }            
-            if (this.pos.x > 50 && this.pos.x < 430 && this.pos.y > 600 && this.pos.y + this.vel.y < 600) {
+            if (this.pos.x > 50 && this.pos.x < 430 && this.pos.y >= 600 && this.pos.y + this.vel.y < 600) {
                 if (this.forwardWay) {
                     this.startDate = new Date().getTime();
                     if (this.loops == 0 || this.currentTime < this.bestTime)
@@ -56,7 +56,7 @@ class Car {
                     this.forwardWay = true;
                     this.startDate = new Date().getTime();
                 }
-            } else if (this.pos.x > 50 && this.pos.x < 430 && this.pos.y < 600 && this.pos.y + this.vel.y > 600) {
+            } else if (this.pos.x > 50 && this.pos.x < 430 && this.pos.y <= 600 && this.pos.y + this.vel.y > 600) {
                 this.forwardWay = false;
             }
             this.pos.add(this.vel);

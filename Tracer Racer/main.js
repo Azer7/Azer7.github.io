@@ -95,7 +95,7 @@ function keyPressed() {
     if (keyCode == 32) {
         car.vel.mult(0);
         car.pos.x = 260;
-        car.pos.y = 700;
+        car.pos.y = 600;
         car.angle = 0;
     }
 }
@@ -107,3 +107,5 @@ window.addEventListener('touchstart', function() {
 window.addEventListener('touchend', function() {
   pressedDown = false;
 });
+
+window.addEventListener('touchmove', function(e){e.preventDefault()});
