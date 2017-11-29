@@ -1,6 +1,11 @@
 const overflow = 10000; //10k
 const precision = 0.0001; // 10kths
 
+let canvas;
+let stage;
+let displayStage;
+let camera;
+
 let objects = [];
 let terrain = [];
 let car;
@@ -8,6 +13,7 @@ let car;
 let mouse = new Vector();
 let mouseDown = false;
 let keys = [];
+
 
 let score = new createjs.Container();
 
@@ -18,7 +24,8 @@ function init() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight + 1;
     stage = new createjs.Stage(canvas);
-
+    displayStage = new createjs.Container();
+    stage.addChild(displayStage);
     //player stuff
     stage.addEventListener("stagemousemove", moveCanvas);
     stage.addEventListener("stagemousedown", mousePressed);
@@ -40,17 +47,51 @@ function init() {
     else
         car = new Car(260, 600, 12);
 
+    let loopLabel = new createjs.Text("", "bold 24px Arial", "#FFF");
+    loopLabel.textAlign = "center";
+    loopLabel.textBaseline = "middle";
+    loopLabel.x = 40;
+    loopLabel.y = 20;
+    score.addChild(loopLabel);
+
+    let currTimeLabel = new createjs.Text("", "bold 24px Arial", "#FFF");
+    currTimeLabel.textAlign = "center";
+    currTimeLabel.textBaseline = "middle";
+    currTimeLabel.x = 40;
+    currTimeLabel.y = 45;
+    score.addChild(currTimeLabel);
+
+    let bestTimeLabel = new createjs.Text("", "bold 24px Arial", "#FFF");
+    bestTimeLabel.textAlign = "center";
+    bestTimeLabel.textBaseline = "middle";
+    bestTimeLabel.x = 40;
+    bestTimeLabel.y = 70;
+    score.addChild(bestTimeLabel);
+    displayStage.addChild(score);
+
+    let guideLines = new createjs.Shape();
+    guideLines.graphics.setStrokeStyle(5).beginStroke("black")
+    guideLines.graphics.moveTo(0, 0).lineTo(4800, 0).lineTo(4800, 3000).lineTo(0, 3000).lineTo(0, 0);
+    guideLines.graphics.moveTo(0, 1000).lineTo(4800, 1000);
+    guideLines.graphics.moveTo(0, 2000).lineTo(4800, 2000);
+
+    guideLines.graphics.moveTo(1600, 0).lineTo(1600, 3000);
+    guideLines.graphics.moveTo(3200, 0).lineTo(3200, 3000);
+
+    displayStage.addChild(guideLines);
+
+    camera = new Camera(displayStage);
+    camera.focalDistance = 500;
+    camera.x = -100;
 
     createjs.Ticker.timingMode = createjs.Ticker.RAF;
     createjs.Ticker.addEventListener("tick", tick);
 }
 
 function tick(e) {
-    //textSize(20);
-
-    //text(car.loops, 30, 30);
-    //text("time: " + Math.round(car.currentTime * 100) / 100, 30, 55);
-    //text("best time: " + car.bestTime, 30, 80);
+    score.children[0].text = car.loops;
+    score.children[1].text = car.currentTime;
+    score.children[2].text = car.bestTime;
 
     //camera(car.pos.x - width / 2, car.pos.y - height / 2, 0, 0, 0, 0, 1, 0)
     ////translate(100, 100);
@@ -65,11 +106,11 @@ function tick(e) {
     //line(0, 2000, 4800, 2000);
     //line(1600, 0, 1600, 3000);
     //line(3200, 0, 3200, 3000);
-    
+
     //stroke("white");
     //line(50, 600, 430, 600);
 
-    ////draw
+    //draw
     //for (let i = 0; i < objects.length; i++) {
     //    objects[i].draw();
     //}
@@ -106,6 +147,7 @@ function tick(e) {
     //localStorage.setItem("x", car.pos.x);
     //localStorage.setItem("y", car.pos.y);
 
+    camera.update();
     stage.update(event);
 }
 
@@ -133,11 +175,11 @@ onkeydown = onkeyup = function (e) {
         car.angle = 0;
     }
 }
-window.addEventListener('touchstart', function() {
+window.addEventListener('touchstart', function () {
     mouseDown = true;
 });
 
-window.addEventListener('touchend', function() {
+window.addEventListener('touchend', function () {
     mouseDown = false;
 });
 
