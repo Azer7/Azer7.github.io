@@ -108,4 +108,4 @@ window.addEventListener('touchend', function() {
   pressedDown = false;
 });
 
-window.addEventListener('touchmove', function(e){e.preventDefault()});
+//window.addEventListener('touchmove', function(e){e.preventDefault()});
