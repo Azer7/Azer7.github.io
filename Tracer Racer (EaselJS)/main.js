@@ -4,7 +4,6 @@ const precision = 0.0001; // 10kths
 let canvas;
 let stage;
 let displayStage;
-let camera;
 
 let objects = [];
 let terrain = [];
@@ -22,7 +21,7 @@ let pressedDown = false;
 function init() {
     canvas = document.getElementById("game");
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight + 1;
+    canvas.height = window.innerHeight;
     stage = new createjs.Stage(canvas);
     displayStage = new createjs.Container();
     stage.addChild(displayStage);
@@ -32,7 +31,7 @@ function init() {
     stage.addEventListener("stagemouseup", mouseReleased);
 
     for (let i = 0; i < terrainPos.length; i++) {
-        terrain.push(new Border(terrainPos[i].x1, terrainPos[i].y1, terrainPos[i].x2, terrainPos[i].y2));
+        terrain.push(new Border(terrainPos[i].x, terrainPos[i].y, terrainPos[i].newLine));
     }
 
     lastLine.x = terrainPos[leftIndex].x2;
@@ -67,7 +66,7 @@ function init() {
     bestTimeLabel.x = 40;
     bestTimeLabel.y = 70;
     score.addChild(bestTimeLabel);
-    displayStage.addChild(score);
+    stage.addChild(score);
 
     let guideLines = new createjs.Shape();
     guideLines.graphics.setStrokeStyle(5).beginStroke("black")
@@ -80,10 +79,6 @@ function init() {
 
     displayStage.addChild(guideLines);
 
-    camera = new Camera(displayStage);
-    camera.focalDistance = 500;
-    camera.x = -100;
-
     createjs.Ticker.timingMode = createjs.Ticker.RAF;
     createjs.Ticker.addEventListener("tick", tick);
 }
@@ -93,20 +88,9 @@ function tick(e) {
     score.children[1].text = car.currentTime;
     score.children[2].text = car.bestTime;
 
-    //camera(car.pos.x - width / 2, car.pos.y - height / 2, 0, 0, 0, 0, 1, 0)
-    ////translate(100, 100);
-    //scale(1);
-    ////box border
-    //line(0, 0, 4800, 0);
-    //line(0, 0, 0, 3000);
-    //line(4800, 0, 4800, 3000);
-    //line(0, 3000, 4800, 3000);
-
-    //line(0, 1000, 4800, 1000);
-    //line(0, 2000, 4800, 2000);
-    //line(1600, 0, 1600, 3000);
-    //line(3200, 0, 3200, 3000);
-
+   // camera(car.pos.x - width / 2, car.pos.y - height / 2, 0, 0, 0, 0, 1, 0)
+    displayStage.x = car.pos.x + canvas.width / 2;
+    displayStage.y = car.pos.y + canvas.height / 2;
     //stroke("white");
     //line(50, 600, 430, 600);
 
@@ -147,7 +131,6 @@ function tick(e) {
     //localStorage.setItem("x", car.pos.x);
     //localStorage.setItem("y", car.pos.y);
 
-    camera.update();
     stage.update(event);
 }
 
