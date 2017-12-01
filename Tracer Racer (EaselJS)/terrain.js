@@ -348,7 +348,7 @@ let terrainPos = [
         newLine: true,
         x: 790,
         y: 1900,
-    }
+    },
     {
         x: 700,
         y: 1760

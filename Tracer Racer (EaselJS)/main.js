@@ -31,7 +31,12 @@ function init() {
     stage.addEventListener("stagemouseup", mouseReleased);
 
     for (let i = 0; i < terrainPos.length; i++) {
-        terrain.push(new Border(terrainPos[i].x, terrainPos[i].y, terrainPos[i].newLine));
+        if (terrain[i].newLine == "true") {
+            lastLine.x = terrain[i].x;
+            lastLine.y = terrain[i].y;
+        } else {
+            terrain.push(new Border(terrainPos[i].x, terrainPos[i].y));
+        }
     }
 
     lastLine.x = terrainPos[leftIndex].x2;
@@ -88,7 +93,7 @@ function tick(e) {
     score.children[1].text = car.currentTime;
     score.children[2].text = car.bestTime;
 
-   // camera(car.pos.x - width / 2, car.pos.y - height / 2, 0, 0, 0, 0, 1, 0)
+    // camera(car.pos.x - width / 2, car.pos.y - height / 2, 0, 0, 0, 0, 1, 0)
     displayStage.x = car.pos.x + canvas.width / 2;
     displayStage.y = car.pos.y + canvas.height / 2;
     //stroke("white");

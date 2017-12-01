@@ -36,8 +36,8 @@ let lastLine = {
 
 //custom shapes and arrangements
 class Border extends Shape { //this looks awfully like class Line because it *almost is (kinda)
-    constructor(x, y, xEnd, yEnd) {
-        super(x ? x : lastLine.x, y ? y : lastLine.y);
+    constructor(xEnd, yEnd) {
+        super(lastLine.x,lastLine.y);
         this.posEnd = new Vector(xEnd, yEnd);
 
         lastLine.x = this.posEnd.x;
