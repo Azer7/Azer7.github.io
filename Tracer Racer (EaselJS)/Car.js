@@ -13,12 +13,17 @@ class Car {
         this.currentTime = 0;
         this.bestTime = "N/A";
         this.loops = 0;
-
         this.rayNum = rayAmount;
         this.rays = [];
 
         for (let i = 0; i < rayAmount; i++)
             this.rays.push(new Ray(0, 0, i * (360 / rayAmount)));
+
+        this.g = new createjs.Shape();
+        this.g.graphics.setStrokeStyle(1).beginStroke("black");
+        this.fill = this.g.graphics.beginFill("red").command;
+        this.g.graphics.drawRect(-15, -25, 30, 50);
+        stage.addChild(this.g);
     }
 
     get angle() {
@@ -38,17 +43,17 @@ class Car {
 
             //add movement
             this.acc.rotate(this._angle);
-            this.vel.add(this.acc.div(this.slowDown));
+            this.vel.add(this.acc.divideScalar(this.slowDown));
             if (this.acc.x == 0 && this.acc.y == 0) {
-                this.vel.mult(.88);
+                this.vel.multiplyScalar(.88);
             } else {
-                this.vel.mult(.985);
-            }            
+                this.vel.multiplyScalar(.985);
+            }
             if (this.pos.x > 50 && this.pos.x < 430 && this.pos.y >= 600 && this.pos.y + this.vel.y < 600) {
                 if (this.forwardWay) {
                     this.startDate = new Date().getTime();
                     if (this.loops == 0 || this.currentTime < this.bestTime)
-                        this.bestTime = this.currentTime;                   
+                        this.bestTime = this.currentTime;
 
                     this.loops++;
                 }
@@ -60,20 +65,20 @@ class Car {
                 this.forwardWay = false;
             }
             this.pos.add(this.vel);
-            this.acc.mult(0); // only do once
+            this.acc.multiplyScalar(0); // only do once
             this.currentTime += 0.016;
 
             //process rays
-//            for (let i = 0; i < this.rays.length; i++) {
-//                this.rays[i].pos = this.pos;
-//                this.rays[i]._angle = this._angle + this.rays[i].baseAngle;
-//            }
+            //            for (let i = 0; i < this.rays.length; i++) {
+            //                this.rays[i].pos = this.pos;
+            //                this.rays[i]._angle = this._angle + this.rays[i].baseAngle;
+            //            }
             let totalVector = new Vector(0, 0);
-            
+
             for (let i = 0; i < this.rays.length; i++) {
-             
+
                 this.rays[i].pos = this.pos;
-               this.rays[i].checkCollisions(objArr);
+                this.rays[i].checkCollisions(objArr);
                 //calculate collision bounce back direction
                 let largestVector = new Vector(-1, this.rays[i].slope);
                 if (this.rays[i].angle > 270 || this.rays[i].angle < 90) {
@@ -84,40 +89,37 @@ class Car {
                     largestVector.y *= -1;
 
                 //same as setMag to get actually distance to move back
-                largestVector.mult(this.rays[i].maxLength / largestVector.mag());
+                largestVector.multiplyScalar(this.rays[i].maxLength / largestVector.length());
                 //this.speed / 10 to get how much of the bounce back vector to move
                 let pushVector = new Vector(0, 0);
                 pushVector.x = (this.speed / 1) * (largestVector.x - (this.rays[i].posEnd.x - this.rays[i].pos.x))
                 pushVector.y = (this.speed / 1) * (largestVector.y - (this.rays[i].posEnd.y - this.rays[i].pos.y));
-                this.vel.sub(pushVector);
-                
+                this.vel.subtract(pushVector);
+
                 totalVector.add(pushVector);
                 //if (this.rays[i].length < 10)
-                 //   this.crashed = true;
+                //   this.crashed = true;
             }
-            if(totalVector.mag() > precision)
-                car.vel.mult(.6);
-            car.slowDown = 1 + totalVector.mag();
+            if (totalVector.length() > precision)
+                car.vel.multiplyScalar(.6);
+            car.slowDown = 1 + totalVector.length();
         }
     }
 
     draw() {
         //draw rays
-        Ray.preDraw();
-        for (let i = 0; i < this.rays.length; i++) {
-            this.rays[i].draw();
-        }
+        //Ray.preDraw();
+        //for (let i = 0; i < this.rays.length; i++) {
+        //    this.rays[i].draw();
+        //}
 
         //draw car
-        push();
-        translate(this.pos.x, this.pos.y);
-        rotate(this._angle);
-        rectMode(CENTER);
+        this.g.x = canvas.width / 2;
+        this.g.y = canvas.height / 2;
+        this.g.rotation = this.angle;
         if (this.forwardWay)
-            fill("grey");
+            this.fill.style = "#999999";
         else
-            fill("red");
-        rect(0, 0, 20, 40);
-        pop();
+            this.fill.style = "#c04000";
     }
 }

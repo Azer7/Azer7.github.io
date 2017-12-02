@@ -9,10 +9,13 @@ let objects = [];
 let terrain = [];
 let car;
 
-let mouse = new Vector();
+let mouse = {
+    x: 0,
+    y: 0,
+    down: false
+};
 let mouseDown = false;
 let keys = [];
-
 
 let score = new createjs.Container();
 
@@ -30,14 +33,27 @@ function init() {
     stage.addEventListener("stagemousedown", mousePressed);
     stage.addEventListener("stagemouseup", mouseReleased);
 
+    let terrainGraphics;
+
     for (let i = 0; i < terrainPos.length; i++) {
-        if (terrain[i].newLine == "true") {
-            lastLine.x = terrain[i].x;
-            lastLine.y = terrain[i].y;
+        if (terrainPos[i].newLine) {
+            if (terrainGraphics) {
+                displayStage.addChild(new createjs.Shape(terrainGraphics));
+            }            
+            
+            lastLine.x = terrainPos[i].x;
+            lastLine.y = terrainPos[i].y;
+
+            terrainGraphics = new createjs.Graphics();
+            terrainGraphics.setStrokeStyle(5).beginStroke("black")
+            terrainGraphics.moveTo(lastLine.x, lastLine.y);            
         } else {
             terrain.push(new Border(terrainPos[i].x, terrainPos[i].y));
+            terrainGraphics.lineTo(terrainPos[i].x, terrainPos[i].y);
         }
     }
+    displayStage.addChild(new createjs.Shape(terrainGraphics));
+
 
     lastLine.x = terrainPos[leftIndex].x2;
     lastLine.y = terrainPos[leftIndex].y2;
@@ -74,15 +90,18 @@ function init() {
     stage.addChild(score);
 
     let guideLines = new createjs.Shape();
-    guideLines.graphics.setStrokeStyle(5).beginStroke("black")
+    guideLines.graphics.setStrokeStyle(5).beginStroke("black");
     guideLines.graphics.moveTo(0, 0).lineTo(4800, 0).lineTo(4800, 3000).lineTo(0, 3000).lineTo(0, 0);
     guideLines.graphics.moveTo(0, 1000).lineTo(4800, 1000);
     guideLines.graphics.moveTo(0, 2000).lineTo(4800, 2000);
 
     guideLines.graphics.moveTo(1600, 0).lineTo(1600, 3000);
     guideLines.graphics.moveTo(3200, 0).lineTo(3200, 3000);
-
+    guideLines.alpha = 0.5;
+    
     displayStage.addChild(guideLines);
+
+    displayStage.cache(-2.5, -2.5, 4805, 3005);
 
     createjs.Ticker.timingMode = createjs.Ticker.RAF;
     createjs.Ticker.addEventListener("tick", tick);
@@ -94,8 +113,12 @@ function tick(e) {
     score.children[2].text = car.bestTime;
 
     // camera(car.pos.x - width / 2, car.pos.y - height / 2, 0, 0, 0, 0, 1, 0)
-    displayStage.x = car.pos.x + canvas.width / 2;
-    displayStage.y = car.pos.y + canvas.height / 2;
+    ///displayStage.x = car.pos.x - canvas.width / 2;
+    ///displayStage.y = car.pos.y - canvas.height / 2;
+    displayStage.x = -1 * (car.pos.x - canvas.width / 2);
+    displayStage.y = -1 * (car.pos.y - canvas.height / 2);
+
+
     //stroke("white");
     //line(50, 600, 430, 600);
 
@@ -110,9 +133,9 @@ function tick(e) {
 
     //let compression = 0;
 
-    //if (mouseIsPressed || pressedDown) {
-    //    car.acc.y -= car.speed;
-    //}
+    if (mouse.down || pressedDown) {
+        car.acc.y -= car.speed;
+    }
     //if (keyIsDown(83)) {
     //    car.acc.y += car.speed * 0.5; //reverse
     //}
@@ -124,17 +147,17 @@ function tick(e) {
     //    car.angle += 2 * (1 + car.vel.mag() / 40);
     //}
 
-    //let mouseVec = new Vector(mouseX, mouseY);
+    let mouseVec = new Vector(mouse.x, mouse.y);
 
-    //mouseVec.x -= width / 2;
-    //mouseVec.y -= height / 2;
-    //car._angle = mouseVec.heading() + Math.PI / 2;
+    mouseVec.x -= canvas.width / 2;
+    mouseVec.y -= canvas.height / 2;
+    car._angle = mouseVec.angle() + Math.PI / 2;
 
-    //car.process(terrain);
-    //car.draw();
+    car.process(terrain);
+    car.draw();
 
-    //localStorage.setItem("x", car.pos.x);
-    //localStorage.setItem("y", car.pos.y);
+    localStorage.setItem("x", car.pos.x);
+    localStorage.setItem("y", car.pos.y);
 
     stage.update(event);
 }
@@ -146,18 +169,18 @@ function moveCanvas(e) {
 }
 
 function mousePressed(e) {
-    mouseDown = true;
+    mouse.down = true;
 }
 
 function mouseReleased(e) {
-    mouseDown = false;
+    mouse.down = false;
 }
 
 onkeydown = onkeyup = function (e) {
     e = e || event; // to deal with IE
     keys[e.keyCode] = e.type == 'keydown';
     if (e.keyCode = 32 && keys[32]) {
-        car.vel.mult(0);
+        car.vel.multiply(0);
         car.pos.x = 260;
         car.pos.y = 600;
         car.angle = 0;

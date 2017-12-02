@@ -3,7 +3,7 @@ let leftIndex = 9;
 let terrainPos = [
     //left wall
     {
-        newLine = true,
+        newLine: true,
         x: 50,
         y: 600,
     },
