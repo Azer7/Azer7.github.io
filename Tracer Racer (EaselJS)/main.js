@@ -29,9 +29,10 @@ function init() {
     displayStage = new createjs.Container();
     stage.addChild(displayStage);
     //player stuff
-    stage.addEventListener("stagemousemove", moveCanvas);
-    stage.addEventListener("stagemousedown", mousePressed);
-    stage.addEventListener("stagemouseup", mouseReleased);
+    stage.on("stagemousemove", moveCanvas);
+    stage.on("stagemousedown", mousePressed);
+    stage.on("stagemouseup", mouseReleased);
+
 
     let terrainGraphics;
 
@@ -104,12 +105,12 @@ function init() {
     displayStage.cache(-2.5, -2.5, 4805, 3005);
 
     createjs.Ticker.timingMode = createjs.Ticker.RAF;
-    createjs.Ticker.addEventListener("tick", tick);
+    createjs.Ticker.on("tick", tick);
 }
 
 function tick(e) {
     score.children[0].text = car.loops;
-    score.children[1].text = car.currentTime;
+    score.children[1].text = Math.round(car.currentTime * 100) / 100;
     score.children[2].text = car.bestTime;
 
     // camera(car.pos.x - width / 2, car.pos.y - height / 2, 0, 0, 0, 0, 1, 0)
@@ -122,30 +123,9 @@ function tick(e) {
     //stroke("white");
     //line(50, 600, 430, 600);
 
-    //draw
-    //for (let i = 0; i < objects.length; i++) {
-    //    objects[i].draw();
-    //}
-
-    //for (let i = 0; i < terrain.length; i++) {
-    //    terrain[i].draw();
-    //}
-
-    //let compression = 0;
-
     if (mouse.down || pressedDown) {
         car.acc.y -= car.speed;
     }
-    //if (keyIsDown(83)) {
-    //    car.acc.y += car.speed * 0.5; //reverse
-    //}
-    //if (keyIsDown(65)) {
-    //    car.angle -= 2 * (1 + car.vel.mag() / 40);
-
-    //}
-    //if (keyIsDown(68)) {
-    //    car.angle += 2 * (1 + car.vel.mag() / 40);
-    //}
 
     let mouseVec = new Vector(mouse.x, mouse.y);
 
@@ -187,11 +167,11 @@ onkeydown = onkeyup = function (e) {
     }
 }
 window.addEventListener('touchstart', function () {
-    mouseDown = true;
+    mouse.down = true;
 });
 
 window.addEventListener('touchend', function () {
-    mouseDown = false;
+    mouse.down = false;
 });
 
 //window.addEventListener('touchmove', function(e){e.preventDefault()});
