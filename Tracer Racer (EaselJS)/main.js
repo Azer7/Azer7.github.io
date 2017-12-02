@@ -26,6 +26,7 @@ function init() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     stage = new createjs.Stage(canvas);
+    createjs.Touch.enable(stage);
     displayStage = new createjs.Container();
     stage.addChild(displayStage);
     //player stuff
@@ -71,7 +72,7 @@ function init() {
     else
         car = new Car(260, 600, 12);
 
-    let loopLabel = new createjs.Text("", "bold 24px Arial", "#FFF");
+    let loopLabel = new createjs.Text("v1.2", "bold 24px Arial", "#FFF");
     loopLabel.textAlign = "center";
     loopLabel.textBaseline = "middle";
     loopLabel.x = 40;
