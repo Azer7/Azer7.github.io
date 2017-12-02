@@ -33,6 +33,9 @@ function init() {
     stage.on("stagemousedown", mousePressed);
     stage.on("stagemouseup", mouseReleased);
 
+    stage.on("pressmove", moveCanvas);
+    stage.on("pressup", mouseReleased);
+
 
     let terrainGraphics;
 
