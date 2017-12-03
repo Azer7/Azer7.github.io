@@ -5,7 +5,7 @@ class Ray {
         this.visible = visible;
         
         this._angle = angle * Math.PI / 180;
-        this.maxLength = 20;
+        this.maxLength = 30;
         this.length = this.maxLength; //will be changed if collision is found
         //ray slope intercept form
         this.slope;

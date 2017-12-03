@@ -8,6 +8,7 @@ let displayStage;
 let objects = [];
 let terrain = [];
 let car;
+let policeSpriteSheet;
 
 let mouse = {
     x: 0,
@@ -50,7 +51,7 @@ function init() {
             lastLine.y = terrainPos[i].y;
 
             terrainGraphics = new createjs.Graphics();
-            terrainGraphics.setStrokeStyle(5).beginStroke("black")
+            terrainGraphics.setStrokeStyle(5, "round", "round").beginStroke("black")
             terrainGraphics.moveTo(lastLine.x, lastLine.y);            
         } else {
             terrain.push(new Border(terrainPos[i].x, terrainPos[i].y));
@@ -59,11 +60,19 @@ function init() {
     }
     displayStage.addChild(new createjs.Shape(terrainGraphics));
 
-
     lastLine.x = terrainPos[leftIndex].x2;
     lastLine.y = terrainPos[leftIndex].y2;
 
-    // terrain.push(new Border(terrain));
+    policeSpriteSheet = new createjs.SpriteSheet({
+        framerate: 30,
+        "images": ["./Assets/Police_animation/1.png","./Assets/Police_animation/2.png","./Assets/Police_animation/3.png"],
+        "frames": [[0,0,256,256,0,128,128],[0,0,256,256,1,128,128],[0,0,256,256,2,128,128]
+         ],
+        "animations": {
+            "default": [0, 2, "default", .1],
+        }
+    });
+    
 
     ray = new Ray(canvas.width / 2, canvas.height / 2, 270); //x, y, angle
     //car = new Car(3700, 1000, 12);

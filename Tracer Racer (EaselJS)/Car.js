@@ -19,10 +19,20 @@ class Car {
         for (let i = 0; i < rayAmount; i++)
             this.rays.push(new Ray(0, 0, i * (360 / rayAmount)));
 
-        this.g = new createjs.Shape();
-        this.g.graphics.setStrokeStyle(1).beginStroke("black");
-        this.fill = this.g.graphics.beginFill("red").command;
-        this.g.graphics.drawRect(-15, -25, 30, 50);
+      //  this.g = new createjs.Bitmap("./Assets/Police.png");
+    //    this.g.regX = 128;
+      //  this.g.regY = 128;
+    //    this.g.scaleX = .36;
+    //    this.g.scaleY = .36;
+      
+        this.g = new createjs.Sprite(policeSpriteSheet, "default");
+        this.g.scaleX = .35;
+        this.g.scaleY = .35;
+        
+        //this.g = new createjs.Shape();
+        //this.g.graphics.setStrokeStyle(1).beginStroke("black");
+        //this.fill = this.g.graphics.beginFill("red").command;
+        //this.g.graphics.drawRect(-15, -25, 30, 50);
         stage.addChild(this.g);
     }
 
@@ -117,9 +127,9 @@ class Car {
         this.g.x = canvas.width / 2;
         this.g.y = canvas.height / 2;
         this.g.rotation = this.angle;
-        if (this.forwardWay)
-            this.fill.style = "#999999";
-        else
-            this.fill.style = "#c04000";
+        //if (this.forwardWay)
+          //  this.fill.style = "#999999";
+        //else
+          //  this.fill.style = "#c04000";
     }
 }
