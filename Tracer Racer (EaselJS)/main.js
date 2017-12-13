@@ -76,10 +76,10 @@ function init() {
 
     ray = new Ray(canvas.width / 2, canvas.height / 2, 270); //x, y, angle
     //car = new Car(3700, 1000, 12);
-    if (localStorage.getItem("x") && localStorage.getItem("y"))
-        car = new Car(parseFloat(localStorage.getItem("x")), parseFloat(localStorage.getItem("y")), 12);
-    else
-        car = new Car(260, 600, 12);
+//    if (localStorage.getItem("x") && localStorage.getItem("y"))
+//        car = new Car(parseFloat(localStorage.getItem("x")), parseFloat(localStorage.getItem("y")), 12);
+//    else
+        car = new Car(260, 599, 12);
 
     let loopLabel = new createjs.Text("v1.2", "bold 24px Arial", "#FFF");
     loopLabel.textAlign = "center";
@@ -103,17 +103,17 @@ function init() {
     score.addChild(bestTimeLabel);
     stage.addChild(score);
 
-    let guideLines = new createjs.Shape();
-    guideLines.graphics.setStrokeStyle(5).beginStroke("black");
-    guideLines.graphics.moveTo(0, 0).lineTo(4800, 0).lineTo(4800, 3000).lineTo(0, 3000).lineTo(0, 0);
-    guideLines.graphics.moveTo(0, 1000).lineTo(4800, 1000);
-    guideLines.graphics.moveTo(0, 2000).lineTo(4800, 2000);
-
-    guideLines.graphics.moveTo(1600, 0).lineTo(1600, 3000);
-    guideLines.graphics.moveTo(3200, 0).lineTo(3200, 3000);
-    guideLines.alpha = 0.5;
-    
-    displayStage.addChild(guideLines);
+//    let guideLines = new createjs.Shape();
+//    guideLines.graphics.setStrokeStyle(5).beginStroke("black");
+//    guideLines.graphics.moveTo(0, 0).lineTo(4800, 0).lineTo(4800, 3000).lineTo(0, 3000).lineTo(0, 0);
+//    guideLines.graphics.moveTo(0, 1000).lineTo(4800, 1000);
+//    guideLines.graphics.moveTo(0, 2000).lineTo(4800, 2000);
+//
+//    guideLines.graphics.moveTo(1600, 0).lineTo(1600, 3000);
+//    guideLines.graphics.moveTo(3200, 0).lineTo(3200, 3000);
+//    guideLines.alpha = 0.5;
+//    
+//    displayStage.addChild(guideLines);
 
     displayStage.cache(-2.5, -2.5, 4805, 3005);
 
@@ -172,12 +172,12 @@ function mouseReleased(e) {
 onkeydown = onkeyup = function (e) {
     e = e || event; // to deal with IE
     keys[e.keyCode] = e.type == 'keydown';
-    if (e.keyCode = 32 && keys[32]) {
-        car.vel.multiply(0);
-        car.pos.x = 260;
-        car.pos.y = 600;
-        car.angle = 0;
-    }
+//    if (e.keyCode = 32 && keys[32]) {
+//        car.vel.multiply(0);
+//        car.pos.x = 260;
+//        car.pos.y = 600;
+//        car.angle = 0;
+//    }
 }
 window.addEventListener('touchstart', function () {
     mouse.down = true;
