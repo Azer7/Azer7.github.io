@@ -60,7 +60,8 @@ class Ray {
     checkCollisions(objects) {
         this.evaluateSlopePoint();
         let shortest = this.maxLength;
-        let shortestIndex = -1;
+        //let shortestIndex = -1;
+        let hits = [];
         for (let i = 0; i < objects.length; i++) {
             let object = objects[i] instanceof Enemy ? objects[i].collision : objects[i];
             for (let j = 0; j < object.lines.length; j++) {
@@ -68,23 +69,25 @@ class Ray {
 
                 if (collisionP) { //checks if it actually collided
                     let lineLength = lineMag(this.pos.x, this.pos.y, collisionP.x, collisionP.y);
-                    if (lineLength < shortest) {
+                    //if (lineLength < shortest) {
                         this.length = lineLength
                         this.evaluateEndpoint();
                         if (Math.abs(this.posEnd.x - collisionP.x) < precision && Math.abs(this.posEnd.y - collisionP.y) < precision) {
                             if (this.posEnd.x >= object.lines[j].pos.x && this.posEnd.x <= object.lines[j].posEnd.x && ((this.posEnd.y >= object.lines[j].pos.y && this.posEnd.y <= object.lines[j].posEnd.y) || (this.posEnd.y <= object.lines[j].pos.y && this.posEnd.y >= object.lines[j].posEnd.y))) {
-                                shortest = lineLength;
-                                shortestIndex = i;
+                                //shortest = lineLength;
+                                //shortestIndex = i;
+                                hits.push(i);
                             }
                         }
-                    }
+                    //}
                 }
             }
         }
 
-        this.length = shortest;
+        this.length = this.maxLength;
         this.evaluateEndpoint();
-        return shortestIndex;
+        //return shortestIndex;
+        return hits;
     }
 
     getCollisionPoint(line) {

@@ -16,6 +16,8 @@ class Car {
         this.rayNum = rayAmount;
         this.rays = [];
 
+        this.animationValue = 0;
+        
         for (let i = 0; i < rayAmount; i++)
             this.rays.push(new Ray(0, 0, i * (360 / rayAmount)));
 
@@ -25,7 +27,7 @@ class Car {
     //    this.g.scaleX = .36;
     //    this.g.scaleY = .36;
       
-        this.g = new createjs.Sprite(policeSpriteSheet, "default");
+        this.g = new createjs.Sprite(policeSpriteSheet, "car");
         this.g.scaleX = .35;
         this.g.scaleY = .35;
         

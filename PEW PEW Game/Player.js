@@ -101,7 +101,7 @@ class Player {
         this.shooting = false;
         this.boosting = false;
         this.boostG.visible = false;
-        
+
         this.laser.activeRay = guns[player.equippedGun].beam;
     }
 
@@ -179,9 +179,11 @@ class Player {
         //process gun
         this.laser.pos = this.barrelPos.clone().rotateBy(this._angle).add(this.pos);
         this.laser._angle = this._angle;
-        let hit = this.laser.checkCollisions(objArr);
-        if (this.shooting && hit >= 0 && objects[hit] instanceof Enemy)
-            objects[hit].health -= this.damage;
+        let hits = this.laser.checkCollisions(objArr);
+        for (let i = 0; i < hits.length; i++) {
+            if (this.shooting && hits.length > 0 && objects[hits[i]] instanceof Enemy)
+                objects[hits[i]].health -= this.damage;
+        }
     }
 
     constrainVel(xlow, xhigh, ylow, yhigh) {

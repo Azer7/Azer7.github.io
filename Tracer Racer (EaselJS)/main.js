@@ -65,11 +65,13 @@ function init() {
 
     policeSpriteSheet = new createjs.SpriteSheet({
         framerate: 30,
-        "images": ["./Assets/Police_animation/1.png","./Assets/Police_animation/2.png","./Assets/Police_animation/3.png"],
-        "frames": [[0,0,256,256,0,128,128],[0,0,256,256,1,128,128],[0,0,256,256,2,128,128]
+        "images": ["./Assets/Car.png","./Assets/Black_viper.png","./Assets/ambulance_animation/1.png","./Assets/ambulance_animation/2.png","./Assets/ambulance_animation/3.png"],
+        "frames": [[0,0,256,256,0,128,128],[0,0,256,256,1,128,128],[0,0,256,256,2,128,128],[0,0,256,256,2,128,128],[0,0,256,256,2,128,128]
          ],
         "animations": {
-            "default": [0, 2, "default", .1],
+            "car": [0],
+            "viper": [1],
+            "ambulance": [2,4,"ambulance",0.1]
         }
     });
     
@@ -172,12 +174,18 @@ function mouseReleased(e) {
 onkeydown = onkeyup = function (e) {
     e = e || event; // to deal with IE
     keys[e.keyCode] = e.type == 'keydown';
-//    if (e.keyCode = 32 && keys[32]) {
+    if (e.keyCode = 32 && keys[32]) {
+        car.animation++;
+        car.animation = car.animation % 3;
+        if(car.animation = 0) {
+            car.g.gotoAndPlay("car");
+        } else if(car.animation = 1) {
+        }
 //        car.vel.multiply(0);
 //        car.pos.x = 260;
 //        car.pos.y = 600;
 //        car.angle = 0;
-//    }
+    }
 }
 window.addEventListener('touchstart', function () {
     mouse.down = true;
