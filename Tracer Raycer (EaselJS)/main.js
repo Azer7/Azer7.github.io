@@ -121,8 +121,8 @@ function init() {
 
     displayStage.cache(-2.5, -2.5, 4805, 3005);
 
+    createjs.Ticker.timingMode = createjs.Ticker.RAF;
     createjs.Ticker.on("tick", tick);
-    createjs.Ticker.framerate = 60;
 }
 
 function tick(e) {
