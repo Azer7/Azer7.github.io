@@ -1,6 +1,6 @@
 class Car {
     constructor(x, y, rayAmount) {
-        this.speed = .35;
+        this.speed = .3;
         this.slowDown = 1;
         this.pos = new Vector(x, y);
         this.vel = new Vector(0, 0);
