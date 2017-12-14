@@ -7,9 +7,9 @@ class Enemy {
         this.collision = new Rectangle(x - this.size * 50, y - this.size * 50, this.size * 100, false);
 
         this.speed = speed * hScl;
-        this.maxHealth = health * (upgrades[11].getValue() * 2 - 1);
+        this.maxHealth = health;
         this.health = this.maxHealth;
-        this.damage = damage * (upgrades[11].getValue() * 2 - 1);
+        this.damage = damage;
         this.attackCooldown = 0;
         this.sprite = new createjs.Sprite(zombieSpriteSheet, "move");
 
@@ -20,7 +20,7 @@ class Enemy {
         this.sprite.filters = [
             new createjs.ColorFilter(1, 1, 1, 1, 0, 0, 0, 0)
         ]
-            this.sprite.cache(-90, -130, 250, 250);
+        this.sprite.cache(-90, -130, 250, 250);
         gameAssets.children.splice(2, 0, this.sprite);
     }
 
@@ -36,7 +36,7 @@ class Enemy {
     update(index) {
         if (this.health <= 0) {
             enemies--;
-            score += (1 + elapsedTicks / 2000) * upgrades[8].getValue() * upgrades[11].getValue();
+            score += (1 + elapsedTicks / 2000) * upgrades[9].getValue();
             this.remove(index);
         } else {
             this.attackCooldown--;

@@ -15,6 +15,7 @@ class Player {
         this.equippedGun = 0;
 
         this.damage; //dictated by gun
+        this.pierce;
         this.energyDischarge; //dictated by gun
         this.energyRecharge;
         this.maxEnergy;
@@ -84,14 +85,16 @@ class Player {
     reset() {
         //calculate stats
         this.damage = guns[player.equippedGun].damage * upgrades[0].getValue(upgrades[0].level);
-        this.maxHealth = upgrades[1].getValue(upgrades[1].level);
-        this.baseSpeed = upgrades[2].getValue(upgrades[2].level) * guns[player.equippedGun].speedMultiplier * hScl;
-        this.maxEnergy = upgrades[3].getValue(upgrades[3].level);
-        this.maxBoost = upgrades[4].getValue(upgrades[4].level);
-        this.boostRecharge = upgrades[5].getValue(upgrades[5].level);
-        this.boostSpeed = upgrades[6].getValue(upgrades[6].level) * guns[player.equippedGun].speedMultiplier * hScl;
+        this.pierce = guns[player.equippedGun].damage * upgrades[1].getValue(upgrades[1].level);
+        this.maxHealth = upgrades[2].getValue(upgrades[2].level);
+        this.baseSpeed = upgrades[3].getValue(upgrades[3].level) * guns[player.equippedGun].speedMultiplier * hScl;
+        this.maxEnergy = upgrades[4].getValue(upgrades[4].level);
+        this.maxBoost = upgrades[5].getValue(upgrades[5].level);
+        this.boostRecharge = upgrades[6].getValue(upgrades[6].level);
+        this.boostSpeed = upgrades[7].getValue(upgrades[7].level) * guns[player.equippedGun].speedMultiplier * hScl;
         this.energyDischarge = guns[player.equippedGun].energyCost;
-        this.energyRecharge = upgrades[7].getValue(upgrades[7].level);
+        this.energyRecharge = upgrades[8].getValue(upgrades[8].level);
+
 
         //reset variable stats
         this.health = this.maxHealth;
@@ -181,8 +184,9 @@ class Player {
         this.laser._angle = this._angle;
         let hits = this.laser.checkCollisions(objArr);
         for (let i = 0; i < hits.length; i++) {
-            if (this.shooting && hits.length > 0 && objects[hits[i]] instanceof Enemy)
-                objects[hits[i]].health -= this.damage;
+            if (this.shooting && hits.length > 0 && objects[hits[i]] instanceof Enemy) {
+                    objects[hits[i]].health -= this.damage * Math.pos(this.pierce, i);
+            }
         }
     }
 

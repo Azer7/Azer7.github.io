@@ -108,6 +108,8 @@ guns.push(new Gun("Fire Extinguisher", 66, 44, 666, .9, "Burn Baby Burn", "Burne
 let upgrades = [];
 //Damage upgrade
 upgrades.push(new Upgrade("Damage", 10, (lvl) => 1 + 0.08 * lvl));
+//Pierce value
+upgrades.push(new Upgrade("Pierce", 10, (lvl) => 0.4 + 0.02 * lvl));
 //Max Health upgrade
 upgrades.push(new Upgrade("Health", 10, (lvl) => 100 + 30 * lvl));
 //Player speed upgrade
@@ -128,9 +130,7 @@ upgrades.push(new Upgrade("Income", 10, (lvl) => 1 + 0.25 * lvl));
 upgrades.push(new Upgrade("Zombie Rate", 10, (lvl) => 1 + 0.05 * lvl));
 //Zombie Speed (slowdown) upgrade
 upgrades.push(new Upgrade("Zombie Speed", 10, (lvl) => 1 - Math.sqrt(lvl) * 0.08));
-//Zombie Multiplyer, increases health and damage by double this value,
-//while increasing income by it
-upgrades.push(new Upgrade("Zombie Mult.", 10, (lvl) => 1 + Math.pow(0.1 * lvl, 1.5)));
+
 
 function init() {
     canvas = document.getElementById("game");

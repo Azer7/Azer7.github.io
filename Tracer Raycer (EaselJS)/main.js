@@ -123,6 +123,7 @@ function init() {
 
     createjs.Ticker.timingMode = createjs.Ticker.RAF;
     createjs.Ticker.on("tick", tick);
+    createjs.Tickewr.framerate = 60;
 }
 
 function tick(e) {

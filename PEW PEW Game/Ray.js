@@ -62,21 +62,21 @@ class Ray {
         let shortest = this.maxLength;
         //let shortestIndex = -1;
         let hits = [];
-        for (let i = 0; i < objects.length; i++) {
+        for (let i = 0; i < objects.length; i++) {        
             let object = objects[i] instanceof Enemy ? objects[i].collision : objects[i];
             for (let j = 0; j < object.lines.length; j++) {
                 let collisionP = this.getCollisionPoint(object.lines[j]);
-
                 if (collisionP) { //checks if it actually collided
                     let lineLength = lineMag(this.pos.x, this.pos.y, collisionP.x, collisionP.y);
                     //if (lineLength < shortest) {
-                        this.length = lineLength
+                        this.length = lineLength;
                         this.evaluateEndpoint();
                         if (Math.abs(this.posEnd.x - collisionP.x) < precision && Math.abs(this.posEnd.y - collisionP.y) < precision) {
                             if (this.posEnd.x >= object.lines[j].pos.x && this.posEnd.x <= object.lines[j].posEnd.x && ((this.posEnd.y >= object.lines[j].pos.y && this.posEnd.y <= object.lines[j].posEnd.y) || (this.posEnd.y <= object.lines[j].pos.y && this.posEnd.y >= object.lines[j].posEnd.y))) {
                                 //shortest = lineLength;
                                 //shortestIndex = i;
                                 hits.push(i);
+                                break;
                             }
                         }
                     //}
@@ -89,7 +89,7 @@ class Ray {
         //return shortestIndex;
         return hits;
     }
-
+    
     getCollisionPoint(line) {
         let collision;
         let hasCollided = false;
