@@ -38,6 +38,20 @@ function init() {
     stage.on("pressmove", moveCanvas);
     stage.on("pressup", mouseReleased);
 
+    //    let guideLines = new createjs.Shape();
+    //    guideLines.graphics.setStrokeStyle(5).beginStroke("black");
+    //    guideLines.graphics.moveTo(0, 0).lineTo(4800, 0).lineTo(4800, 3000).lineTo(0, 3000).lineTo(0, 0);
+    //    guideLines.graphics.moveTo(0, 1000).lineTo(4800, 1000);
+    //    guideLines.graphics.moveTo(0, 2000).lineTo(4800, 2000);
+    //
+    //    guideLines.graphics.moveTo(1600, 0).lineTo(1600, 3000);
+    //    guideLines.graphics.moveTo(3200, 0).lineTo(3200, 3000);
+    //    guideLines.alpha = 0.5;
+    //
+    let guideLines = new createjs.Shape();
+    guideLines.graphics.setStrokeStyle(2).beginStroke("white");
+    guideLines.graphics.moveTo(50, 600).lineTo(430, 600);
+    displayStage.addChild(guideLines);
 
     let terrainGraphics;
 
@@ -45,14 +59,14 @@ function init() {
         if (terrainPos[i].newLine) {
             if (terrainGraphics) {
                 displayStage.addChild(new createjs.Shape(terrainGraphics));
-            }            
-            
+            }
+
             lastLine.x = terrainPos[i].x;
             lastLine.y = terrainPos[i].y;
 
             terrainGraphics = new createjs.Graphics();
             terrainGraphics.setStrokeStyle(5, "round", "round").beginStroke("black")
-            terrainGraphics.moveTo(lastLine.x, lastLine.y);            
+            terrainGraphics.moveTo(lastLine.x, lastLine.y);
         } else {
             terrain.push(new Border(terrainPos[i].x, terrainPos[i].y));
             terrainGraphics.lineTo(terrainPos[i].x, terrainPos[i].y);
@@ -65,23 +79,23 @@ function init() {
 
     policeSpriteSheet = new createjs.SpriteSheet({
         framerate: 30,
-        "images": ["./Assets/Car.png","./Assets/Black_viper.png","./Assets/ambulance_animation/1.png","./Assets/ambulance_animation/2.png","./Assets/ambulance_animation/3.png"],
-        "frames": [[0,0,256,256,0,128,128],[0,0,256,256,1,128,128],[0,0,256,256,2,128,128],[0,0,256,256,2,128,128],[0,0,256,256,2,128,128]
-         ],
+        "images": ["./Assets/Car.png", "./Assets/Black_viper.png", "./Assets/ambulance_animation/1.png", "./Assets/ambulance_animation/2.png", "./Assets/ambulance_animation/3.png"],
+        "frames": [[0, 0, 256, 256, 0, 128, 128], [0, 0, 256, 256, 1, 128, 128], [0, 0, 256, 256, 2, 128, 128], [0, 0, 256, 256, 3, 128, 128], [0, 0, 256, 256, 4, 128, 128]
+        ],
         "animations": {
             "car": [0],
             "viper": [1],
-            "ambulance": [2,4,"ambulance",0.1]
+            "ambulance": [2, 4, "ambulance", 0.1]
         }
     });
-    
+
 
     ray = new Ray(canvas.width / 2, canvas.height / 2, 270); //x, y, angle
     //car = new Car(3700, 1000, 12);
-//    if (localStorage.getItem("x") && localStorage.getItem("y"))
-//        car = new Car(parseFloat(localStorage.getItem("x")), parseFloat(localStorage.getItem("y")), 12);
-//    else
-        car = new Car(260, 599, 12);
+    //    if (localStorage.getItem("x") && localStorage.getItem("y"))
+    //        car = new Car(parseFloat(localStorage.getItem("x")), parseFloat(localStorage.getItem("y")), 12);
+    //    else
+    car = new Car(260, 599, 12);
 
     let loopLabel = new createjs.Text("v1.2", "bold 24px Arial", "#FFF");
     loopLabel.textAlign = "center";
@@ -104,18 +118,6 @@ function init() {
     bestTimeLabel.y = 70;
     score.addChild(bestTimeLabel);
     stage.addChild(score);
-
-//    let guideLines = new createjs.Shape();
-//    guideLines.graphics.setStrokeStyle(5).beginStroke("black");
-//    guideLines.graphics.moveTo(0, 0).lineTo(4800, 0).lineTo(4800, 3000).lineTo(0, 3000).lineTo(0, 0);
-//    guideLines.graphics.moveTo(0, 1000).lineTo(4800, 1000);
-//    guideLines.graphics.moveTo(0, 2000).lineTo(4800, 2000);
-//
-//    guideLines.graphics.moveTo(1600, 0).lineTo(1600, 3000);
-//    guideLines.graphics.moveTo(3200, 0).lineTo(3200, 3000);
-//    guideLines.alpha = 0.5;
-//    
-//    displayStage.addChild(guideLines);
 
     displayStage.cache(-2.5, -2.5, 4805, 3005);
 
@@ -175,16 +177,19 @@ onkeydown = onkeyup = function (e) {
     e = e || event; // to deal with IE
     keys[e.keyCode] = e.type == 'keydown';
     if (e.keyCode = 32 && keys[32]) {
-        car.animation++;
-        car.animation = car.animation % 3;
-        if(car.animation = 0) {
+        car.animationValue++;
+        car.animationValue = car.animationValue % 3;
+        if (car.animationValue == 0) {
             car.g.gotoAndPlay("car");
-        } else if(car.animation = 1) {
+        } else if (car.animationValue == 1) {
+            car.g.gotoAndPlay("viper");
+        } else if (car.animationValue == 2) {
+            car.g.gotoAndPlay("ambulance");
         }
-//        car.vel.multiply(0);
-//        car.pos.x = 260;
-//        car.pos.y = 600;
-//        car.angle = 0;
+        //        car.vel.multiply(0);
+        //        car.pos.x = 260;
+        //        car.pos.y = 600;
+        //        car.angle = 0;
     }
 }
 window.addEventListener('touchstart', function () {

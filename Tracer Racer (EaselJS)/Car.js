@@ -9,28 +9,28 @@ class Car {
         this.crashed = false;
 
         this.forwardWay = true;
-        this.startDate = new Date().getTime();
-        this.currentTime = 0;
+        this.startDate = new Date().getTime() + 2000;
+        this.currentTime = -2;
         this.bestTime = "N/A";
         this.loops = 0;
         this.rayNum = rayAmount;
         this.rays = [];
 
         this.animationValue = 0;
-        
+
         for (let i = 0; i < rayAmount; i++)
             this.rays.push(new Ray(0, 0, i * (360 / rayAmount)));
 
-      //  this.g = new createjs.Bitmap("./Assets/Police.png");
-    //    this.g.regX = 128;
-      //  this.g.regY = 128;
-    //    this.g.scaleX = .36;
-    //    this.g.scaleY = .36;
-      
+        //  this.g = new createjs.Bitmap("./Assets/Police.png");
+        //    this.g.regX = 128;
+        //  this.g.regY = 128;
+        //    this.g.scaleX = .36;
+        //    this.g.scaleY = .36;
+
         this.g = new createjs.Sprite(policeSpriteSheet, "car");
         this.g.scaleX = .35;
         this.g.scaleY = .35;
-        
+
         //this.g = new createjs.Shape();
         //this.g.graphics.setStrokeStyle(1).beginStroke("black");
         //this.fill = this.g.graphics.beginFill("red").command;
@@ -50,7 +50,8 @@ class Car {
     }
 
     process(objArr) {
-        if (!this.crashed) {
+        this.currentTime += 0.016;
+        if (this.currentTime > 0) {
             this.currentTime = (new Date().getTime() - car.startDate) / 1000;
 
             //add movement
@@ -76,9 +77,8 @@ class Car {
             } else if (this.pos.x > 50 && this.pos.x < 430 && this.pos.y <= 600 && this.pos.y + this.vel.y > 600) {
                 this.forwardWay = false;
             }
-            this.pos.add(this.vel);
-            this.acc.multiplyScalar(0); // only do once
-            this.currentTime += 0.016;
+                this.pos.add(this.vel);
+            this.acc.multiplyScalar(0); // only do once            
 
             //process rays
             //            for (let i = 0; i < this.rays.length; i++) {
@@ -115,6 +115,9 @@ class Car {
             if (totalVector.length() > precision)
                 car.vel.multiplyScalar(.6);
             car.slowDown = 1 + totalVector.length();
+        } else {
+            car.vel.multiplyScalar(0);
+            car.acc.multiplyScalar(0);
         }
     }
 
@@ -130,8 +133,8 @@ class Car {
         this.g.y = canvas.height / 2;
         this.g.rotation = this.angle;
         //if (this.forwardWay)
-          //  this.fill.style = "#999999";
+        //  this.fill.style = "#999999";
         //else
-          //  this.fill.style = "#c04000";
+        //  this.fill.style = "#c04000";
     }
 }
