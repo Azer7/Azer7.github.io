@@ -143,7 +143,7 @@ class Player {
         this.boostbarTo.x = (this.boost / this.maxBoost * 115 + 82) * hScl;
 
 
-        if (guns[this.equippedGun] typeof Laser) {
+        if (guns[this.equippedGun] instanceof Laser) {
             //calculate laser energy
             if (this.shooting)
                 this.energy -= this.energyDischarge;

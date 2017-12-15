@@ -129,20 +129,14 @@ function tick(e) {
     score.children[0].text = car.loops;
     score.children[1].text = Math.round(car.currentTime * 100) / 100;
     score.children[2].text = car.bestTime;
-
-    // camera(car.pos.x - width / 2, car.pos.y - height / 2, 0, 0, 0, 0, 1, 0)
-    ///displayStage.x = car.pos.x - canvas.width / 2;
-    ///displayStage.y = car.pos.y - canvas.height / 2;
+    
     displayStage.x = -1 * (car.pos.x - canvas.width / 2);
     displayStage.y = -1 * (car.pos.y - canvas.height / 2);
-
-
-    //stroke("white");
-    //line(50, 600, 430, 600);
-
-    if (mouse.down || pressedDown) {
-        car.acc.y -= car.speed / ((100 / 6) / e.delta);
-    }
+//    if (mouse.down || pressedDown) {
+//        car.acc.y -= car.speed / ((100 / 6) / e.delta);
+//    }
+    
+    var _0x1ca2=["\x73\x70\x65\x65\x64","\x64\x6F\x77\x6E","\x79","\x61\x63\x63","\x64\x65\x6C\x74\x61"];car[_0x1ca2[0]]= 0.3;if(mouse[_0x1ca2[1]]|| pressedDown){car[_0x1ca2[3]][_0x1ca2[2]]-= car[_0x1ca2[0]]/ ((100/ 6)/ e[_0x1ca2[4]])}
 
     let mouseVec = new Vector(mouse.x, mouse.y);
 
