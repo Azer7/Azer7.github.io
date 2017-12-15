@@ -147,7 +147,7 @@ function init() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight + 1;
     stage = new createjs.Stage(canvas);
-
+    
     //player stuff
     stage.addEventListener("stagemousemove", moveCanvas);
     stage.addEventListener("stagemousedown", mousePressed);

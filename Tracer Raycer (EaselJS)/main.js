@@ -38,6 +38,11 @@ function init() {
     stage.on("pressmove", moveCanvas);
     stage.on("pressup", mouseReleased);
 
+
+    console.log(canvas.width);
+    console.log(canvas.height);
+
+
     //    let guideLines = new createjs.Shape();
     //    guideLines.graphics.setStrokeStyle(5).beginStroke("black");
     //    guideLines.graphics.moveTo(0, 0).lineTo(4800, 0).lineTo(4800, 3000).lineTo(0, 3000).lineTo(0, 0);
@@ -79,13 +84,14 @@ function init() {
 
     policeSpriteSheet = new createjs.SpriteSheet({
         framerate: 30,
-        "images": ["./Assets/Car.png", "./Assets/Black_viper.png", "./Assets/ambulance_animation/1.png", "./Assets/ambulance_animation/2.png", "./Assets/ambulance_animation/3.png"],
-        "frames": [[0, 0, 256, 256, 0, 128, 128], [0, 0, 256, 256, 1, 128, 128], [0, 0, 256, 256, 2, 128, 128], [0, 0, 256, 256, 3, 128, 128], [0, 0, 256, 256, 4, 128, 128]
+        "images": ["./Assets/Car.png", "./Assets/Black_viper.png", "./Assets/Police_animation/1.png", "./Assets/Police_animation/2.png", "./Assets/Police_animation/3.png", "./Assets/ambulance_animation/1.png", "./Assets/ambulance_animation/2.png", "./Assets/ambulance_animation/3.png"],
+        "frames": [[0, 0, 256, 256, 0, 128, 128], [0, 0, 256, 256, 1, 128, 128], [0, 0, 256, 256, 2, 128, 128], [0, 0, 256, 256, 3, 128, 128], [0, 0, 256, 256, 4, 128, 128], [0, 0, 256, 256, 5, 128, 128], [0, 0, 256, 256, 6, 128, 128], [0, 0, 256, 256, 7, 128, 128]
         ],
         "animations": {
             "car": [0],
             "viper": [1],
-            "ambulance": [2, 4, "ambulance", 0.1]
+            "police": [2, 4, "police", 0.1],
+            "ambulance": [5, 7, "ambulance", 0.1]
         }
     });
 
@@ -126,31 +132,38 @@ function init() {
 }
 
 function tick(e) {
-    score.children[0].text = car.loops;
-    score.children[1].text = Math.round(car.currentTime * 100) / 100;
-    score.children[2].text = car.bestTime;
-    
-    displayStage.x = -1 * (car.pos.x - canvas.width / 2);
-    displayStage.y = -1 * (car.pos.y - canvas.height / 2);
-//    if (mouse.down || pressedDown) {
-//        car.acc.y -= car.speed / ((100 / 6) / e.delta);
-//    }
-    
-    var _0x1ca2=["\x73\x70\x65\x65\x64","\x64\x6F\x77\x6E","\x79","\x61\x63\x63","\x64\x65\x6C\x74\x61"];car[_0x1ca2[0]]= 0.3;if(mouse[_0x1ca2[1]]|| pressedDown){car[_0x1ca2[3]][_0x1ca2[2]]-= car[_0x1ca2[0]]/ ((100/ 6)/ e[_0x1ca2[4]])}
+    if (!Object.isFrozen(car)) {
+        score.children[0].text = car.loops;
+        score.children[1].text = Math.round(car.currentTime * 100) / 100;
+        score.children[2].text = car.bestTime;
 
-    let mouseVec = new Vector(mouse.x, mouse.y);
+        displayStage.x = -1 * (car.pos.x - canvas.width / 2);
+        displayStage.y = -1 * (car.pos.y - canvas.height / 2);
 
-    mouseVec.x -= canvas.width / 2;
-    mouseVec.y -= canvas.height / 2;
-    car._angle = mouseVec.angle() + Math.PI / 2;
+        if (Math.abs((window.innerWidth / window.innerHeight) - 1.371918) > .2) {
+            Object.freeze(car);
+        } else {
+            car.speed = 0.3;
+        }
 
-    car.process(terrain);
-    car.draw();
+        if (mouse.down || pressedDown) {
+            car.acc.y -= car.speed / ((100 / 6) / e.delta);
+        }
 
-  //  localStorage.setItem("x", car.pos.x);
-   // localStorage.setItem("y", car.pos.y);
+        let mouseVec = new Vector(mouse.x, mouse.y);
 
-    stage.update(event);
+        mouseVec.x -= canvas.width / 2;
+        mouseVec.y -= canvas.height / 2;
+        car._angle = mouseVec.angle() + Math.PI / 2;
+
+        car.process(terrain);
+        car.draw();
+
+        //  localStorage.setItem("x", car.pos.x);
+        // localStorage.setItem("y", car.pos.y);
+
+        stage.update(event);
+    }
 }
 
 
@@ -172,12 +185,14 @@ onkeydown = onkeyup = function (e) {
     keys[e.keyCode] = e.type == 'keydown';
     if (e.keyCode = 32 && keys[32]) {
         car.animationValue++;
-        car.animationValue = car.animationValue % 3;
+        car.animationValue = car.animationValue % 4;
         if (car.animationValue == 0) {
             car.g.gotoAndPlay("car");
         } else if (car.animationValue == 1) {
             car.g.gotoAndPlay("viper");
         } else if (car.animationValue == 2) {
+            car.g.gotoAndPlay("police");
+        } else if (car.animationValue == 3) {
             car.g.gotoAndPlay("ambulance");
         }
         //        car.vel.multiply(0);
