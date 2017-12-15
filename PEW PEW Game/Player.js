@@ -197,6 +197,9 @@ class Player {
                     objects[hits[i].index].health -= this.damage * Math.pow(this.pierce, i);
                 }
             }
+        } else if (guns[this.equippedGun] instanceof Gun) {
+            
+            
         }
     }
 
