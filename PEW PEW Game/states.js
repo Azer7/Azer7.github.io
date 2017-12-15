@@ -128,7 +128,10 @@ function updateGun(newIndex) {
     //cool text :v)
     gunContainer.children[8].text = "“" + guns[gunIndex].text + "”";
     //special
-    gunContainer.children[9].text = "Special: " + guns[gunIndex].special;
+    if(guns[gunIndex].name != "Flamer Gamer")
+        gunContainer.children[9].text = "Special: " + guns[gunIndex].special;
+    else 
+        gunContainer.children[9].text = guns[gunIndex].special;
 }
 
 function equipGun() {

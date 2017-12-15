@@ -48,68 +48,78 @@ guns.push(new Gun("Terry's Trash Taser", 3.33, 4, 0, 1.2, "The result of 6 years
     c: createjs.Graphics.getRGB(180, 0, 30, .9),
     s: 5
 }, {
-    x: 139,
-    y: 6,
-    w: 42,
-    h: 28
-}));
+        x: 139,
+        y: 6,
+        w: 42,
+        h: 28
+    }));
 guns[0].bought = true;
 
-guns.push(new Gun("Alpha v0.1 Laser", 4, 6, 21.01, 1, "Always better than the full release", "no-speciallyness",{
+guns.push(new Gun("Alpha v0.1 Laser", 4, 6, 21.01, 1, "Always better than the full release", "no-speciallyness", {
     c: createjs.Graphics.getRGB(140, 50, 30, .9),
     s: 6
 }, {
-    x: 97,
-    y: 5,
-    w: 42,
-    h: 26
-}));
+        x: 97,
+        y: 5,
+        w: 42,
+        h: 26
+    }));
 
-guns.push(new Gun("Grandma's Gun", 7, 9, 55, .7, "Used to protect herself from the wolf", "no-speciallyness",{
+guns.push(new Gun("Grandma's Gun", 7, 9, 55, .7, "Used to protect herself from the wolf", "no-speciallyness", {
     c: createjs.Graphics.getRGB(91, 107, 6, .9),
     s: 6
 }, {
-    x: 42,
-    y: 34.6,
-    w: 56,
-    h: 20
-}));
+        x: 42,
+        y: 34.6,
+        w: 56,
+        h: 20
+    }));
 
 guns.push(new Gun("Alien Dispatcher", 24, 25, 121, 1.2, "911, an alien showed up at my door", "no-speciallyness", {
     c: createjs.Graphics.getRGB(89, 255, 119, .7),
     s: 6
 }, {
-    x: 72,
-    y: 57.5,
-    w: 40,
-    h: 24
-}));
+        x: 72,
+        y: 57.5,
+        w: 40,
+        h: 24
+    }));
 
 guns.push(new Gun("Butt Blaster", 40, 33, 432, .9, "Man that's a stinky one", "no-speciallyness", {
     c: createjs.Graphics.getRGB(109, 60, 20, .7),
     s: 6
 }, {
-    x: 1,
-    y: 60,
-    w: 70,
-    h: 30
-}));
+        x: 1,
+        y: 60,
+        w: 70,
+        h: 30
+    }));
 
 guns.push(new Gun("Fire Extinguisher", 66, 44, 666, .9, "Burn Baby Burn", "Burnemup dot", {
     c: createjs.Graphics.getRGB(222, 66, 6, .7),
     s: 12
 }, {
-    x: 1,
-    y: 135,
-    w: 52,
-    h: 16
-}));
+        x: 1,
+        y: 135,
+        w: 52,
+        h: 16
+    }));
+
+guns.push(new Gun("Flamer Gamer", 0, 0, 0.1, 2.5, "tell him to fix his game -James", "Downfall: The League made it a habit", {
+    c: createjs.Graphics.getRGB(222, 222, 22, .7),
+    s: 120
+}, {
+        x: 1,
+        y: 115,
+        w: 56,
+        h: 21
+    }));
 
 let upgrades = [];
 //Damage upgrade
 upgrades.push(new Upgrade("Damage", 10, (lvl) => 1 + 0.08 * lvl));
 //Pierce value
-upgrades.push(new Upgrade("Pierce", 10, (lvl) => 0.4 + 0.02 * lvl));
+upgrades.push(new Upgrade("Pierce", 10, (lvl) => .8 + 0.01 * lvl));
 //Max Health upgrade
 upgrades.push(new Upgrade("Health", 10, (lvl) => 100 + 30 * lvl));
 //Player speed upgrade
@@ -248,11 +258,11 @@ function init() {
 
     leftButton = new Button(() => {
         updateGun(gunIndex - 1)
-    }, () => {});
+    }, () => { });
     leftButton.bubbly = false;
     rightButton = new Button(() => {
         updateGun(gunIndex + 1)
-    }, () => {});
+    }, () => { });
     rightButton.bubbly = false;
 
     let leftArrow = new createjs.Shape();
@@ -277,7 +287,7 @@ function init() {
 
     let equipContainer = new Button(() => {
         equipGun();
-    }, () => {});
+    }, () => { });
 
     let equipButton = new createjs.Shape();
     equipButton.graphics.setStrokeStyle(1);
@@ -320,14 +330,14 @@ function init() {
     gunSpeed.textAlign = "center";
     gunSpeed.textBaseline = "middle";
     gunSpeed.x = 281 * hScl;
-    gunSpeed.y = 51 * hScl;
+    gunSpeed.y = 50 * hScl;
 
     let gunText = new createjs.Text("“The result of 6 years of pole-dancing”", "bold " + 11 * hScl + "px Arial", "#FFF");
     gunText.textAlign = "center";
     gunText.textBaseline = "middle";
     gunText.x = 281 * hScl;
-    gunText.y = 67 * hScl;
-    
+    gunText.y = 66 * hScl;
+
     let gunSpecial = new createjs.Text("no-speciallyness", "bold " + 11 * hScl + "px Arial", "#FFF");
     gunSpecial.textAlign = "center";
     gunSpecial.textBaseline = "middle";
@@ -354,7 +364,7 @@ function init() {
     cashLabel.y = 67 * hScl;
     shopAssets.addChild(cashLabel);
 
-    playButton = new Button(() => {}, () => {
+    playButton = new Button(() => { }, () => {
         setupGame()
     });
     let button = new createjs.Shape();
@@ -453,7 +463,7 @@ function init() {
     stage.addChild(fpsLabel);
     fpsLabel.x = width - 70 * hScl;
     fpsLabel.y = 20 * hScl;
-    
+
     //setupGame();
     setupShop();
     // start the tick and point it at the window so we can do some work before updating the stage:
@@ -495,7 +505,7 @@ function mouseReleased(e) {
     }
 }
 
-onkeydown = onkeyup = function (e) {
+onkeydown = onkeyup = function(e) {
     e = e || event; // to deal with IE
     keys[e.keyCode] = e.type == 'keydown';
     if (e.keyCode == 32) {
@@ -518,7 +528,7 @@ onkeydown = onkeyup = function (e) {
 }
 
 window.onbeforeunload = closingCode;
-function closingCode(){
-   // do something...
-   return null;
+function closingCode() {
+    // do something...
+    return null;
 }

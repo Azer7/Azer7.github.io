@@ -85,7 +85,7 @@ class Player {
     reset() {
         //calculate stats
         this.damage = guns[player.equippedGun].damage * upgrades[0].getValue(upgrades[0].level);
-        this.pierce = guns[player.equippedGun].damage * upgrades[1].getValue(upgrades[1].level);
+        this.pierce = upgrades[1].getValue(upgrades[1].level);
         this.maxHealth = upgrades[2].getValue(upgrades[2].level);
         this.baseSpeed = upgrades[3].getValue(upgrades[3].level) * guns[player.equippedGun].speedMultiplier * hScl;
         this.maxEnergy = upgrades[4].getValue(upgrades[4].level);
@@ -157,7 +157,7 @@ class Player {
         //detect player angle
         for (let i = 0; i < this.rays.length; i++) {
             this.rays[i].pos = this.pos;
-            this.rays[i].checkCollisions(objArr);
+            this.rays[i].checkCollision(objArr);
             //calculate collision bounce back direction
             let largestVector = new Vector(-1, this.rays[i].slope);
             if (this.rays[i].angle > 270 || this.rays[i].angle < 90) {
@@ -182,10 +182,24 @@ class Player {
         //process gun
         this.laser.pos = this.barrelPos.clone().rotateBy(this._angle).add(this.pos);
         this.laser._angle = this._angle;
-        let hits = this.laser.checkCollisions(objArr);
+        let hits = this.laser.getCollisions(objArr);
+        hits.sort((a, b) => {
+            if (a.length > b.length)
+                return 1;
+            if (a.length < b.length)
+                return -1;
+        });
+
         for (let i = 0; i < hits.length; i++) {
-            if (this.shooting && hits.length > 0 && objects[hits[i]] instanceof Enemy) {
-                    objects[hits[i]].health -= this.damage * Math.pos(this.pierce, i);
+            if (this.shooting && hits.length > 0 && objects[hits[i].index] instanceof Enemy) {
+                //if ((1 - this.pierce) * i < 1) {
+                //    objects[hits[i].index].health -= this.damage * (1 - (1 - this.pierce) * i);
+                //} else {
+                //    this.laser.length = hits[i].length;
+                //    break;
+                //}
+
+                objects[hits[i].index].health -= this.damage * Math.pow(this.pierce, i);
             }
         }
     }

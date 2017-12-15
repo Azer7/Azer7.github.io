@@ -141,7 +141,7 @@ function tick(e) {
     //line(50, 600, 430, 600);
 
     if (mouse.down || pressedDown) {
-        car.acc.y -= car.speed;
+        car.acc.y -= car.speed / ((100 / 6) / e.delta);
     }
 
     let mouseVec = new Vector(mouse.x, mouse.y);
@@ -153,8 +153,8 @@ function tick(e) {
     car.process(terrain);
     car.draw();
 
-    localStorage.setItem("x", car.pos.x);
-    localStorage.setItem("y", car.pos.y);
+  //  localStorage.setItem("x", car.pos.x);
+   // localStorage.setItem("y", car.pos.y);
 
     stage.update(event);
 }
