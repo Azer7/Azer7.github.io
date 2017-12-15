@@ -78,15 +78,28 @@ class Upgrade extends Button {
         levelText.text = "Lvl: " + this.level;
         levelText.font = "bold " + 11.5 * (Math.sqrt(100 / levelText.getBounds().width)) + "px Arial";
 
-        if (this.name == "Damage" || this.name == "Income" || this.name == "Zombie Rate" || this.name == "Zombie Mult.") {
-            statText.text = Math.round(this.getValue(this.level) * 100) / 100 + "x ⇒ " + Math.round(this.getValue(this.level + 1) * 100) / 100 + "x";
-        } else {
-            statText.text = Math.round(this.getValue(this.level) * 100) / 100 + " ⇒ " + Math.round(this.getValue(this.level + 1) * 100) / 100;
-        }
-        statText.font = "bold " + 11.5 * (Math.sqrt(100 / statText.getBounds().width)) + "px Arial";
+        if (this.level < this.maxLevel) {
+            if (this.name == "Damage" || this.name == "Income" || this.name == "Zombie Rate" || this.name == "Zombie Mult.") {
+                statText.text = Math.round(this.getValue(this.level) * 100) / 100 + "x ⇒ " + Math.round(this.getValue(this.level + 1) * 100) / 100 + "x";
+            } else {
+                statText.text = Math.round(this.getValue(this.level) * 100) / 100 + " ⇒ " + Math.round(this.getValue(this.level + 1) * 100) / 100;
+            }
+            statText.font = "bold " + 11.5 * (Math.sqrt(100 / statText.getBounds().width)) + "px Arial";
 
-        costText.text = "฿" + Math.round(this.getCost(this.level));
-        costText.font = "bold " + 17 * (Math.sqrt(100 / levelText.getBounds().width)) + "px Arial";
+            costText.text = "฿" + Math.round(this.getCost(this.level));
+            costText.font = "bold " + 17 * (Math.sqrt(100 / levelText.getBounds().width)) + "px Arial";
+        } else {
+            if (this.name == "Damage" || this.name == "Income" || this.name == "Zombie Rate" || this.name == "Zombie Mult.") {
+                statText.text = "cap: " + Math.round(this.getValue(this.level) * 100) / 100 + "x";
+            } else {
+                statText.text = "cap: " + Math.round(this.getValue(this.level) * 100) / 100;
+            }
+
+            statText.font = "bold 15px Arial";
+            
+            costText.text = "Max";
+            costText.font = "bold 22px Arial";
+        }
     }
 
     mousePressed() {}
@@ -99,7 +112,7 @@ class Upgrade extends Button {
                 this.update();
             }
         } else {
-            if (Math.round(this.getCost(this.level) <= cash)) {
+            if (this.level < this.maxLevel && Math.round(this.getCost(this.level) <= cash)) {
                 cash -= Math.round(this.getCost(this.level));
                 this.level++;
                 this.update();
@@ -109,8 +122,8 @@ class Upgrade extends Button {
     }
 }
 
-class Gun {
-    constructor(name, damage, energyCost, price, speedMultiplier, text, special, beam, image) {
+class Weapon {
+    constructor(name, damage, energyCost, price, speedMultiplier, text, special, image) {
         this.name = name;
         this.damage = damage;
         this.energyCost = energyCost;
@@ -119,8 +132,22 @@ class Gun {
         this.speedMultiplier = speedMultiplier;
         this.text = text;
         this.special = special;
-        this.beam = beam;
         this.image = image;
+    }
+
+}
+
+class Laser extends Weapon {
+    constructor(name, damage, energyCost, price, speedMultiplier, text, special, beam, image) {
+        super(name, damage, energyCost, price, speedMultiplier, text, special, image);
+        this.beam = beam;
+    }
+}
+
+class Gun extends Weapon {
+    constructor(name, damage, energyCost, price, speedMultiplier, text, special, bullet, image) {
+        super(name, damage, energyCost, price, speedMultiplier, text, special, image);
+        this.beam = bullet;
     }
 
 }

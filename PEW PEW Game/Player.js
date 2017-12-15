@@ -26,7 +26,8 @@ class Player {
         this.boostRecharge;
         this.boostSpeed;
 
-        this.laser = new Ray(x, y, 0, 1000 * wScl, true);
+        this.laser = new Ray(x, y, 0, 9999, true);
+        this.bullets = [];
         this.rays = [];
         for (let i = 0; i < 72; i++) {
             this.rays.push(new Ray(x, y, 0, 40 * hScl, false))
@@ -125,19 +126,6 @@ class Player {
         this.constrainVel(0, width, 0, height);
         this.acc.multiplyScalar(0); // only do once
 
-        //calculate laser energy
-        if (this.shooting)
-            this.energy -= this.energyDischarge;
-        this.energy += this.energyRecharge;
-
-        if (this.energy < 0) {
-            this.energy = 0;
-            this.shooting = false;
-            player.sprite.gotoAndPlay("unshoot");
-        } else if (this.energy > this.maxEnergy)
-            this.energy = this.maxEnergy;
-        this.energybarTo.x = (this.energy / this.maxEnergy * 112 + 95) * hScl;
-
         //calculate boost energy
         if (this.boosting) {
             this.boost -= this.boostDischarge;
@@ -154,52 +142,60 @@ class Player {
             this.boost = this.maxBoost;
         this.boostbarTo.x = (this.boost / this.maxBoost * 115 + 82) * hScl;
 
-        //detect player angle
-        for (let i = 0; i < this.rays.length; i++) {
-            this.rays[i].pos = this.pos;
-            this.rays[i].checkCollision(objArr);
-            //calculate collision bounce back direction
-            let largestVector = new Vector(-1, this.rays[i].slope);
-            if (this.rays[i].angle > 270 || this.rays[i].angle < 90) {
-                largestVector.x = 1;
+
+        if (guns[this.equippedGun] typeof Laser) {
+            //calculate laser energy
+            if (this.shooting)
+                this.energy -= this.energyDischarge;
+            this.energy += this.energyRecharge;
+
+            //detect player angle
+            for (let i = 0; i < this.rays.length; i++) {
+                this.rays[i].pos = this.pos;
+                this.rays[i].checkCollision(objArr);
+                //calculate collision bounce back direction
+                let largestVector = new Vector(-1, this.rays[i].slope);
+                if (this.rays[i].angle > 270 || this.rays[i].angle < 90) {
+                    largestVector.x = 1;
+                }
+
+                if (this.rays[i].angle > 90 && this.rays[i].angle <= 270)
+                    largestVector.y *= -1;
+
+                //same as setMag to get actually distance to move back
+                largestVector.multiplyScalar(this.rays[i].maxLength / largestVector.length());
+                //this.speed / 10 to get how much of the bounce back vector to move
+                this.pos.x -= (this.speed / 10) * (largestVector.x - (this.rays[i].posEnd.x - this.rays[i].pos.x));
+                this.pos.y -= (this.speed / 10) * (largestVector.y - (this.rays[i].posEnd.y - this.rays[i].pos.y));
+                console.log();
             }
+            //detect gun angle
+            this._angle = mouse.clone().subtract(this.pos).angle();
+            let angleChange = mouse.clone().subtract(this.barrelPos.clone().rotateBy(this._angle).multiplyScalar(0.001)).subtract(this.pos).angle() - this._angle;
+            this._angle += angleChange * 1000;
 
-            if (this.rays[i].angle > 90 && this.rays[i].angle <= 270)
-                largestVector.y *= -1;
+            //process gun
+            this.laser.pos = this.barrelPos.clone().rotateBy(this._angle).add(this.pos);
+            this.laser._angle = this._angle;
+            let hits = this.laser.getCollisions(objArr);
+            hits.sort((a, b) => {
+                if (a.length > b.length)
+                    return 1;
+                if (a.length < b.length)
+                    return -1;
+            });
 
-            //same as setMag to get actually distance to move back
-            largestVector.multiplyScalar(this.rays[i].maxLength / largestVector.length());
-            //this.speed / 10 to get how much of the bounce back vector to move
-            this.pos.x -= (this.speed / 10) * (largestVector.x - (this.rays[i].posEnd.x - this.rays[i].pos.x));
-            this.pos.y -= (this.speed / 10) * (largestVector.y - (this.rays[i].posEnd.y - this.rays[i].pos.y));
-            console.log();
-        }
-        //detect gun angle
-        this._angle = mouse.clone().subtract(this.pos).angle();
-        let angleChange = mouse.clone().subtract(this.barrelPos.clone().rotateBy(this._angle).multiplyScalar(0.001)).subtract(this.pos).angle() - this._angle;
-        this._angle += angleChange * 1000;
+            for (let i = 0; i < hits.length; i++) {
+                if (this.shooting && hits.length > 0 && objects[hits[i].index] instanceof Enemy) {
+                    //if ((1 - this.pierce) * i < 1) {
+                    //    objects[hits[i].index].health -= this.damage * (1 - (1 - this.pierce) * i);
+                    //} else {
+                    //    this.laser.length = hits[i].length;
+                    //    break;
+                    //}
 
-        //process gun
-        this.laser.pos = this.barrelPos.clone().rotateBy(this._angle).add(this.pos);
-        this.laser._angle = this._angle;
-        let hits = this.laser.getCollisions(objArr);
-        hits.sort((a, b) => {
-            if (a.length > b.length)
-                return 1;
-            if (a.length < b.length)
-                return -1;
-        });
-
-        for (let i = 0; i < hits.length; i++) {
-            if (this.shooting && hits.length > 0 && objects[hits[i].index] instanceof Enemy) {
-                //if ((1 - this.pierce) * i < 1) {
-                //    objects[hits[i].index].health -= this.damage * (1 - (1 - this.pierce) * i);
-                //} else {
-                //    this.laser.length = hits[i].length;
-                //    break;
-                //}
-
-                objects[hits[i].index].health -= this.damage * Math.pow(this.pierce, i);
+                    objects[hits[i].index].health -= this.damage * Math.pow(this.pierce, i);
+                }
             }
         }
     }
@@ -241,4 +237,24 @@ class Player {
     get health() {
         return this._health;
     }
+}
+
+class Bullet {
+    constructor(x, y, angle, speed, damage) {
+        this.pos = new Vector(x, y);
+        this.angle = angle;
+        this.speed = speed;
+        this.damage = damage;
+
+        this.g = new createjs.Shape();
+        this.g.graphics.setStrokeStyle(1);
+        this.g.graphics.beginStroke(createjs.Graphics.getRGB(40, 111, 180, 0.6));
+        this.g.graphics.beginFill(createjs.Graphics.getRGB(46, 136, 205, 0.4));
+        this.g.graphics.drawCircle(0, 0, 45 * hScl);
+        this.g.x = this.pos.x;
+        this.g.y = this.pos.y;
+    }
+
+
+
 }

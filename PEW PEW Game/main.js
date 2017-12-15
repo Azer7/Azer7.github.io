@@ -44,7 +44,7 @@ let gunContainer = new createjs.Container();
 let gunIndex = 0;
 let guns = [];
 
-guns.push(new Gun("Terry's Trash Taser", 3.33, 4, 0, 1.2, "The result of 6 years of pole-dancing", "no-speciallyness", {
+guns.push(new Laser("Terry's Trash Taser", 3.33, 4, 0, 1.2, "The result of 6 years of pole-dancing", "no-speciallyness", {
     c: createjs.Graphics.getRGB(180, 0, 30, .9),
     s: 5
 }, {
@@ -55,7 +55,7 @@ guns.push(new Gun("Terry's Trash Taser", 3.33, 4, 0, 1.2, "The result of 6 years
     }));
 guns[0].bought = true;
 
-guns.push(new Gun("Alpha v0.1 Laser", 4, 6, 21.01, 1, "Always better than the full release", "no-speciallyness", {
+guns.push(new Laser("Alpha v0.1 Laser", 4, 6, 21.01, 1, "Always better than the full release", "no-speciallyness", {
     c: createjs.Graphics.getRGB(140, 50, 30, .9),
     s: 6
 }, {
@@ -75,7 +75,7 @@ guns.push(new Gun("Grandma's Gun", 7, 9, 55, .7, "Used to protect herself from t
         h: 20
     }));
 
-guns.push(new Gun("Alien Dispatcher", 24, 25, 121, 1.2, "911, an alien showed up at my door", "no-speciallyness", {
+guns.push(new Laser("Alien Dispatcher", 24, 25, 121, 1.2, "911, an alien showed up at my door", "no-speciallyness", {
     c: createjs.Graphics.getRGB(89, 255, 119, .7),
     s: 6
 }, {
@@ -85,7 +85,7 @@ guns.push(new Gun("Alien Dispatcher", 24, 25, 121, 1.2, "911, an alien showed up
         h: 24
     }));
 
-guns.push(new Gun("Butt Blaster", 40, 33, 432, .9, "Man that's a stinky one", "no-speciallyness", {
+guns.push(new Laser("Butt Blaster", 40, 33, 432, .9, "Man that's a stinky one", "no-speciallyness", {
     c: createjs.Graphics.getRGB(109, 60, 20, .7),
     s: 6
 }, {
@@ -95,7 +95,7 @@ guns.push(new Gun("Butt Blaster", 40, 33, 432, .9, "Man that's a stinky one", "n
         h: 30
     }));
 
-guns.push(new Gun("Fire Extinguisher", 66, 44, 666, .9, "Burn Baby Burn", "Burnemup dot", {
+guns.push(new Laser("Fire Extinguisher", 66, 44, 666, .9, "Burn Baby Burn", "Burnemup dot", {
     c: createjs.Graphics.getRGB(222, 66, 6, .7),
     s: 12
 }, {
@@ -105,9 +105,9 @@ guns.push(new Gun("Fire Extinguisher", 66, 44, 666, .9, "Burn Baby Burn", "Burne
         h: 16
     }));
 
-guns.push(new Gun("Flamer Gamer", 0, 0, 0.1, 2.5, "tell him to fix his game -James", "Downfall: The League made it a habit", {
-    c: createjs.Graphics.getRGB(222, 222, 22, .7),
-    s: 120
+guns.push(new Laser("Flamer Gamer", 0, 0, 0.1, 2.5, "tell him to fix his game -James", "Downfall: The League got the best of him", {
+    c: createjs.Graphics.getRGB(222, 222, 22, .5),
+    s: 800
 }, {
         x: 1,
         y: 115,
@@ -117,29 +117,29 @@ guns.push(new Gun("Flamer Gamer", 0, 0, 0.1, 2.5, "tell him to fix his game -Jam
 
 let upgrades = [];
 //Damage upgrade
-upgrades.push(new Upgrade("Damage", 10, (lvl) => 1 + 0.08 * lvl));
+upgrades.push(new Upgrade("Damage", 40, (lvl) => 1 + 0.08 * lvl));
 //Pierce value
-upgrades.push(new Upgrade("Pierce", 10, (lvl) => .8 + 0.01 * lvl));
+upgrades.push(new Upgrade("Pierce", 20, (lvl) => .8 + 0.01 * lvl));
 //Max Health upgrade
-upgrades.push(new Upgrade("Health", 10, (lvl) => 100 + 30 * lvl));
+upgrades.push(new Upgrade("Health", 50, (lvl) => 100 + 30 * lvl));
 //Player speed upgrade
-upgrades.push(new Upgrade("Speed", 10, (lvl) => .5 + 0.03 * lvl));
+upgrades.push(new Upgrade("Speed", 15, (lvl) => .5 + 0.03 * lvl));
 //Player Max Energy upgrade
-upgrades.push(new Upgrade("Max Energy", 10, (lvl) => 100 + Math.pow(40 * lvl, 1.2)));
+upgrades.push(new Upgrade("Max Energy", 50, (lvl) => 100 + Math.pow(40 * lvl, 1.2)));
 //Player Max Boost upgrade
-upgrades.push(new Upgrade("Max Boost", 10, (lvl) => 100 + 30 * lvl));
+upgrades.push(new Upgrade("Max Boost", 50, (lvl) => 100 + 30 * lvl));
 //Player Boost Recharge upgrade
-upgrades.push(new Upgrade("Boost Recharge", 10, (lvl) => .5 + 0.03 * lvl));
+upgrades.push(new Upgrade("Boost Recharge", 20, (lvl) => .5 + 0.05 * lvl));
 //Player Boost Speed upgrade
-upgrades.push(new Upgrade("Boost Speed", 10, (lvl) => .9 + 0.06 * lvl));
+upgrades.push(new Upgrade("Boost Speed", 15, (lvl) => .9 + 0.06 * lvl));
 //Player Energy Recharge upgrade
-upgrades.push(new Upgrade("Energy Recharge", 10, (lvl) => 3 + Math.floor(Math.pow(lvl, 1.3) * 10) / 10));
+upgrades.push(new Upgrade("Energy Recharge", 40, (lvl) => 3 + Math.floor(Math.pow(lvl, 1.3) * 10) / 10));
 //Game Income multiplier upgrade
-upgrades.push(new Upgrade("Income", 10, (lvl) => 1 + 0.25 * lvl));
+upgrades.push(new Upgrade("Income", 15, (lvl) => 1 + 0.25 * lvl));
 //Game Zombie spawn rate upgrade
-upgrades.push(new Upgrade("Zombie Rate", 10, (lvl) => 1 + 0.05 * lvl));
+upgrades.push(new Upgrade("Zombie Rate", 25, (lvl) => 1 + 0.05 * lvl));
 //Zombie Speed (slowdown) upgrade
-upgrades.push(new Upgrade("Zombie Speed", 10, (lvl) => 1 - Math.sqrt(lvl) * 0.08));
+upgrades.push(new Upgrade("Zombie Speed", 20, (lvl) => 1 - Math.sqrt(lvl) * 0.08));
 
 
 function init() {
