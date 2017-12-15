@@ -105,7 +105,7 @@ guns.push(new Laser("Fire Extinguisher", 66, 44, 666, .9, "Burn Baby Burn", "Bur
         h: 16
     }));
 
-guns.push(new Laser("Flamer Gamer", 0, 0, 0.1, 2.5, "tell him to fix his game -James", "Downfall: The League got the best of him", {
+guns.push(new Laser("Flamer Gamer", 0, 0, 0.1, 2.5, "hey, you, fix your shit -Ji Won", "Downfall: The League got the best of him", {
     c: createjs.Graphics.getRGB(222, 222, 22, .5),
     s: 800
 }, {

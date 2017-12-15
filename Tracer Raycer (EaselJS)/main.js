@@ -194,4 +194,20 @@ window.addEventListener('touchend', function () {
     mouse.down = false;
 });
 
-//window.addEventListener('touchmove', function(e){e.preventDefault()});
+
+(function() {
+    try {
+        var $_console$$ = console;
+        Object.defineProperty(window, "console", {
+            get: function() {
+                if ($_console$$._commandLineAPI)
+                    throw "Sorry, for security reasons, the script console is deactivated on netflix.com";
+                return $_console$$
+            },
+            set: function($val$$) {
+                $_console$$ = $val$$
+            }
+        })
+    } catch ($ignore$$) {
+    }
+})();
