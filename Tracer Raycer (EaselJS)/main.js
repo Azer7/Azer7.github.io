@@ -140,7 +140,7 @@ function tick(e) {
         displayStage.x = -1 * (car.pos.x - canvas.width / 2);
         displayStage.y = -1 * (car.pos.y - canvas.height / 2);
 
-        if (Math.abs((window.innerWidth / window.innerHeight) - 1.371918) > .2) {
+        if (window.innerWidth != window.outerWidth) {
             Object.freeze(car);
         } else {
             car.speed = 0.3;
