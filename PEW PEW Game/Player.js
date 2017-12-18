@@ -25,7 +25,6 @@ class Player {
         this.boostDischarge = 4;
         this.boostRecharge;
         this.boostSpeed;
-
         this.laser = new Ray(x, y, 0, 9999, true);
         this.bullets = [];
         this.rays = [];
@@ -33,8 +32,9 @@ class Player {
             this.rays.push(new Ray(x, y, 0, 40 * hScl, false))
             this.rays[i].angle = 5 * i;
         }
-        this.shooting = false;
+        this._shooting = false;
         this.boosting = false;
+        this.canShoot;
 
         //this.rays.push();
         this.barrelPos = new Vector(68 * hScl, 6 * hScl);
@@ -83,6 +83,20 @@ class Player {
         gameAssets.addChild(this.boostG);
     }
 
+    set shooting(value) {
+        if (value == true) {
+            this.sprite.gotoAndPlay("shoot");
+        } else {
+            this.sprite.gotoAndPlay("unshoot");
+        }
+        this._shooting = value;
+    }
+
+    get shooting() {
+        return this._shooting;
+    }
+
+
     reset() {
         //calculate stats
         this.damage = guns[player.equippedGun].damage * upgrades[0].getValue(upgrades[0].level);
@@ -96,6 +110,7 @@ class Player {
         this.energyDischarge = guns[player.equippedGun].energyCost;
         this.energyRecharge = upgrades[8].getValue(upgrades[8].level);
 
+        this.canShoot = true;
 
         //reset variable stats
         this.health = this.maxHealth;
@@ -107,6 +122,12 @@ class Player {
         this.boostG.visible = false;
 
         this.laser.activeRay = guns[player.equippedGun].beam;
+
+        if (guns[this.equippedGun] instanceof Laser) {
+            this.laser.line.visible = true;
+        } else if (guns[this.equippedGun] instanceof Gun) {
+            this.laser.line.visible = false;
+        } else { }
     }
 
     get angle() {
@@ -140,39 +161,50 @@ class Player {
             this.boostG.visible = false;
         } else if (this.boost > this.maxBoost)
             this.boost = this.maxBoost;
-        this.boostbarTo.x = (this.boost / this.maxBoost * 115 + 82) * hScl;
 
+        this._angle = mouse.pos.clone().subtract(this.pos).angle();
+        let angleChange = mouse.pos.clone().subtract(this.barrelPos.clone().rotateBy(this._angle).multiplyScalar(0.001)).subtract(this.pos).angle() - this._angle;
+        this._angle += angleChange * 1000;
 
-        if (guns[this.equippedGun] instanceof Laser) {
+        //detect player angle
+        for (let i = 0; i < this.rays.length; i++) {
+            this.rays[i].pos = this.pos;
+            this.rays[i].checkCollision(objArr);
+            //calculate collision bounce back direction
+            let largestVector = new Vector(-1, this.rays[i].slope);
+            if (this.rays[i].angle > 270 || this.rays[i].angle < 90) {
+                largestVector.x = 1;
+            }
+
+            if (this.rays[i].angle > 90 && this.rays[i].angle <= 270)
+                largestVector.y *= -1;
+
+            //same as setMag to get actually distance to move back
+            largestVector.multiplyScalar(this.rays[i].maxLength / largestVector.length());
+            //this.speed / 10 to get how much of the bounce back vector to move
+            this.pos.x -= (this.speed / 10) * (largestVector.x - (this.rays[i].posEnd.x - this.rays[i].pos.x));
+            this.pos.y -= (this.speed / 10) * (largestVector.y - (this.rays[i].posEnd.y - this.rays[i].pos.y));
+            console.log();
+        }
+
+        /* LOGIC */
+        if (guns[this.equippedGun] instanceof Laser) { //laser logic
             //calculate laser energy
             if (this.shooting)
                 this.energy -= this.energyDischarge;
             this.energy += this.energyRecharge;
 
-            //detect player angle
-            for (let i = 0; i < this.rays.length; i++) {
-                this.rays[i].pos = this.pos;
-                this.rays[i].checkCollision(objArr);
-                //calculate collision bounce back direction
-                let largestVector = new Vector(-1, this.rays[i].slope);
-                if (this.rays[i].angle > 270 || this.rays[i].angle < 90) {
-                    largestVector.x = 1;
-                }
+            if (this.energy < 0) {
+                this.energy = 0;
+                this.shooting = false;
 
-                if (this.rays[i].angle > 90 && this.rays[i].angle <= 270)
-                    largestVector.y *= -1;
+            } else if (this.energy > this.maxEnergy)
+                this.energy = this.maxEnergy;
 
-                //same as setMag to get actually distance to move back
-                largestVector.multiplyScalar(this.rays[i].maxLength / largestVector.length());
-                //this.speed / 10 to get how much of the bounce back vector to move
-                this.pos.x -= (this.speed / 10) * (largestVector.x - (this.rays[i].posEnd.x - this.rays[i].pos.x));
-                this.pos.y -= (this.speed / 10) * (largestVector.y - (this.rays[i].posEnd.y - this.rays[i].pos.y));
-                console.log();
-            }
+
+
+
             //detect gun angle
-            this._angle = mouse.clone().subtract(this.pos).angle();
-            let angleChange = mouse.clone().subtract(this.barrelPos.clone().rotateBy(this._angle).multiplyScalar(0.001)).subtract(this.pos).angle() - this._angle;
-            this._angle += angleChange * 1000;
 
             //process gun
             this.laser.pos = this.barrelPos.clone().rotateBy(this._angle).add(this.pos);
@@ -197,10 +229,30 @@ class Player {
                     objects[hits[i].index].health -= this.damage * Math.pow(this.pierce, i);
                 }
             }
-        } else if (guns[this.equippedGun] instanceof Gun) {
-            
-            
-        }
+        } else if (guns[this.equippedGun] instanceof Gun) { //gun logic
+            if (this.shooting && this.canShoot) {
+                this.canShoot = false;
+                setTimeout(() => { this.canShoot = true; this.shooting = false; }, 500);
+                this.energy -= this.energyDischarge;
+                for (let i = 0; i < 15; i++) {
+                    //let randPos = this.barrelPos.clone().rotateBy(this._angle).add(new Vector(this.pos.x + Math.random() * 35 - Math.random() * 35, this.pos.y + Math.random() * 35 - Math.random() * 35));
+                    let randPos = new Vector(this.barrelPos.x + Math.random() * 30 - Math.random() * 10, this.barrelPos.y + Math.random() * 10 - Math.random() * 10).rotateBy(this._angle).add(this.pos);
+                    this.bullets.push(new Bullet(randPos, this._angle + Math.random() / 15 - Math.random() / 15, 10, this.damage, this.pierce - .7, guns[this.equippedGun].beam));
+
+                }
+
+
+                if (this.energy <= this.energyDischarge) {
+                    this.sprite.gotoAndPlay("reload");
+                    setTimeout(() => { this.energy = this.maxEnergy }, 1000 / Math.pow(this.energyRecharge, 1/4));
+                }
+            }
+
+        } else { }
+
+
+        this.boostbarTo.x = (this.boost / this.maxBoost * 115 + 82) * hScl; //draw line
+        this.energybarTo.x = (this.energy / this.maxEnergy * 112 + 95) * hScl; //draw line
     }
 
     constrainVel(xlow, xhigh, ylow, yhigh) {
@@ -222,10 +274,14 @@ class Player {
 
     update() {
         //draw rays
-        this.laser.active = this.shooting;
-        this.laser.update();
-        //for (let i = 0; i < this.rays.length; i++)
-        //   this.rays[i].update();
+        if (guns[this.equippedGun] instanceof Laser) {
+            this.laser.active = this.shooting;
+            this.laser.update();
+        } else if (guns[this.equippedGun] instanceof Gun) {
+            for (let i = 0; i < this.bullets.length; i++) {
+                this.bullets[i].update(this.bullets, i);
+            }
+        } else { }
 
         //draw player
         this.sprite.x = this.pos.x;
@@ -243,21 +299,50 @@ class Player {
 }
 
 class Bullet {
-    constructor(x, y, angle, speed, damage) {
-        this.pos = new Vector(x, y);
+    constructor(pos, angle, speed, damage, pierce, display) {
+        this.pos = pos;
         this.angle = angle;
         this.speed = speed;
         this.damage = damage;
+        this.pierce = pierce;
 
         this.g = new createjs.Shape();
         this.g.graphics.setStrokeStyle(1);
-        this.g.graphics.beginStroke(createjs.Graphics.getRGB(40, 111, 180, 0.6));
-        this.g.graphics.beginFill(createjs.Graphics.getRGB(46, 136, 205, 0.4));
-        this.g.graphics.drawCircle(0, 0, 45 * hScl);
+        this.g.graphics.beginStroke(createjs.Graphics.getRGB(100, 111, 100));
+        this.g.graphics.beginFill(display.c);
+        this.g.graphics.drawCircle(0, 0, display.s * hScl);
         this.g.x = this.pos.x;
         this.g.y = this.pos.y;
+        this.g.cache(-5, -5, 10, 10);
+        gameAssets.children.splice(2, 0, this.g);
     }
 
+    update(bulletArr, index) {
+        if (this.pos.x < 0 || this.pos.x > width || this.pos.y < 0 || this.pos.y > height) {
+            this.remove(bulletArr, index)
+            return;
+        }
 
+        this.pos.add(new Vector(this.speed).rotateBy(this.angle));
+        this.g.x = this.pos.x;
+        this.g.y = this.pos.y;
 
+        for (let i = 0; i < objects.length; i++) {
+            if (objects[i] instanceof Enemy) {
+                let object = objects[i].collision;
+                if (this.pos.x > object.pos.x && this.pos.x < object.pos.x + object.width && this.pos.y > object.pos.y && this.pos.y < object.pos.y + object.height) {
+                    objects[i].health -= this.damage;
+                    if (Math.random() > this.pierce) {
+                        this.remove(bulletArr, index);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    remove(bulletArr, index) {
+        gameAssets.removeChild(this.g);
+        bulletArr.splice(index, 1);
+    }
 }

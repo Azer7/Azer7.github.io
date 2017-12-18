@@ -6,8 +6,7 @@ let width = window.innerWidth,
 
 let wScl = width / 800,
     hScl = height / 640;
-let mouse = new Vector(0, 0);
-let mouseDown = false;
+let mouse = { pos: new Vector(), down: false };
 
 let lessLag = false;
 
@@ -44,7 +43,7 @@ let gunContainer = new createjs.Container();
 let gunIndex = 0;
 let guns = [];
 
-guns.push(new Laser("Terry's Trash Taser", 3.33, 4, 0, 1.2, "The result of 6 years of pole-dancing", "no-speciallyness", {
+guns.push(new Laser("Terry's Trash Taser", 2.77, 4, 0, 1.2, "The result of 6 years of pole-dancing", "no-speciallyness", {
     c: createjs.Graphics.getRGB(180, 0, 30, .9),
     s: 5
 }, {
@@ -56,7 +55,7 @@ guns.push(new Laser("Terry's Trash Taser", 3.33, 4, 0, 1.2, "The result of 6 yea
 guns[0].bought = true;
 
 guns.push(new Laser("Alpha v0.1 Laser", 4, 6, 21.01, 1, "Always better than the full release", "no-speciallyness", {
-    c: createjs.Graphics.getRGB(140, 50, 30, .9),
+    c: createjs.Graphics.getRGB(140, 100, 100, .9),
     s: 6
 }, {
         x: 97,
@@ -65,9 +64,9 @@ guns.push(new Laser("Alpha v0.1 Laser", 4, 6, 21.01, 1, "Always better than the 
         h: 26
     }));
 
-guns.push(new Gun("Grandma's Gun", 7, 9, 55, .7, "Used to protect herself from the wolf", "no-speciallyness", {
-    c: createjs.Graphics.getRGB(91, 107, 6, .9),
-    s: 6
+guns.push(new Gun("Grandma's Shotgun", 70, 9, 55, .7, "Used to protect herself from the wolf", "it's not a laser", {
+    c: createjs.Graphics.getRGB(241, 37, 6, .9),
+    s: 4
 }, {
         x: 42,
         y: 34.6,
@@ -105,7 +104,7 @@ guns.push(new Laser("Fire Extinguisher", 66, 44, 666, .9, "Burn Baby Burn", "Bur
         h: 16
     }));
 
-guns.push(new Laser("Flamer Gamer", 0, 0, 0.1, 2.5, "hey, you, fix your shit -Ji Won", "Downfall: The League got the best of him", {
+guns.push(new Laser("Flamer Gamer", 0, 0, 0.1, 2.5, "fix you game -James Han", "Downfall: The League got the best of him", {
     c: createjs.Graphics.getRGB(222, 222, 22, .5),
     s: 800
 }, {
@@ -119,11 +118,11 @@ let upgrades = [];
 //Damage upgrade
 upgrades.push(new Upgrade("Damage", 40, (lvl) => 1 + 0.08 * lvl));
 //Pierce value
-upgrades.push(new Upgrade("Pierce", 20, (lvl) => .8 + 0.01 * lvl));
+upgrades.push(new Upgrade("Pierce", 20, (lvl) => .7 + 0.015 * lvl));
 //Max Health upgrade
 upgrades.push(new Upgrade("Health", 50, (lvl) => 100 + 30 * lvl));
 //Player speed upgrade
-upgrades.push(new Upgrade("Speed", 15, (lvl) => .5 + 0.03 * lvl));
+upgrades.push(new Upgrade("Speed", 15, (lvl) => .3 + 0.03 * lvl));
 //Player Max Energy upgrade
 upgrades.push(new Upgrade("Max Energy", 50, (lvl) => 100 + Math.pow(40 * lvl, 1.2)));
 //Player Max Boost upgrade
@@ -131,7 +130,7 @@ upgrades.push(new Upgrade("Max Boost", 50, (lvl) => 100 + 30 * lvl));
 //Player Boost Recharge upgrade
 upgrades.push(new Upgrade("Boost Recharge", 20, (lvl) => .5 + 0.05 * lvl));
 //Player Boost Speed upgrade
-upgrades.push(new Upgrade("Boost Speed", 15, (lvl) => .9 + 0.06 * lvl));
+upgrades.push(new Upgrade("Boost Speed", 15, (lvl) => .5 + 0.06 * lvl));
 //Player Energy Recharge upgrade
 upgrades.push(new Upgrade("Energy Recharge", 40, (lvl) => 3 + Math.floor(Math.pow(lvl, 1.3) * 10) / 10));
 //Game Income multiplier upgrade
@@ -147,7 +146,7 @@ function init() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight + 1;
     stage = new createjs.Stage(canvas);
-    
+
     //player stuff
     stage.addEventListener("stagemousemove", moveCanvas);
     stage.addEventListener("stagemousedown", mousePressed);
@@ -172,7 +171,7 @@ function init() {
         "animations": {
             "idle": [0, 19, "idle", .2],
             "move": [20, 39, "idle", .5],
-            "reload": [40, 59, "reload", .5],
+            "reload": [40, 59, "idle", .4],
             "shoot": {
                 frames: [61],
                 next: "",
@@ -475,37 +474,39 @@ function tick(e) {
     elapsedTicks++;
     if (gameState == 1) {
         mainGame(e);
-    } else if (gameState == 2) { //show score screen
+    } else if (gameState == 2) { //shop
         shop(e);
-    } else if (gameState == 3) { //show shop
-
     }
     fpsLabel.text = Math.round(createjs.Ticker.getMeasuredFPS()) + " fps";
     stage.update(event);
 }
 
 function moveCanvas(e) {
-    mouse.x = e.stageX;
-    mouse.y = e.stageY;
+    mouse.pos.x = e.stageX;
+    mouse.pos.y = e.stageY;
 }
 
 function mousePressed(e) {
-    mouseDown = true;
+    mouse.down = true;
     if (gameState == 1) {
-        player.sprite.gotoAndPlay("shoot");
-        player.shooting = true;
+        if (guns[player.equippedGun] instanceof Laser) {
+            player.shooting = true;
+        } else if (guns[player.equippedGun] instanceof Gun) {
+            if (player.energy > player.energyDischarge && player.canShoot) {
+                player.shooting = true;               
+            }
+        } else { }
     }
 }
 
 function mouseReleased(e) {
-    mouseDown = false;
-    if (gameState == 1 && player.shooting) {
-        player.sprite.gotoAndPlay("unshoot");
+    mouse.down = false;
+    if (gameState == 1 && player.shooting && player.canShoot) {
         player.shooting = false;
     }
 }
 
-onkeydown = onkeyup = function(e) {
+onkeydown = onkeyup = function (e) {
     e = e || event; // to deal with IE
     keys[e.keyCode] = e.type == 'keydown';
     if (e.keyCode == 32) {
@@ -524,11 +525,25 @@ onkeydown = onkeyup = function(e) {
         }
     } else if (e.keyCode == 76 && keys[76]) {
         lessLag = !lessLag;
+    } else if (e.keyCode == 69 && keys[69] && keys[16] && keys[17]) {
+        exportData();
     }
 }
 
-window.onbeforeunload = closingCode;
-function closingCode() {
-    // do something...
-    return null;
+function exportData() {
+    let exportData;
+
+    //decide what to stick in an export object
+
+    let exportString = JSON.stringify(exportData);
+    let inputString = prompt("Replace this to import save game \nHere is your export:", exportString);
+
+    if (inputString != exportString) {
+        importData = JSON.parse(inputString);
+        //set user data and set up game
+    }
 }
+
+window.onbeforeunload = function () {
+    return null;
+};
