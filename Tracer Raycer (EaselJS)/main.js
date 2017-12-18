@@ -146,7 +146,7 @@ function tick(e) {
             car.speed = 0.3;
         }
 
-        if (mouse.down || pressedDown) {
+        if (mouse.down || pressedDown || keys[16]) {
             car.acc.y -= car.speed / ((100 / 6) / e.delta);
         }
 
@@ -183,7 +183,7 @@ function mouseReleased(e) {
 onkeydown = onkeyup = function (e) {
     e = e || event; // to deal with IE
     keys[e.keyCode] = e.type == 'keydown';
-    if (e.keyCode = 32 && keys[32]) {
+    if (e.keyCode = 67 && keys[67]) {
         car.animationValue++;
         car.animationValue = car.animationValue % 4;
         if (car.animationValue == 0) {

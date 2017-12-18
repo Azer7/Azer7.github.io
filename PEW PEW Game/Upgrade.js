@@ -96,7 +96,7 @@ class Upgrade extends Button {
             }
 
             statText.font = "bold 15px Arial";
-            
+
             costText.text = "Max";
             costText.font = "bold 22px Arial";
         }
@@ -145,9 +145,13 @@ class Laser extends Weapon {
 }
 
 class Gun extends Weapon {
-    constructor(name, damage, energyCost, price, speedMultiplier, text, special, bullet, image) {
+    constructor(name, damage, energyCost, delay, price, speedMultiplier, text, special, bullet, image) {
         super(name, damage, energyCost, price, speedMultiplier, text, special, image);
         this.beam = bullet;
+        this.bulletSpeed = 10;
+        this.bulletAmount = 1;
+        this.delay = delay;
+        this.angleSpread = 0;
+        this.posSpread = new Vector();
     }
-
 }

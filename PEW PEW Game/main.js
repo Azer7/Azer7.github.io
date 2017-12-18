@@ -6,7 +6,10 @@ let width = window.innerWidth,
 
 let wScl = width / 800,
     hScl = height / 640;
-let mouse = { pos: new Vector(), down: false };
+let mouse = {
+    pos: new Vector(),
+    down: false
+};
 
 let lessLag = false;
 
@@ -47,72 +50,80 @@ guns.push(new Laser("Terry's Trash Taser", 2.77, 4, 0, 1.2, "The result of 6 yea
     c: createjs.Graphics.getRGB(180, 0, 30, .9),
     s: 5
 }, {
-        x: 139,
-        y: 6,
-        w: 42,
-        h: 28
-    }));
+    x: 139,
+    y: 6,
+    w: 42,
+    h: 28
+}));
 guns[0].bought = true;
 
 guns.push(new Laser("Alpha v0.1 Laser", 4, 6, 21.01, 1, "Always better than the full release", "no-speciallyness", {
     c: createjs.Graphics.getRGB(140, 100, 100, .9),
     s: 6
 }, {
-        x: 97,
-        y: 5,
-        w: 42,
-        h: 26
-    }));
+    x: 97,
+    y: 5,
+    w: 42,
+    h: 26
+}));
 
-guns.push(new Gun("Grandma's Shotgun", 70, 9, 55, .7, "Used to protect herself from the wolf", "it's not a laser", {
+guns.push(new Gun("Grandma's Shotgun", 20, 25, 1000, 55, .7, "Used to protect herself from the wolf", "it's not a laser", {
     c: createjs.Graphics.getRGB(241, 37, 6, .9),
-    s: 4
+    s: 4,
+    type: "round"
 }, {
-        x: 42,
-        y: 34.6,
-        w: 56,
-        h: 20
-    }));
+    x: 42,
+    y: 34.6,
+    w: 56,
+    h: 20
+}));
+guns[guns.length - 1].bulletAmount = 15;
+guns[guns.length - 1].angleSpread = 1 / 5;
+guns[guns.length - 1].posSpread.x = 30;
+guns[guns.length - 1].posSpread.y = 10;
 
-guns.push(new Laser("Alien Dispatcher", 24, 25, 121, 1.2, "911, an alien showed up at my door", "no-speciallyness", {
+
+
+guns.push(new Gun("Alien Dispatcher", 101, 5, 100, 121, 1.2, "911, an alien showed up at my door", "no-speciallyness", {
     c: createjs.Graphics.getRGB(89, 255, 119, .7),
-    s: 6
+    s: 25,
+    type: "rect"
 }, {
-        x: 72,
-        y: 57.5,
-        w: 40,
-        h: 24
-    }));
+    x: 72,
+    y: 57.5,
+    w: 40,
+    h: 24
+}));
 
 guns.push(new Laser("Butt Blaster", 40, 33, 432, .9, "Man that's a stinky one", "no-speciallyness", {
     c: createjs.Graphics.getRGB(109, 60, 20, .7),
     s: 6
 }, {
-        x: 1,
-        y: 60,
-        w: 70,
-        h: 30
-    }));
+    x: 1,
+    y: 60,
+    w: 70,
+    h: 30
+}));
 
 guns.push(new Laser("Fire Extinguisher", 66, 44, 666, .9, "Burn Baby Burn", "Burnemup dot", {
     c: createjs.Graphics.getRGB(222, 66, 6, .7),
     s: 12
 }, {
-        x: 1,
-        y: 135,
-        w: 52,
-        h: 16
-    }));
+    x: 1,
+    y: 135,
+    w: 52,
+    h: 16
+}));
 
 guns.push(new Laser("Flamer Gamer", 0, 0, 0.1, 2.5, "fix you game -James Han", "Downfall: The League got the best of him", {
     c: createjs.Graphics.getRGB(222, 222, 22, .5),
     s: 800
 }, {
-        x: 1,
-        y: 115,
-        w: 56,
-        h: 21
-    }));
+    x: 1,
+    y: 115,
+    w: 56,
+    h: 21
+}));
 
 let upgrades = [];
 //Damage upgrade
@@ -257,11 +268,11 @@ function init() {
 
     leftButton = new Button(() => {
         updateGun(gunIndex - 1)
-    }, () => { });
+    }, () => {});
     leftButton.bubbly = false;
     rightButton = new Button(() => {
         updateGun(gunIndex + 1)
-    }, () => { });
+    }, () => {});
     rightButton.bubbly = false;
 
     let leftArrow = new createjs.Shape();
@@ -286,7 +297,7 @@ function init() {
 
     let equipContainer = new Button(() => {
         equipGun();
-    }, () => { });
+    }, () => {});
 
     let equipButton = new createjs.Shape();
     equipButton.graphics.setStrokeStyle(1);
@@ -363,7 +374,7 @@ function init() {
     cashLabel.y = 67 * hScl;
     shopAssets.addChild(cashLabel);
 
-    playButton = new Button(() => { }, () => {
+    playButton = new Button(() => {}, () => {
         setupGame()
     });
     let button = new createjs.Shape();
@@ -492,10 +503,10 @@ function mousePressed(e) {
         if (guns[player.equippedGun] instanceof Laser) {
             player.shooting = true;
         } else if (guns[player.equippedGun] instanceof Gun) {
-            if (player.energy > player.energyDischarge && player.canShoot) {
-                player.shooting = true;               
+            if (player.energy >= player.energyDischarge && player.canShoot) {
+                player.shooting = true;
             }
-        } else { }
+        } else {}
     }
 }
 
