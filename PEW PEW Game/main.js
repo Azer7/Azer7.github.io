@@ -46,7 +46,7 @@ let gunContainer = new createjs.Container();
 let gunIndex = 0;
 let guns = [];
 
-guns.push(new Laser("Terry's Trash Taser", 2.77, 4, 0, 1.2, "The result of 6 years of pole-dancing", "no-speciallyness", {
+guns.push(new Laser("Terry's Trash Taser", 2.77, 4, 0, 1.2, "10pm - 3am every day for 6 years", "the molesters stood no chance", {
     c: createjs.Graphics.getRGB(180, 0, 30, .9),
     s: 5
 }, {
@@ -67,7 +67,7 @@ guns.push(new Laser("Alpha v0.1 Laser", 4, 6, 21.01, 1, "Always better than the 
     h: 26
 }));
 
-guns.push(new Gun("Grandma's Shotgun", 20, 25, 1000, 55, .7, "Used to protect herself from the wolf", "it's not a laser", {
+guns.push(new Gun("Granny's Gun", 25, 20, 700, 55, .7, "Used to protect herself from the wolf", "it's not a laser", {
     c: createjs.Graphics.getRGB(241, 37, 6, .9),
     s: 4,
     type: "round"
@@ -77,14 +77,14 @@ guns.push(new Gun("Grandma's Shotgun", 20, 25, 1000, 55, .7, "Used to protect he
     w: 56,
     h: 20
 }));
-guns[guns.length - 1].bulletAmount = 15;
+guns[guns.length - 1].bulletAmount = 25;
 guns[guns.length - 1].angleSpread = 1 / 5;
 guns[guns.length - 1].posSpread.x = 30;
 guns[guns.length - 1].posSpread.y = 10;
 
 
 
-guns.push(new Gun("Alien Dispatcher", 101, 5, 100, 121, 1.2, "911, an alien showed up at my door", "no-speciallyness", {
+guns.push(new Gun("Alien Annihalator", 101, 5, 100, 121, 1.2, "911, an alien showed up at my door", "no-speciallyness", {
     c: createjs.Graphics.getRGB(89, 255, 119, .7),
     s: 25,
     type: "rect"
@@ -105,7 +105,7 @@ guns.push(new Laser("Butt Blaster", 40, 33, 432, .9, "Man that's a stinky one", 
     h: 30
 }));
 
-guns.push(new Flamethrower("Fire Extinguisher", 66, 5, 666, .9, "Burn Baby Burn", "Burnemup dot", {
+guns.push(new Flamethrower("Fire Extinguisher", 44, 18, 666, .9, "Burn Baby Burn", "Burnemup baby", {
     c: createjs.Graphics.getRGB(222, 66, 6, .7),
     s: 12,
     type: "fire"

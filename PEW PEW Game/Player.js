@@ -12,7 +12,7 @@ class Player {
         this.maxHealth;
         this._health;
 
-        this.equippedGun = 5;
+        this.equippedGun = 0;
 
         this.damage; //dictated by gun
         this.pierce;
@@ -130,7 +130,7 @@ class Player {
         if (value == true) {
             this.sprite.gotoAndPlay("shoot");
         } else {
-            if (!this.sprite.currentAnimation == "reload")
+            if (this.sprite.currentAnimation != "reload")
                 this.sprite.gotoAndPlay("unshoot");
         }
         this._shooting = value;
@@ -352,7 +352,7 @@ class Bullet {
 
         if (display.type == "round") {
             this.g.graphics.drawCircle(0, 0, display.s * hScl);
-            this.g.cache(-display.s, -display.s, 2 * display.s, 2 * display.s);
+            this.g.cache(-display.s * 1.5, -display.s * 1.5, 3 * display.s, 3 * display.s);
         } else if (display.type == "rect") {
             this.g.graphics.drawRect(0, 0, display.s * hScl, display.s * hScl / 4);
             this.g.rotation = this.angle * 180 / Math.PI;

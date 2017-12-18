@@ -21,7 +21,7 @@ class Enemy {
             new createjs.ColorFilter(1, 1, 1, 1, 0, 0, 0, 0)
         ]
         this.sprite.cache(-90, -130, 250, 250);
-        gameAssets.children.splice(2, 0, this.sprite);
+        gameAssets.children.splice(3, 0, this.sprite);
     }
 
     get angle() {
