@@ -155,3 +155,14 @@ class Gun extends Weapon {
         this.posSpread = new Vector();
     }
 }
+
+class Flamethrower extends Weapon {
+    constructor(name, damage, energyCost, price, speedMultiplier, text, special, bullet, image) {
+        super(name, damage, energyCost, price, speedMultiplier, text, special, image);
+        this.beam = bullet;
+        this.bulletSpeed = 12;
+        this.bulletAmount = 1;
+        this.angleSpread = 1/5;
+        this.posSpread = new Vector(30, 10);
+    }
+}

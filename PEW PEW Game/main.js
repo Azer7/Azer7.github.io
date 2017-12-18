@@ -105,15 +105,20 @@ guns.push(new Laser("Butt Blaster", 40, 33, 432, .9, "Man that's a stinky one", 
     h: 30
 }));
 
-guns.push(new Laser("Fire Extinguisher", 66, 44, 666, .9, "Burn Baby Burn", "Burnemup dot", {
+guns.push(new Flamethrower("Fire Extinguisher", 66, 5, 666, .9, "Burn Baby Burn", "Burnemup dot", {
     c: createjs.Graphics.getRGB(222, 66, 6, .7),
-    s: 12
+    s: 12,
+    type: "fire"
 }, {
     x: 1,
     y: 135,
     w: 52,
     h: 16
 }));
+guns[guns.length - 1].posSpread.x = 30;
+guns[guns.length - 1].posSpread.y = 10;
+
+
 
 guns.push(new Laser("Flamer Gamer", 0, 0, 0.1, 2.5, "fix you game -James Han", "Downfall: The League got the best of him", {
     c: createjs.Graphics.getRGB(222, 222, 22, .5),
@@ -477,8 +482,9 @@ function init() {
     //setupGame();
     setupShop();
     // start the tick and point it at the window so we can do some work before updating the stage:
-    createjs.Ticker.timingMode = createjs.Ticker.RAF;
+    //createjs.Ticker.timingMode = createjs.Ticker.RAF;
     createjs.Ticker.addEventListener("tick", tick);
+    createjs.Ticker.framerate = 60;
 }
 
 function tick(e) {
@@ -500,7 +506,7 @@ function moveCanvas(e) {
 function mousePressed(e) {
     mouse.down = true;
     if (gameState == 1) {
-        if (guns[player.equippedGun] instanceof Laser) {
+        if (guns[player.equippedGun] instanceof Laser || guns[player.equippedGun] instanceof Flamethrower) {
             player.shooting = true;
         } else if (guns[player.equippedGun] instanceof Gun) {
             if (player.energy >= player.energyDischarge && player.canShoot) {
