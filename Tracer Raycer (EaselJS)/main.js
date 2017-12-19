@@ -132,38 +132,33 @@ function init() {
 }
 
 function tick(e) {
-    if (!Object.isFrozen(car)) {
-        score.children[0].text = car.loops;
-        score.children[1].text = Math.round(car.currentTime * 100) / 100;
-        score.children[2].text = car.bestTime;
+    score.children[0].text = car.loops;
+    score.children[1].text = Math.round(car.currentTime * 100) / 100;
+    score.children[2].text = car.bestTime;
 
-        displayStage.x = -1 * (car.pos.x - canvas.width / 2);
-        displayStage.y = -1 * (car.pos.y - canvas.height / 2);
+    displayStage.x = -1 * (car.pos.x - canvas.width / 2);
+    displayStage.y = -1 * (car.pos.y - canvas.height / 2);
 
-        if (window.innerWidth != window.outerWidth) {
-            Object.freeze(car);
-        } else {
-            car.speed = 0.3;
-        }
+    car.speed = 0.3;
 
-        if (mouse.down || pressedDown || keys[16]) {
-            car.acc.y -= car.speed / ((100 / 6) / e.delta);
-        }
-
-        let mouseVec = new Vector(mouse.x, mouse.y);
-
-        mouseVec.x -= canvas.width / 2;
-        mouseVec.y -= canvas.height / 2;
-        car._angle = mouseVec.angle() + Math.PI / 2;
-
-        car.process(terrain);
-        car.draw();
-
-        //  localStorage.setItem("x", car.pos.x);
-        // localStorage.setItem("y", car.pos.y);
-
-        stage.update(event);
+    if (mouse.down || pressedDown || keys[16] || keys[32]) {
+        car.acc.y -= car.speed / ((100 / 6) / e.delta);
     }
+
+    let mouseVec = new Vector(mouse.x, mouse.y);
+
+    mouseVec.x -= canvas.width / 2;
+    mouseVec.y -= canvas.height / 2;
+    car._angle = mouseVec.angle() + Math.PI / 2;
+
+    car.process(terrain);
+    car.draw();
+
+    //  localStorage.setItem("x", car.pos.x);
+    // localStorage.setItem("y", car.pos.y);
+
+    stage.update(event);
+}
 }
 
 
@@ -180,9 +175,9 @@ function mouseReleased(e) {
     mouse.down = false;
 }
 
-onkeydown = onkeyup = function (e) {
+onkeydown = function (e) {
     e = e || event; // to deal with IE
-    keys[e.keyCode] = e.type == 'keydown';
+    keys[e.keyCode] = true;
     if (e.keyCode = 67 && keys[67]) {
         car.animationValue++;
         car.animationValue = car.animationValue % 4;
@@ -195,10 +190,6 @@ onkeydown = onkeyup = function (e) {
         } else if (car.animationValue == 3) {
             car.g.gotoAndPlay("ambulance");
         }
-        //        car.vel.multiply(0);
-        //        car.pos.x = 260;
-        //        car.pos.y = 600;
-        //        car.angle = 0;
     }
 }
 window.addEventListener('touchstart', function () {

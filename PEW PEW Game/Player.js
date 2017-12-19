@@ -12,7 +12,7 @@ class Player {
         this.maxHealth;
         this._health;
 
-        this.equippedGun = 4;
+        this.equippedGun = 0;
 
         this.damage; //dictated by gun
         this.pierce;
