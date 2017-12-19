@@ -159,7 +159,6 @@ function tick(e) {
 
     stage.update(event);
 }
-}
 
 
 function moveCanvas(e) {
@@ -178,7 +177,7 @@ function mouseReleased(e) {
 onkeydown = function (e) {
     e = e || event; // to deal with IE
     keys[e.keyCode] = true;
-    if (e.keyCode = 67 && keys[67]) {
+    if (e.keyCode == 67) {
         car.animationValue++;
         car.animationValue = car.animationValue % 4;
         if (car.animationValue == 0) {
@@ -190,7 +189,19 @@ onkeydown = function (e) {
         } else if (car.animationValue == 3) {
             car.g.gotoAndPlay("ambulance");
         }
+    } else if (keys[74] && keys[73] && keys[78] && keys[79] && keys[87]) {
+        keys[74] = keys[73] = keys[78] = keys[79] = keys[87] = false;
+        let cheat = prompt("what is yer cheet code skrb:", ">:(");
+        if (cheat.toLocaleLowerCase() == "ji won sucks" || cheat.toLocaleLowerCase() == "jiwon sucks") {
+            alert("scrub detected");
+            terrain = [];
+        }
     }
+}
+
+onkeyup = function (e) {
+    e = e || event; // to deal with IE
+    keys[e.keyCode] = false;
 }
 window.addEventListener('touchstart', function () {
     mouse.down = true;
