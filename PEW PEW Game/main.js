@@ -67,7 +67,7 @@ guns.push(new Laser("Alpha v0.1 Laser", 4, 6, 21.01, 1, "Always better than the 
     h: 26
 }));
 
-guns.push(new Gun("Granny's Gun", 33.3, 33.3, 700, 55, .7, "Used to protect herself from the wolf", "it's not a laser", {
+guns.push(new Gun("Granny's Gun", 25, 33.3, 900, 55, .7, "Used to protect herself from the wolf", "it's not a laser", {
     c: createjs.Graphics.getRGB(241, 37, 6, .9),
     s: 4,
     type: "round"

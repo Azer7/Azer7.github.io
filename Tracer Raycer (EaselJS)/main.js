@@ -153,10 +153,7 @@ function tick(e) {
 
     car.process(terrain);
     car.draw();
-
-    //  localStorage.setItem("x", car.pos.x);
-    // localStorage.setItem("y", car.pos.y);
-
+    
     stage.update(event);
 }
 

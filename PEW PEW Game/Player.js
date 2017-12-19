@@ -270,7 +270,7 @@ class Player {
                     this.sprite.gotoAndPlay("r-reload");
                     setTimeout(() => {
                         this.energy = this.maxEnergy
-                    }, 1000 / Math.pow(this.energyRecharge, 1 / 4));
+                    }, 2000 / Math.pow(this.energyRecharge, 1 / 4));
                 }
             }
         } else if (guns[this.equippedGun] instanceof Rifle) {
