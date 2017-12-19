@@ -156,12 +156,25 @@ class Gun extends Weapon {
     }
 }
 
+class Rifle extends Weapon {
+    constructor(name, damage, energyCost, delay, price, speedMultiplier, text, special, bullet, image) {
+        super(name, damage, energyCost, price, speedMultiplier, text, special, image);
+        this.beam = bullet;
+        this.bulletSpeed = 15;
+        this.bulletAmount = 1;
+        this.delay = delay;
+        this.angleSpread = 0;
+        this.posSpread = new Vector();
+    }
+}
+
 class Flamethrower extends Weapon {
-    constructor(name, damage, energyCost, price, speedMultiplier, text, special, bullet, image) {
+    constructor(name, damage, energyCost, delay, price, speedMultiplier, text, special, bullet, image) {
         super(name, damage, energyCost, price, speedMultiplier, text, special, image);
         this.beam = bullet;
         this.bulletSpeed = 12;
         this.bulletAmount = 1;
+        this.delay = delay;
         this.angleSpread = 1/5;
         this.posSpread = new Vector(30, 10);
     }

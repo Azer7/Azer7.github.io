@@ -67,7 +67,7 @@ guns.push(new Laser("Alpha v0.1 Laser", 4, 6, 21.01, 1, "Always better than the 
     h: 26
 }));
 
-guns.push(new Gun("Granny's Gun", 25, 20, 700, 55, .7, "Used to protect herself from the wolf", "it's not a laser", {
+guns.push(new Gun("Granny's Gun", 33.3, 33.3, 700, 55, .7, "Used to protect herself from the wolf", "it's not a laser", {
     c: createjs.Graphics.getRGB(241, 37, 6, .9),
     s: 4,
     type: "round"
@@ -84,10 +84,9 @@ guns[guns.length - 1].posSpread.y = 10;
 
 
 
-guns.push(new Gun("Alien Annihalator", 101, 5, 100, 121, 1.2, "911, an alien showed up at my door", "no-speciallyness", {
+guns.push(new Laser("Alien Annihalator", 30, 10, 121, 1.2, "911, an alien showed up at my door", "no-speciallyness", {
     c: createjs.Graphics.getRGB(89, 255, 119, .7),
-    s: 25,
-    type: "rect"
+    s: 6
 }, {
     x: 72,
     y: 57.5,
@@ -95,9 +94,10 @@ guns.push(new Gun("Alien Annihalator", 101, 5, 100, 121, 1.2, "911, an alien sho
     h: 24
 }));
 
-guns.push(new Laser("Butt Blaster", 40, 33, 432, .9, "Man that's a stinky one", "no-speciallyness", {
-    c: createjs.Graphics.getRGB(109, 60, 20, .7),
-    s: 6
+guns.push(new Rifle("Butt Blaster", 40, 18, 1, 432, .9, "Man that's a stinky one", "no-speciallyness", {
+    c: createjs.Graphics.getRGB(109, 60, 20, 1),
+    s: 25,
+    type: "rect"
 }, {
     x: 1,
     y: 60,
@@ -105,7 +105,7 @@ guns.push(new Laser("Butt Blaster", 40, 33, 432, .9, "Man that's a stinky one", 
     h: 30
 }));
 
-guns.push(new Flamethrower("Fire Extinguisher", 44, 18, 666, .9, "Burn Baby Burn", "Burnemup baby", {
+guns.push(new Flamethrower("Fire Extinguisher", 101, 36, 1, 666, .9, "Burn Baby Burn", "Burnemup baby", {
     c: createjs.Graphics.getRGB(222, 66, 6, .7),
     s: 12,
     type: "fire"
@@ -169,35 +169,66 @@ function init() {
     stage.addEventListener("stagemouseup", mouseReleased);
 
     let playerFrames = [];
+
+    //? IDLE MOVE RELOAD SHOOT IS ALPHA ORDER
     for (let i = 0; i < 40; i++) { //idle and move
         playerFrames.push([2 + i * 313, 2, 312, 206, 0, 116, 123]);
     }
     for (let i = 0; i < 20; i++) { //reload
         playerFrames.push([12522 + i * 322, 2, 322, 217, 0, 116, 123]);
     }
-    for (let i = 0; i < 20; i++) { //shoot
+    for (let i = 0; i < 3; i++) { //shoot
         playerFrames.push([18962 + i * 313, 2, 312, 206, 0, 116, 123]);
+    }
+
+    for (let i = 0; i < 40; i++) { //idle and move
+        playerFrames.push([2 + i * 313, 2, 312, 206, 1, 116, 123]);
+    }
+    for (let i = 0; i < 20; i++) { //reload
+        playerFrames.push([12522 + i * 322, 2, 322, 217, 1, 116, 123]);
+    }
+    for (let i = 0; i < 3; i++) { //shoot
+        playerFrames.push([18962 + i * 313, 2, 312, 206, 1, 116, 123]);
+    }
+
+    for (let i = 0; i < 20; i++) { //flashlight
+        playerFrames.push([2 + i * 307, 2, 303, 223, 2, 116, 123]);
     }
 
     playerSpriteSheet = new createjs.SpriteSheet({
         framerate: 30,
-        "images": ["Sprites/player-gun-anims.png"],
+        "images": ["Sprites/player-gun-anims.png", "Sprites/player-rifle-anims.png", "Sprites/player-flash-anims.png"],
         "frames": playerFrames,
         // define two animations, run (loops, 1.5x speed) and jump (returns to run):
         "animations": {
-            "idle": [0, 19, "idle", .2],
-            "move": [20, 39, "idle", .5],
-            "reload": [40, 59, "idle", .4],
-            "shoot": {
+            "s-idle": [0,19, "s-idle", .2],
+            "s-move": [20, 39, "s-idle", .5],
+            "s-reload": [40, 59, "s-idle", .4],
+            "s-shoot": {
                 frames: [61],
                 next: "",
                 speed: 0.5
             },
-            "unshoot": {
+            "s-unshoot": {
                 frames: [61, 62],
-                next: "idle",
+                next: "s-idle",
                 speed: 0.5
-            }
+            },
+            "r-idle": [63, 82, "r-idle", .2],
+
+            "r-move": [83, 102, "r-idle", .5],
+            "r-reload": [103, 121, "r-idle", .4],
+            "r-shoot": {
+                frames: [124],
+                next: "",
+                speed: 0.5
+            },
+            "r-unshoot": {
+                frames: [124, 124],
+                next: "r-idle",
+                speed: 0.5
+            },
+            "f-idle": [125, 143, "idle", .2],
         }
     });
 
@@ -506,7 +537,7 @@ function moveCanvas(e) {
 function mousePressed(e) {
     mouse.down = true;
     if (gameState == 1) {
-        if (guns[player.equippedGun] instanceof Laser || guns[player.equippedGun] instanceof Flamethrower) {
+        if (guns[player.equippedGun] instanceof Laser || guns[player.equippedGun] instanceof Flamethrower || guns[player.equippedGun] instanceof Rifle) {
             player.shooting = true;
         } else if (guns[player.equippedGun] instanceof Gun) {
             if (player.energy >= player.energyDischarge && player.canShoot) {

@@ -12,7 +12,7 @@ class Player {
         this.maxHealth;
         this._health;
 
-        this.equippedGun = 0;
+        this.equippedGun = 4;
 
         this.damage; //dictated by gun
         this.pierce;
@@ -42,7 +42,7 @@ class Player {
         this.barrelPos = new Vector(68 * hScl, 6 * hScl);
 
         //this.player = new createjs.Shape(graphics.player);
-        this.sprite = new createjs.Sprite(playerSpriteSheet, "idle");
+        this.sprite = new createjs.Sprite(playerSpriteSheet, "s-idle");
         this.sprite.x = x;
         this.sprite.y = y;
         this.sprite.scaleX = .4 * hScl;
@@ -128,10 +128,19 @@ class Player {
 
     set shooting(value) {
         if (value == true) {
-            this.sprite.gotoAndPlay("shoot");
+            if (guns[this.equippedGun] instanceof Gun || guns[this.equippedGun] instanceof Rifle)
+                this.sprite.gotoAndPlay("r-shoot");
+            else
+                this.sprite.gotoAndPlay("s-shoot");
+
         } else {
-            if (this.sprite.currentAnimation != "reload")
-                this.sprite.gotoAndPlay("unshoot");
+            if (this.sprite.currentAnimation != "reload") {
+                if (guns[this.equippedGun] instanceof Gun || guns[this.equippedGun] instanceof Rifle)
+                    this.sprite.gotoAndPlay("r-unshoot");
+                else
+                    this.sprite.gotoAndPlay("s-unshoot");
+            }
+
         }
         this._shooting = value;
     }
@@ -246,31 +255,31 @@ class Player {
                     this.canShoot = true;
                     this.shooting = false;
                 }, guns[this.equippedGun].delay);
+
                 this.energy -= this.energyDischarge;
                 for (let i = 0; i < guns[this.equippedGun].bulletAmount; i++) {
                     //let randPos = this.barrelPos.clone().rotateBy(this._angle).add(new Vector(this.pos.x + Math.random() * 35 - Math.random() * 35, this.pos.y + Math.random() * 35 - Math.random() * 35));
                     let randPos = new Vector(this.barrelPos.x + Math.random() * guns[this.equippedGun].posSpread.x - Math.random() * guns[this.equippedGun].posSpread.y, this.barrelPos.y + Math.random() * guns[this.equippedGun].posSpread.y - Math.random() * guns[this.equippedGun].posSpread.y).rotateBy(this._angle).add(this.pos);
                     let randAngle = this._angle + Math.random() * guns[this.equippedGun].angleSpread - Math.random() * guns[this.equippedGun].angleSpread;
-                    this.bullets.push(new Bullet(randPos, randAngle, guns[this.equippedGun].bulletSpeed, this.damage, this.pierce - .7, this.bulletContainer, guns[this.equippedGun].beam));
+                    this.bullets.push(new Bullet(randPos, randAngle, guns[this.equippedGun].bulletSpeed, this.damage, this.pierce - .6, this.bulletContainer, guns[this.equippedGun].beam));
 
                 }
 
 
                 if (this.energy < this.energyDischarge) {
-                    this.sprite.gotoAndPlay("reload");
+                    this.sprite.gotoAndPlay("r-reload");
                     setTimeout(() => {
                         this.energy = this.maxEnergy
                     }, 1000 / Math.pow(this.energyRecharge, 1 / 4));
                 }
             }
-
-        } else if (guns[this.equippedGun] instanceof Flamethrower) {
-            if (this.shooting) {
+        } else if (guns[this.equippedGun] instanceof Rifle) {
+            if (this.shooting && elapsedTicks % guns[this.equippedGun].delay == 0) {
                 this.energy -= this.energyDischarge; // reduce energy
                 for (let i = 0; i < guns[this.equippedGun].bulletAmount; i++) {
-                    let randPos = new Vector(this.barrelPos.x + Math.random() * guns[this.equippedGun].posSpread.x - Math.random() * guns[this.equippedGun].posSpread.y, this.barrelPos.y + Math.random() * guns[this.equippedGun].posSpread.y - Math.random() * guns[this.equippedGun].posSpread.y).rotateBy(this._angle).add(this.pos);
+                    let randPos = new Vector(this.barrelPos.x - 4, this.barrelPos.y + 6).rotateBy(this._angle).add(this.pos);
                     let randAngle = this._angle + Math.random() * guns[this.equippedGun].angleSpread - Math.random() * guns[this.equippedGun].angleSpread;
-                    this.bullets.push(new Bullet(randPos, randAngle, guns[this.equippedGun].bulletSpeed, this.damage, this.pierce - .7, this.bulletContainer, guns[this.equippedGun].beam));
+                    this.bullets.push(new Bullet(randPos, randAngle, guns[this.equippedGun].bulletSpeed, this.damage, this.pierce - .6, this.bulletContainer, guns[this.equippedGun].beam));
                 }
             }
             this.energy += this.energyRecharge;
@@ -281,8 +290,23 @@ class Player {
 
             } else if (this.energy > this.maxEnergy)
                 this.energy = this.maxEnergy;
+        } else if (guns[this.equippedGun] instanceof Flamethrower) {
+            if (this.shooting) {
+                this.energy -= this.energyDischarge; // reduce energy
+                for (let i = 0; i < guns[this.equippedGun].bulletAmount; i++) {
+                    let randPos = new Vector(this.barrelPos.x + Math.random() * guns[this.equippedGun].posSpread.x - Math.random() * guns[this.equippedGun].posSpread.y, this.barrelPos.y + Math.random() * guns[this.equippedGun].posSpread.y - Math.random() * guns[this.equippedGun].posSpread.y).rotateBy(this._angle).add(this.pos);
+                    let randAngle = this._angle + Math.random() * guns[this.equippedGun].angleSpread - Math.random() * guns[this.equippedGun].angleSpread;
+                    this.bullets.push(new Bullet(randPos, randAngle, guns[this.equippedGun].bulletSpeed, this.damage, 0, this.bulletContainer, guns[this.equippedGun].beam));
+                }
+            }
+            this.energy += this.energyRecharge;
 
+            if (this.energy < 0) {
+                this.energy = 0;
+                this.shooting = false;
 
+            } else if (this.energy > this.maxEnergy)
+                this.energy = this.maxEnergy;
         }
 
 
@@ -312,7 +336,7 @@ class Player {
         if (guns[this.equippedGun] instanceof Laser) {
             this.laser.active = this.shooting;
             this.laser.update();
-        } else if (guns[this.equippedGun] instanceof Gun || guns[this.equippedGun] instanceof Flamethrower) {
+        } else if (guns[this.equippedGun] instanceof Gun || guns[this.equippedGun] instanceof Rifle || guns[this.equippedGun] instanceof Flamethrower) {
             for (let i = 0; i < this.bullets.length; i++) {
                 this.bullets[i].update(this.bullets, i);
             }
@@ -341,6 +365,8 @@ class Bullet {
         this.damage = damage;
         this.pierce = pierce;
 
+        this.hits = [];
+
         this.container = container;
         this.g = new createjs.Shape();
         this.g.graphics.setStrokeStyle(1 * hScl);
@@ -355,6 +381,8 @@ class Bullet {
             this.g.cache(-display.s * 1.5, -display.s * 1.5, 3 * display.s, 3 * display.s);
         } else if (display.type == "rect") {
             this.g.graphics.drawRect(0, 0, display.s * hScl, display.s * hScl / 4);
+            this.g.regX = display.s * hScl / 2;
+            this.g.regY = display.s * hScl / 2;
             this.g.rotation = this.angle * 180 / Math.PI;
             this.g.cache(-display.s * 2, -display.s * 2, 4 * display.s, 4 * display.s);
         } else if (display.type == "fire") {
@@ -363,14 +391,8 @@ class Bullet {
             this.g.regY = 329.5;
             this.g.scaleX = .2 * hScl;
             this.g.scaleY = .2 * hScl;
-            //this.g.rotation = this.angle * 180 / Math.PI;
-            //this.g.cache(-100, -100, 659, 659);
-            //this.g.rotation = this.angle * 180 / Math.PI;
 
         }
-        //this.g = new createjs.Bitmap("./Sprites/shopGui.png");
-        //this.g.scaleX = .1;
-        //this.g.scaleY = .1;
         container.addChild(this.g);
     }
 
@@ -387,12 +409,13 @@ class Bullet {
         for (let i = 0; i < objects.length; i++) {
             if (objects[i] instanceof Enemy) {
                 let object = objects[i].collision;
-                if (this.pos.x > object.pos.x && this.pos.x < object.pos.x + object.width && this.pos.y > object.pos.y && this.pos.y < object.pos.y + object.height) {
+                if (this.pos.x > object.pos.x && this.pos.x < object.pos.x + object.width && this.pos.y > object.pos.y && this.pos.y < object.pos.y + object.height && !this.hits.includes(objects[i])) {
                     objects[i].health -= this.damage;
+                    this.hits.push(objects[i]);
                     if (Math.random() > this.pierce) {
                         this.remove(bulletArr, index);
-                        return;
                     }
+                    return;
                 }
             }
         }

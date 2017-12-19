@@ -11,7 +11,7 @@ function setupGame() {
         enemies--;
     }
 
-    enemyFrequency = Math.floor(110 / upgrades[9].getValue());
+    enemyFrequency = Math.floor(110 / upgrades[10].getValue());
 
     player.reset();
     shopAssets.visible = false;
@@ -19,7 +19,7 @@ function setupGame() {
 }
 
 function mainGame(e) {
-    zombieSpriteSheet._data.move.speed = .4 + elapsedTicks / (8000 / upgrades[10].getValue());
+    zombieSpriteSheet._data.move.speed = .4 + elapsedTicks / (8000 / upgrades[11].getValue());
     //enemies[i].speed = 1.6 + e.target.getTicks() / 900;
 
     if (elapsedTicks % enemyFrequency == 0 && enemies < 20) {
@@ -42,9 +42,9 @@ function mainGame(e) {
         }
         objects.push(new Enemy(newX, newY,
             .4 * powerRand,
-            .8 + elapsedTicks / (1600 / upgrades[10].getValue()),
-            300 * powerRand * (1 + elapsedTicks / (900 / upgrades[10].getValue())),
-            5 * powerRand * (1 + elapsedTicks / (3000 / upgrades[10].getValue()))));
+            .8 + elapsedTicks / (1600 / upgrades[11].getValue()),
+            300 * powerRand * (1 + elapsedTicks / (700 / upgrades[11].getValue())),
+            5 * powerRand * (1 + elapsedTicks / (2500 / upgrades[11].getValue()))));
 
         enemies++;
     }
