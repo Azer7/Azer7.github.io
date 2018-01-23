@@ -502,7 +502,7 @@ clearTimeout(id);
             var keyCode = String(e.keyCode);
             var isjumpKey = Runner.keycodes.JUMP[keyCode] || e.type == Runner.events.TOUCHEND || e.type == Runner.events.MOUSEDOWN;
             if (this.isRunning() && isjumpKey) {
-                this.tRex.endJump()
+                //this.tRex.endJump()
             } else if (Runner.keycodes.DUCK[keyCode]) {
                 this.tRex.speedDrop = false;
                 this.tRex.setDuck(false)
