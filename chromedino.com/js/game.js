@@ -390,7 +390,7 @@ clearTimeout(id);
                 if (!collision) {
                     this.distanceRan += this.currentSpeed * deltaTime / this.msPerFrame;
                     if (this.currentSpeed < this.config.MAX_SPEED) {
-                        this.currentSpeed += this.config.ACCELERATION
+                        this.currentSpeed += 0/*this.config.ACCELERATION*/
                     }
                 } else {
                     this.gameOver()
