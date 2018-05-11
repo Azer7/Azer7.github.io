@@ -13,13 +13,16 @@
 }
 
 .mini-image {
-    width: 65%;
+    width: 75%;
     margin-left: auto;
     margin-right: auto;
     display:block;
 }
 
 .half-text { 
+    width: 50%;
     margin-top: 3px !important;
-
+    font-size: 1.2em;
+    padding-right: 14px !important;
+    padding-left: 10px !important;
 }
