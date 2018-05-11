@@ -11,3 +11,8 @@
 .avatar {
 	content:url("./images/ProfilePic.jpg");
 }
+
+.mini-image {
+    width: 75%;
+    margin-left: 50px;
+}
