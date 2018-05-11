@@ -1,0 +1,287 @@
+hr {
+    margin: 0px;
+    margin-top: 8px;
+}
+
+ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#wrapper {
+    border-width: .3px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 0px 5px 5px 5px;
+    position: relative;
+    margin: 0px auto;
+    display: block;
+    width: 980px;
+    height: auto;
+    background-color: #fcfcfc;
+}
+
+#title-div {
+    width: 800px;
+    margin: 15px auto;
+    background-color: lightblue;
+    border-radius: 50%;
+    overflow: auto;
+}
+
+#title-header {
+    margin: 10px 0px;
+}
+
+#score {
+    text-align: center;
+    background-color: #ffeca3;
+    padding: 0px;
+}
+
+#score-inner {
+    display: inline-block;
+}
+
+#score-text {
+    text-align: center;
+    font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 33px;
+    color: #000;
+    margin: 10px 0px;
+    float: left;
+}
+
+#rating-wrapper:before {
+    
+}
+
+#rate-button {
+    position: relative;
+    padding: 0px;
+    height: 38px;
+    width: 120px;
+    font-family: Arial;
+    font-size: 1.6em;
+    background: #10897d;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    margin: 10px 0px 10px 15px;
+    float: left;
+}
+
+    #rate-button:hover {
+        cursor: pointer;
+        background-color: #255E58;
+    }
+
+#quiz-questions {
+    width: 600px;
+    margin: 10px auto 20px auto;
+}
+
+    #quiz-questions li {
+        overflow: auto;
+    }
+
+    #quiz-questions h1 {
+        margin: 15px 0px;
+        font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+        line-height: 37px;
+    }
+
+#q3-header {
+    font-size: 1.7em;
+}
+
+#q2,
+#q3,
+#q4,
+#q5 {
+    display: none;
+}
+
+.quiz-option {
+    display: inline-block;
+    float: left;
+    margin: 8px;
+    background-color: #ddd;
+    text-align: center;
+}
+
+    .quiz-option p {
+        font-family: 'Open Sans', Lato, arial, sans-serif;
+        font-size: 1.4em;
+        font-weight: bold;
+        margin: 0px 0px 4px 0px;
+    }
+
+.unselected:hover {
+    background-color: #b8d7db;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #8a88aa;
+}
+
+.img_text {
+    width: 266px;
+    /*5x7*/
+    height: 189px;
+    margin: 9px 9px 0px 9px;
+    /*same as 10 pixels all around*/
+}
+
+.img_full {
+    width: 266px;
+    /*8x10*/
+    height: 214px;
+    margin: 9px 9px 5px 9px;
+    /*same as 10 pixels all around*/
+}
+
+.option-correct {
+    background-color: #55ff55;
+}
+
+.option-wrong {
+    background-color: #ff3333;
+}
+
+nav {
+    cursor: default;
+    text-align: center;
+}
+
+.prev,
+.next {
+    margin: 0px auto;
+    padding: 0px;
+    height: 30px;
+    width: 80px;
+    font-family: Arial;
+    font-size: 1.2em;
+    background: #10897d;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+    .prev:hover,
+    .next:hover {
+        cursor: pointer;
+        background-color: #255E58;
+    }
+
+.inactive {
+    background-color: #888;
+}
+
+    .inactive:hover {
+        cursor: default;
+        background-color: #888;
+    }
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0px 2px;
+    background-color: #bbb;
+    border-radius: 40%;
+    display: inline-block;
+    transition: background-color 0.5s cubic-bezier(0, 0.25, 0, 0.80);
+}
+
+    .dot:hover {
+        cursor: pointer;
+        background-color: #555;
+    }
+
+.dot-active {
+    background-color: #555;
+}
+
+.dot-correct {
+    background-color: #55ff55;
+}
+
+    .dot-correct:hover {
+        background-color: #008800;
+    }
+
+.dot-correct-active {
+    background-color: #008800;
+}
+
+.dot-wrong {
+    background-color: #ff3333;
+}
+
+    .dot-wrong:hover {
+        background-color: #880000;
+    }
+
+.dot-wrong-active {
+    background-color: #880000;
+}
+
+.notransition {
+    transition: none !important;
+}
+
+#rating-wrapper {
+    text-align: center;
+    overflow: auto;
+    display: block;
+}
+
+.rating-question {
+    font-size: 1.7em;
+}
+
+#rating-slider-value {
+    margin: 0px;
+    padding-right: 10px;
+    font-family: 'Open Sans', Lato, arial, sans-serif;
+    font-size: 1.5em;
+}
+
+#rating-fav-question {
+    font-size: 1.3em;
+}
+
+.rating-radio {
+    font-family: Arial;
+    font-size: 1.3em;
+}
+
+#rating-radio-wrapper {
+    margin-left: 435px;
+    text-align: left;
+}
+
+#rating-comment {
+    font-size: 1.5em;
+}
+
+#rating-submit-wrapper {
+    margin-top: 10px;
+}
+
+#complete-heading {
+    text-align: center;
+    font-size: 3em
+}
+
+#comment-text {
+    font-size: 1.7em;
+}
