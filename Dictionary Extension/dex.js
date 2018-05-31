@@ -63,6 +63,20 @@ function addDefex(wordObj) {
     });
     //defex.html(wordObj.text);
 
+    var data = {
+        resource_id: '346d58fc-b7c1-4c38-bf4d-c9d5fb43ce7b', // the resource id
+        limit: 5, // get 5 results
+        // q: 'jones' // query for 'jones' remove this so we actually get some records
+    };
+
+    $.ajax({
+        url: 'https://data.qld.gov.au/api/action/datastore_search',
+        data: data,
+        dataType: 'jsonp',
+        success: function (successData) {
+            alert('Total results found: ' + successData.result.records.length)
+        }
+    });
     $("html").append(defex);
 
 }
