@@ -64,6 +64,7 @@ function addDefex(wordObj) {
     //defex.html(wordObj.text);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     let definitionObject = $.ajax({
         type: "GET",
         headers: {
@@ -82,6 +83,8 @@ function addDefex(wordObj) {
 
 
 =======
+=======
+>>>>>>> 8fd460f4c3742f1444ca653a1b16af3fea6dbe41
     var data = {
         resource_id: '346d58fc-b7c1-4c38-bf4d-c9d5fb43ce7b', // the resource id
         limit: 5, // get 5 results
@@ -96,6 +99,9 @@ function addDefex(wordObj) {
             alert('Total results found: ' + successData.result.records.length)
         }
     });
+<<<<<<< HEAD
+>>>>>>> 8fd460f4c3742f1444ca653a1b16af3fea6dbe41
+=======
 >>>>>>> 8fd460f4c3742f1444ca653a1b16af3fea6dbe41
     $("html").append(defex);
 
