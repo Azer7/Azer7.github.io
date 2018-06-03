@@ -63,6 +63,40 @@ function addDefex(wordObj) {
     });
     //defex.html(wordObj.text);
 
+<<<<<<< HEAD
+    let definitionObject = $.ajax({
+        type: "GET",
+        headers: {
+            "Accept": "application/json",
+            "app_id": "2a0d4629",
+            "app_key": "c302afaeed1c401ee10b33a3cbd588a1"
+        },
+        url: "https://od-api.oxforddictionaries.com:443/api/v1/entries/en/" + wordObj.text,
+        dataType: "jsonp"
+    }).always(function (data) {
+        console.log("");
+    }).fail(function () {
+        console.log("");
+    });
+
+
+
+=======
+    var data = {
+        resource_id: '346d58fc-b7c1-4c38-bf4d-c9d5fb43ce7b', // the resource id
+        limit: 5, // get 5 results
+        // q: 'jones' // query for 'jones' remove this so we actually get some records
+    };
+
+    $.ajax({
+        url: 'https://data.qld.gov.au/api/action/datastore_search',
+        data: data,
+        dataType: 'jsonp',
+        success: function (successData) {
+            alert('Total results found: ' + successData.result.records.length)
+        }
+    });
+>>>>>>> 8fd460f4c3742f1444ca653a1b16af3fea6dbe41
     $("html").append(defex);
 
 }
