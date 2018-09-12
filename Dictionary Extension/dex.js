@@ -63,46 +63,73 @@ function addDefex(wordObj) {
     });
     //defex.html(wordObj.text);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    let definitionObject = $.ajax({
-        type: "GET",
-        headers: {
-            "Accept": "application/json",
-            "app_id": "2a0d4629",
-            "app_key": "c302afaeed1c401ee10b33a3cbd588a1"
-        },
-        url: "https://od-api.oxforddictionaries.com:443/api/v1/entries/en/" + wordObj.text,
-        dataType: "jsonp"
-    }).always(function (data) {
-        console.log("");
-    }).fail(function () {
-        console.log("");
+        var data = 'apikey=' + apiKey + '&q=' + searchFor	
+        $.ajax({
+            type: 'GET',
+            url: searchUrl,
+            data: data,
+            dataType: 'jsonp',
+            jsonp: 'jsonp',
+            success: function(data){
+                handleResponse(data);
+            },
+            error: function(req, err, text ) {
+                debugLog.append('Error: ' + status + '(' + text +')<br/>');
+            }
+        });
+    }
+// <<<<<<< HEAD
+// <<<<<<< HEAD
+//     let definitionObject = $.ajax({
+//         type: "GET",
+//         headers: {
+//             "Accept": "application/json",
+//             "app_id": "2a0d4629",
+//             "app_key": "c302afaeed1c401ee10b33a3cbd588a1"
+//         },
+//         url: "https://od-api.oxforddictionaries.com:443/api/v1/entries/en/" + wordObj.text,
+//         dataType: "jsonp"
+//     }).always(function (data) {
+//         console.log("");
+//     }).fail(function () {
+//         console.log("");
+//     });
+
+
+
+// =======
+// =======
+// >>>>>>> 8fd460f4c3742f1444ca653a1b16af3fea6dbe41
+//     var data = {
+//         resource_id: '346d58fc-b7c1-4c38-bf4d-c9d5fb43ce7b', // the resource id
+//         limit: 5, // get 5 results
+//         // q: 'jones' // query for 'jones' remove this so we actually get some records
+//     };
+
+//     $.ajax({
+//         url: 'https://data.qld.gov.au/api/action/datastore_search',
+//         data: data,
+//         dataType: 'jsonp',
+//         success: function (successData) {
+//             alert('Total results found: ' + successData.result.records.length)
+//         }
+//     });
+// <<<<<<< HEAD
+// >>>>>>> 8fd460f4c3742f1444ca653a1b16af3fea6dbe41
+// =======
+// >>>>>>> 8fd460f4c3742f1444ca653a1b16af3fea6dbe41
+//     $("html").append(defex);
+
+function handleResponse(data){
+    debugLog.append('Response received <br/>');
+    var results = data.Entries.Entry;
+    var html = entry(results);
+    $('#resultList').html(html);
+    $('li>a').click(function(){
+        $(this).parent().find("div").toggle();
     });
-
-
-
-=======
-=======
->>>>>>> 8fd460f4c3742f1444ca653a1b16af3fea6dbe41
-    var data = {
-        resource_id: '346d58fc-b7c1-4c38-bf4d-c9d5fb43ce7b', // the resource id
-        limit: 5, // get 5 results
-        // q: 'jones' // query for 'jones' remove this so we actually get some records
-    };
-
-    $.ajax({
-        url: 'https://data.qld.gov.au/api/action/datastore_search',
-        data: data,
-        dataType: 'jsonp',
-        success: function (successData) {
-            alert('Total results found: ' + successData.result.records.length)
-        }
-    });
-<<<<<<< HEAD
->>>>>>> 8fd460f4c3742f1444ca653a1b16af3fea6dbe41
-=======
->>>>>>> 8fd460f4c3742f1444ca653a1b16af3fea6dbe41
-    $("html").append(defex);
-
+    $('#resultList > li > div').hide();
+    $('#resultList > li:first > div').show();
+    $("#results").show();
+    debugLog.append('Response processed <br/>');
 }
