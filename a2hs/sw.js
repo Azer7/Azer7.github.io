@@ -1,6 +1,6 @@
 self.addEventListener('install', function(e) {
  e.waitUntil(
-   caches.open('video-store').then(function(cache) {
+   caches.open('azer7-a2hs-store').then(function(cache) {
      return cache.addAll([
        '/a2hs/',
        '/a2hs/index.html',
