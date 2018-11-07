@@ -10,11 +10,16 @@ setInterval(function() {
   let randomChoice = randomValueFromArray(images);
   imgElem.src = 'images/' + randomChoice + '.jpg';
 }, 2000)
+/////////////
+//this is just stuff to cycle images
+/////////////
+
+
 
 // Register service worker to control making site work offline
 
 if('serviceWorker' in navigator) {
   navigator.serviceWorker
            .register('/a2hs/sw.js')
-           .then(function() { console.log('Service Worker Registered'); });
+/*just code to debug*/.then(function() { console.log('Service Worker Registered'); });
 }
