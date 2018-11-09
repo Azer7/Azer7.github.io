@@ -1,0 +1,15 @@
+{
+  "background_color": "purple",
+  "description": "Traycer racer racing game",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "Assets/car.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "name": "Traycer Raycer",
+  "short_name": "RaYceR",
+  "start_url": "/Tracer Raycer/index.html"
+}
