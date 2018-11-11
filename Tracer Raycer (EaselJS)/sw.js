@@ -1,15 +1,10 @@
 self.addEventListener('install', function(e) {
  e.waitUntil(
-   caches.open('azer7-a2hs-store').then(function(cache) {
+   caches.open('azer7-raycer-store').then(function(cache) {
      return cache.addAll([
-       //'/a2hs/',
-       //'/a2hs/index.html',
-       //'/a2hs/index.js',
-       //'/a2hs/style.css',
-       //'/a2hs/images/fox1.jpg',
-       //'/a2hs/images/fox2.jpg',
-       //'/a2hs/images/fox3.jpg',
-       //'/a2hs/images/fox4.jpg'
+       '/Tracer Raycer (EaselJS)/',
+       '/Tracer Raycer (EaselJS)/index.html',
+       '/Tracer Raycer (EaselJS)/index.js'
      ]);
    })
  );
