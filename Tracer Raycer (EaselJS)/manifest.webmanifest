@@ -4,7 +4,7 @@
   "display": "fullscreen",
   "icons": [
     {
-      "src": "Assets/car.png",
+      "src": "Assets/Car.png",
       "sizes": "192x192",
       "type": "image/png"
     }
