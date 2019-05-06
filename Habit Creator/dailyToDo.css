@@ -1,0 +1,40 @@
+.sub-mainheader{
+    font-family: 'Abel';
+    font-size: 50px;
+    text-align: center;
+    color: green;
+    margin-bottom: 0px;
+}
+#line{
+    font-size: 24px;
+    text-align: center;
+    color: green;
+    margin-top:0;
+    margin-bottom: 70px;
+}
+
+input[type=checkbox]{
+    width: 70px;
+    height: 70px;
+    vertical-align: middle;
+}
+input[type=number]{
+    width: 100px;
+    height: 28px;
+    vertical-align: middle;
+}
+.checkboxtext{
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    font-size:30px;
+    font-family: "Abel";
+    border: 1px solid green;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.button{
+    /* float: left; */
+    zoom: 2.0;
+    font-family: "Abel";
+}

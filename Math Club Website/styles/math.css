@@ -1,0 +1,178 @@
+﻿#headerBackground {
+    width: 100%;
+    height: 100%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background-position: center top;
+}
+
+body {
+    background-color: #003069;
+}
+
+    body.darkTheme {
+        background-position: left top;
+        background-repeat: repeat;
+        background-attachment: fixed;
+    }
+@media screen and (max-width:480px) {
+    .header {
+        padding-bottom: 5px;
+    }
+}
+
+.header.container_12 #address {
+    color: #ffffff;
+}
+
+    .header.container_12 #address:hover {
+        color: #D1D3D4;
+    }
+
+    .header.container_12 #address a {
+        color: #ffffff;
+    }
+
+        .header.container_12 #address a:hover {
+            color: #D1D3D4;
+        }
+
+.colorOne {
+    background-color: #000;
+}
+/* Main Background Color */
+.colorTwo {
+    background-color: #000;
+}
+
+#navBg {
+    background-color: #D1D3D4;
+}
+/*Menu Background Default*/
+.container_12 nav.primaryNav ul li, .container_12 nav.primaryNav ul li ul.multilevel-linkul-0 li {
+    background-color: #D1D3D4;
+}
+
+nav.primaryNav ul li, nav.primaryNav ul li ul.multilevel-linkul-0 li {
+    background-color: #D1D3D4;
+}
+
+
+/*Menu Background Rollover*/
+.primaryNav a:hover {
+    background-color: #023267 !important;
+}
+
+/*Menu Text Rollover*/
+div.container_12 nav.primaryNav ul li a:hover, div.container_12 nav.primaryNav ul li ul li a:hover {
+    color: #ffffff;
+}
+
+nav.primaryNav ul li a:hover, nav.primaryNav ul li ul li a:hover, nav.primaryNav ul li ul li ul li a:hover {
+    color: #ffffff;
+}
+
+.last {
+    cursor: default;
+}
+/* Main content
+        ================================================*/
+h1, h2, h3, h4, h5, h6 {
+    color: #023267;
+}
+/* Text Heading Color */
+
+a {
+    color: #023267;
+}
+/* Text Heading Color */
+
+/*div.content section#rightColumn a:link, div.content section#rightColumn a:visited {color:#023267;} Sidebar Link text color */
+#rightColumn a, #rightColumn a:visited, #rightColumn a:hover, div.content section#rightColumn a:hover {
+    font-weight: bold;
+}
+
+article a {
+    color: #023267;
+}
+article a:visited {
+    color: #609;
+}
+
+    /*Main content Link text color */
+    article a:hover {
+        color: #D1D3D4;
+    }
+/*Main content Link text color */
+
+div#wrapper aside.grid_3 div a, div#wrapper aside.grid_3 div a:visited {
+    color: #023267;
+}
+    /*Sidebars Link text color */
+    div#wrapper aside.grid_3 div a:hover {
+        color: #D1D3D4;
+    }
+/*Sidebars Link text color */
+
+div.deditpage a, div.deditpage a:visited, div.notice a, div.notice a:visited {
+    color: #023267;
+}
+    /*edit this page/district notice */
+    div.deditpage a:hover, div.notice a:hover {
+        color: #D1D3D4;
+    }
+/*edit this page Link text color/district notice */
+
+div.slideText p.read-more-button a, div.slideText p.read-more-button a:visited {
+    color: #023267;
+}
+    /*homepage slideshow read more */
+    div.slideText p.read-more-button a:hover {
+        color: #D1D3D4;
+    }
+
+footer.colorTwo {
+    background-color: rgb(0, 48, 105);
+}
+
+footer a, footer a:visited {
+    color: #FFFFFF;
+}
+
+    footer, footer h4, footer a:hover {
+        color:#999;
+    }
+
+        footer.colorTwo section#footerAddress h4 {
+            color: #FFFFFF;
+        }
+
+        footer.colorTwo h1, footer.colorTwo h3, footer.colorTwo h4, footer.colorTwo h5 {
+            color: #FFFFFF;
+        }
+
+        footer.colorTwo section#footerAddress.grid_3 {
+            color: #FFFFFF;
+        }
+
+aside.grid_3 div#secondaryNav ul li a, aside#rightColumnAside div a, div.content aside.grid_3 div a {
+    color: #003069;
+}
+
+    aside.grid_3 div#secondaryNav ul li a:hover, aside#rightColumnAside div a:hover, div.content aside.grid_3 div a:hover {
+        color: #0053A0;
+    }
+
+table.stripeMe thead tr.even {
+    background-color: #;
+}
+
+@media screen and (max-width:480px) {
+    body {
+        background-color: #EDE8E5;
+    }
+
+    .content {
+        background-color: #FFF;
+    }
+}

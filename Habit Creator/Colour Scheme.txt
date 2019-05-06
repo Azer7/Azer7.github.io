@@ -1,0 +1,2 @@
+Main colour:
+#6fb426 //lime greenish (highlighter colour)

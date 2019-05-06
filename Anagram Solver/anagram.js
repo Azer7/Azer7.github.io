@@ -1,7 +1,9 @@
 let dictionary = [];
 let sorted = [];
 let loaded = -1;
-
+/**
+ * array of strings
+ */
 let anagrams = [];
 
 $(function () { //basic on document ready functions
@@ -110,14 +112,27 @@ function binaryWordSearch(searchTerm) { //sorts and searches for a word and retu
 }
 
 //display anagrams in a list
+/**
+ * 
+ * @param {String[]} angs 
+ * @returns nothing
+ */
 function showAnagrams(angs) {
     let div = $("#answers");
     div.empty();
 
     if (angs.length) {
         div.append("<ul>");
+        angs.sort((a,b)=>b.length - a.length);
+        let previousLength = angs[0].length;
+        div.append("Words of length " + previousLength + ":");
 
         for (let i = 0; i < angs.length; i++) {
+            if(angs[i].length != previousLength) 
+            {
+                previousLength = angs[i].length;
+                div.append("Words of length " + previousLength + ":");        
+            }                
             div.append("<li>" + angs[i] + "</li>");
         }
 
