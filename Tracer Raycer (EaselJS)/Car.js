@@ -18,9 +18,10 @@ class Car {
 
         this.animationValue = 0;
 
-        for (let i = 0; i < rayAmount; i++)
+        for (let i = 0; i < rayAmount; i++) {
             this.rays.push(new Ray(0, 0, i * (360 / rayAmount)));
 
+        }
         //  this.g = new createjs.Bitmap("./Assets/Police.png");
         //    this.g.regX = 128;
         //  this.g.regY = 128;

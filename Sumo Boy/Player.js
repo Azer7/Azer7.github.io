@@ -9,9 +9,10 @@ class Player {
 
         this.rayAmount = 16;
         this.rays = [];
-        for (let i = 0; i < this.rayAmount; i++)
+        for (let i = 0; i < this.rayAmount; i++) {
             this.rays.push(new Ray(0, 0, i * (360 / this.rayAmount)));
-
+            this.rays[this.rays.length - 1].visible = true;
+        }
         this.g = new createjs.Shape();
         this.g.graphics.setStrokeStyle(1).beginStroke("black");
         this.fill = this.g.graphics.beginFill("red");

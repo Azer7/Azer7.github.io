@@ -1,4 +1,12 @@
+
 class Ray {
+/**
+ * 
+ * @param {number} x 
+ * @param {number} y 
+ * @param {number} angle in radians
+ * @param {boolean} visible 
+ */
     constructor(x, y, angle, visible) {
         this.pos = new Vector(x, y);
         this.posEnd = new Vector(0, 0);
