@@ -1,0 +1,25 @@
+﻿h1, h2, h3, h4, h5, h6 {
+    letter-spacing: 0.1rem;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+input, button, submit {
+    border: none;
+}
+
+hr {
+    background: #ccc;
+    border-style: solid;
+    border: none;
+    height: 1px;
+    margin: 0;
+    width: 100%;
+}

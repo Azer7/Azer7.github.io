@@ -1,0 +1,24 @@
+﻿h1, h2, h3,
+h4, h5, h6 {
+    @extend %headings !optional;
+}
+
+:root {
+    /*--nav-color: #2e4260;*/
+    --nav-color: none;
+    --nav-color-solid: #223755;
+    --text-color: #444444;
+    --contrast-color1: #eeeeee;
+    --contrast-color2: #eceff1;
+    --contrast-color3: #e5ecef;
+    --header-height: 78px;
+    --button-color: #df8510;
+    --button-hover-color: #b95921;
+    --go-color-deep: #0a721b;
+    --go-color-deep-hovered: #0d791f;
+    --brand-color: #7d1d1d;
+    //new mixins
+    --text-light: #777777;
+    --text-normal: #444444;
+    --text-dark: #222222;
+}

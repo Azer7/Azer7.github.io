@@ -1,0 +1,172 @@
+.calendar {
+    $calendar-border: 2px solid rgb(60, 60, 60);
+
+    padding: 40px;
+    margin: auto;
+    max-width: 1100px;
+    width: 100%;
+
+    .inner-calendar {
+        border-left: $calendar-border;
+        border-top: $calendar-border;
+    }
+
+    .title {
+        margin: 10px;
+        text-align: center;
+        font-size: 2.5rem;
+    }
+
+    .days-of-week {
+        .day {
+            border-bottom: $calendar-border;
+            border-right: $calendar-border;
+
+            text-align: center;
+            padding: 5px;
+        }
+    }
+
+    .date-grid {
+
+        .date {
+            position: relative;
+            overflow: hidden;
+            border-bottom: $calendar-border;
+            border-right: $calendar-border;
+            cursor: pointer;
+            background: black;
+
+            .date-number {
+                z-index: 99;
+                padding: 4px 0 0 0;
+                text-align: center;
+                border-radius: 100%;
+                width: 35px;
+                height: 35px;
+                font-size: 1.4rem;
+                background: #e5e5ef;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+
+
+            &.empty {
+                background: white;
+                cursor: default;
+            }
+
+            &.highlight {
+                filter: saturate(210%);
+
+                .trapezoid {
+                    --shown-full-transform: 80%;
+
+                }
+
+                .date-number {
+                    background: #c6e1b9;
+                }
+            }
+
+            &::before {
+                content: "";
+                padding-bottom: 100%;
+                display: inline-block;
+                vertical-align: top;
+            }
+        }
+
+
+
+        .trapezoid {
+            position: absolute;
+            top: -50%;
+            height: 200%;
+            --hidden-transform: 108%;
+            --shown-partial-transform: 88%;
+            // --shown-full-transform: 82%;
+            --shown-full-transform: 74.6%;
+            cursor: default;
+
+            width: 200%;
+            transition: 0.3s ease-in-out;
+
+
+            &.left {
+                left: 0;
+                background: #ff9557;
+                transform: rotate(20deg) translateX(calc(var(--hidden-transform) * -1));
+                // border-bottom: var(--date-height-px) solid #ff9557;
+                // border-left: 0px solid transparent;
+                // border-right: var(--date-diagonal-offset) solid transparent;  
+                // transform: translateX(calc(var(--date-trapezoid-width) * -1)) scaleY(-1);
+            }
+
+            &.right {
+                right: 0;
+                background: #57b6ff;
+                transform: rotate(20deg) translateX(var(--hidden-transform));
+                // border-bottom: var(--date-height-px) solid #57b6ff;
+                // border-left: var(--date-diagonal-offset) solid transparent;
+                // border-right: 0px solid transparent;
+                // transform: translateX(var(--date-trapezoid-width));
+            }
+
+            &.detection {
+                background: white;
+
+                &.left {
+                    transform: rotate(20deg) translateX(calc(var(--shown-full-transform) * -1));
+                }
+
+                &.right {
+                    transform: rotate(20deg) translateX(var(--shown-full-transform));
+                }
+            }
+
+        }
+
+        .date.empty.highlight {
+            // background: #edfff3;
+
+            // .trapezoid {
+            //     background: transparent;
+            // }
+        }
+
+        .date.full {
+
+            .trapezoid.detection:hover+.trapezoid,
+            .trapezoid.display:hover {
+                &.left {
+                    transform: rotate(20deg) translateX(calc(var(--shown-partial-transform) * -1));
+                }
+
+                &.right {
+                    transform: rotate(20deg) translateX(var(--shown-partial-transform));
+                }
+            }
+
+            .trapezoid.detection.activated+.trapezoid,
+            .trapezoid.display.activated {
+                &.left {
+                    transform: rotate(20deg) translateX(calc(var(--shown-full-transform) * -1));
+
+                }
+
+                &.right {
+                    transform: rotate(20deg) translateX(var(--shown-full-transform));
+                }
+            }
+        }
+    }
+
+    /* The grid */
+    .days-of-week,
+    .date-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+    }
+}

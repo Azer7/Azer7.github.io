@@ -1,0 +1,419 @@
+:root {
+  /*--nav-color: #2e4260;*/
+  --nav-color: none;
+  --nav-color-solid: #223755;
+  --text-color: #444444;
+  --contrast-color1: #eeeeee;
+  --contrast-color2: #eceff1;
+  --contrast-color3: #e5ecef;
+  --header-height: 78px;
+  --button-color: #df8510;
+  --button-hover-color: #b95921;
+  --go-color-deep: #0a721b;
+  --go-color-deep-hovered: #0d791f;
+  --brand-color: #7d1d1d;
+  --text-light: #777777;
+  --text-normal: #444444;
+  --text-dark: #222222;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: 0.1rem;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+input, button, submit {
+  border: none;
+}
+
+hr {
+  background: #ccc;
+  border-style: solid;
+  border: none;
+  height: 1px;
+  margin: 0;
+  width: 100%;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', Helvetica, Verdana, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  font-size: 1.33em;
+  color: var(--text-color);
+}
+
+.material-icons {
+  vertical-align: middle;
+  font-size: inherit;
+}
+
+.contact-field,
+.contact-field:active,
+.contact-field:focus,
+.contact-field:hover {
+  color: var(--go-color-deep);
+}
+
+.page-content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.padded-content {
+  max-width: 980px;
+  margin: auto;
+  padding: 0 40px;
+}
+
+.padded-content-wide {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 40px;
+}
+
+.contrast-area {
+  background: var(--contrast-color1);
+}
+
+.contrast-area-secondary {
+  background: var(--contrast-color2);
+}
+
+.classic-link,
+.classic-link:active,
+.classic-link:focus {
+  color: #1a0dab;
+}
+
+.classic-link:hover,
+.classic-link:active:hover,
+.classic-link:focus:hover {
+  color: #1a0dab;
+  text-decoration: underline;
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  /* Light grey */
+  border-top: 5px solid #555;
+  /* Dark grey */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  -webkit-animation: spin 1s linear infinite;
+          animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.invisible {
+  opacity: 0 !important;
+}
+
+/* The Modal (background) */
+.modal {
+  /*display: none;*/
+  /* Hidden by default */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: none;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto auto auto auto;
+  /* 15% from the top and centered */
+  border: 1px solid #666;
+  width: 50%;
+  /* Could be more or less, depending on screen size */
+  max-width: 400px;
+}
+
+.spinner,
+.spinner:before,
+.spinner:after {
+  border-radius: 50%;
+}
+
+.spinner {
+  --spinner-size-multiplier: 1;
+  color: var(--spinner-foreground);
+  font-size: 22px;
+  text-indent: -99999px;
+  /*margin: 0px auto;*/
+  position: relative;
+  width: calc(20px*var(--spinner-size-multiplier));
+  height: calc(20px*var(--spinner-size-multiplier));
+  -webkit-box-shadow: inset 0 0 0 2px;
+          box-shadow: inset 0 0 0 2px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.spinner:before,
+.spinner:after {
+  position: absolute;
+  content: "";
+}
+
+.spinner:before {
+  width: calc(10.4px*var(--spinner-size-multiplier));
+  height: calc(20.4px*var(--spinner-size-multiplier));
+  background: var(--spinner-background);
+  border-radius: calc(20.4px*var(--spinner-size-multiplier)) 0 0 calc(20.4px*var(--spinner-size-multiplier));
+  top: calc(-0.2px*var(--spinner-size-multiplier));
+  left: calc(-0.5px*var(--spinner-size-multiplier));
+  -webkit-transform-origin: calc(10.4px*var(--spinner-size-multiplier)) calc(10.2px*var(--spinner-size-multiplier));
+  transform-origin: calc(10.4px*var(--spinner-size-multiplier)) calc(10.2px*var(--spinner-size-multiplier));
+  -webkit-animation: loading 2s infinite ease 1.5s;
+  animation: loading 2s infinite ease 1.5s;
+}
+
+.spinner:after {
+  width: calc(10.4px*var(--spinner-size-multiplier));
+  height: calc(10.2px*var(--spinner-size-multiplier));
+  background: var(--spinner-background);
+  border-radius: 0 calc(10.2px*var(--spinner-size-multiplier)) calc(10.2px*var(--spinner-size-multiplier)) 0;
+  top: calc(-0.1px*var(--spinner-size-multiplier));
+  left: calc(10.2px*var(--spinner-size-multiplier));
+  -webkit-transform-origin: 0px calc(10.2px*var(--spinner-size-multiplier));
+  transform-origin: 0px calc(10.2px*var(--spinner-size-multiplier));
+  -webkit-animation: loading 2s infinite ease;
+  animation: loading 2s infinite ease;
+}
+
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.calendar {
+  padding: 40px;
+  margin: auto;
+  max-width: 1100px;
+  width: 100%;
+  /* The grid */
+}
+
+.calendar .inner-calendar {
+  border-left: 2px solid #3c3c3c;
+  border-top: 2px solid #3c3c3c;
+}
+
+.calendar .title {
+  margin: 10px;
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.calendar .days-of-week .day {
+  border-bottom: 2px solid #3c3c3c;
+  border-right: 2px solid #3c3c3c;
+  text-align: center;
+  padding: 5px;
+}
+
+.calendar .date-grid .date {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 2px solid #3c3c3c;
+  border-right: 2px solid #3c3c3c;
+  cursor: pointer;
+  background: black;
+}
+
+.calendar .date-grid .date .date-number {
+  z-index: 99;
+  padding: 4px 0 0 0;
+  text-align: center;
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  font-size: 1.4rem;
+  background: #e5e5ef;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.calendar .date-grid .date.empty {
+  background: white;
+  cursor: default;
+}
+
+.calendar .date-grid .date.highlight {
+  -webkit-filter: saturate(210%);
+          filter: saturate(210%);
+}
+
+.calendar .date-grid .date.highlight .trapezoid {
+  --shown-full-transform: 80%;
+}
+
+.calendar .date-grid .date.highlight .date-number {
+  background: #c6e1b9;
+}
+
+.calendar .date-grid .date::before {
+  content: "";
+  padding-bottom: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.calendar .date-grid .trapezoid {
+  position: absolute;
+  top: -50%;
+  height: 200%;
+  --hidden-transform: 108%;
+  --shown-partial-transform: 88%;
+  --shown-full-transform: 74.6%;
+  cursor: default;
+  width: 200%;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+.calendar .date-grid .trapezoid.left {
+  left: 0;
+  background: #ff9557;
+  -webkit-transform: rotate(20deg) translateX(calc(var(--hidden-transform) * -1));
+          transform: rotate(20deg) translateX(calc(var(--hidden-transform) * -1));
+}
+
+.calendar .date-grid .trapezoid.right {
+  right: 0;
+  background: #57b6ff;
+  -webkit-transform: rotate(20deg) translateX(var(--hidden-transform));
+          transform: rotate(20deg) translateX(var(--hidden-transform));
+}
+
+.calendar .date-grid .trapezoid.detection {
+  background: white;
+}
+
+.calendar .date-grid .trapezoid.detection.left {
+  -webkit-transform: rotate(20deg) translateX(calc(var(--shown-full-transform) * -1));
+          transform: rotate(20deg) translateX(calc(var(--shown-full-transform) * -1));
+}
+
+.calendar .date-grid .trapezoid.detection.right {
+  -webkit-transform: rotate(20deg) translateX(var(--shown-full-transform));
+          transform: rotate(20deg) translateX(var(--shown-full-transform));
+}
+
+.calendar .date-grid .date.full .trapezoid.detection:hover + .trapezoid.left,
+.calendar .date-grid .date.full .trapezoid.display:hover.left {
+  -webkit-transform: rotate(20deg) translateX(calc(var(--shown-partial-transform) * -1));
+          transform: rotate(20deg) translateX(calc(var(--shown-partial-transform) * -1));
+}
+
+.calendar .date-grid .date.full .trapezoid.detection:hover + .trapezoid.right,
+.calendar .date-grid .date.full .trapezoid.display:hover.right {
+  -webkit-transform: rotate(20deg) translateX(var(--shown-partial-transform));
+          transform: rotate(20deg) translateX(var(--shown-partial-transform));
+}
+
+.calendar .date-grid .date.full .trapezoid.detection.activated + .trapezoid.left,
+.calendar .date-grid .date.full .trapezoid.display.activated.left {
+  -webkit-transform: rotate(20deg) translateX(calc(var(--shown-full-transform) * -1));
+          transform: rotate(20deg) translateX(calc(var(--shown-full-transform) * -1));
+}
+
+.calendar .date-grid .date.full .trapezoid.detection.activated + .trapezoid.right,
+.calendar .date-grid .date.full .trapezoid.display.activated.right {
+  -webkit-transform: rotate(20deg) translateX(var(--shown-full-transform));
+          transform: rotate(20deg) translateX(var(--shown-full-transform));
+}
+
+.calendar .days-of-week,
+.calendar .date-grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[7];
+      grid-template-columns: repeat(7, 1fr);
+}
+/*# sourceMappingURL=site.min.css.map */

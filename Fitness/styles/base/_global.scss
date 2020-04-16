@@ -1,0 +1,98 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', Helvetica, Verdana, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.05rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-size: 1.33em;
+    color: var(--text-color);
+}
+
+
+// !!!!!!!!!!!-- GLOBAL BASIC RULES --!!!!!!!!!! //
+//font-size: inherit all go first
+.material-icons {
+    vertical-align: middle;
+    font-size: inherit;
+}
+
+.contact-field,
+.contact-field:active,
+.contact-field:focus,
+.contact-field:hover {
+    color: var(--go-color-deep);
+}
+
+.page-content {
+    flex: 1;
+}
+
+.padded-content {
+    max-width: 980px;
+    margin: auto;
+    padding: 0 40px;
+}
+
+.padded-content-wide {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 40px;
+}
+
+.contrast-area {
+    // background: #f7f7f7;
+    // background: #eae9e9;
+    background: var(--contrast-color1);
+}
+
+.contrast-area-secondary {
+    background: var(--contrast-color2);
+}
+
+.classic-link,
+.classic-link:active, 
+.classic-link:focus {
+    color: #1a0dab;
+
+    &:hover {
+        color: #1a0dab;
+        text-decoration: underline;
+    }
+}
+
+
+.loader {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #555; /* Dark grey */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.invisible {
+    opacity: 0 !important;
+}
+
+// End of Global Basic Rules //
