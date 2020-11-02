@@ -6,17 +6,39 @@
     <link rel=icon href="/favicon.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>    
+        #link-items > a {
+            padding: 15px;
+            margin: 5px;
+            background: #eee;
+        }
+    </style>
 
+    <script>
+        var client = new XMLHttpRequest();
+        client.open('GET', '/items.txt');
+        client.onreadystatechange = function() {
+            var itemFileText = client.responseText;
+            var items = itemFileText.split("\n");
+            var itemsEl = document.getElementById("link-items");
+
+            itemsEl.innerHTML = "";
+            for(var i = 0; i < items.length; i++) {
+                var itemLinkEl = document.createElement("a");
+                itemLinkEl.href = items[i];
+                itemLinkEl.innerHTML = items[i];
+                itemsEl.appendChild(itemLinkEl);
+            }
+        }   
+        client.send();
+
+    </script>
 </head>
 
 <body>
     <h1 id="title">Programs</h1>
-    <a href="Tracer Raycer (EaselJS)/">Tracer Raycer</a>
-    <a href="Lazer%20Zomb/">Lazer Zomb Game</a>
-    <a href="Maze%20Solver/">Maze Solver</a>
-    <a href="Anagram%20Solver/">Anagram Solver</a>
-    <a href="Math%20Club%20Website/">Math Club Website</a>
-    <a href="Habit Creator/">HackED Habit Creator</a>
-
+    <div id="link-items">                
+    </div>
 </body>
 </html>

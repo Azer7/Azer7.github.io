@@ -301,13 +301,13 @@ body {
   overflow: hidden;
   border-bottom: 2px solid #3c3c3c;
   border-right: 2px solid #3c3c3c;
-  cursor: pointer;
+  cursor: default;
   background: black;
 }
 
 .calendar .date-grid .date .date-number {
   z-index: 99;
-  padding: 4px 0 0 0;
+  padding: 2px 0 0 0;
   text-align: center;
   border-radius: 100%;
   width: 35px;
@@ -351,7 +351,6 @@ body {
   --hidden-transform: 108%;
   --shown-partial-transform: 88%;
   --shown-full-transform: 74.6%;
-  cursor: default;
   width: 200%;
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
@@ -362,6 +361,7 @@ body {
   background: #ff9557;
   -webkit-transform: rotate(20deg) translateX(calc(var(--hidden-transform) * -1));
           transform: rotate(20deg) translateX(calc(var(--hidden-transform) * -1));
+  cursor: pointer;
 }
 
 .calendar .date-grid .trapezoid.right {
@@ -369,6 +369,7 @@ body {
   background: #57b6ff;
   -webkit-transform: rotate(20deg) translateX(var(--hidden-transform));
           transform: rotate(20deg) translateX(var(--hidden-transform));
+  cursor: pointer;
 }
 
 .calendar .date-grid .trapezoid.detection {
@@ -383,6 +384,11 @@ body {
 .calendar .date-grid .trapezoid.detection.right {
   -webkit-transform: rotate(20deg) translateX(var(--shown-full-transform));
           transform: rotate(20deg) translateX(var(--shown-full-transform));
+}
+
+.calendar .date-grid .date.full .date-number:hover {
+  -webkit-filter: brightness(85%);
+          filter: brightness(85%);
 }
 
 .calendar .date-grid .date.full .trapezoid.detection:hover + .trapezoid.left,

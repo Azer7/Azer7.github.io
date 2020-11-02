@@ -1,0 +1,634 @@
+Angus Beef Ribs
+---
+Tare
+Sesame Seeds
+Parsley
+3.5 oz
+
+===
+Gyu Tan Beef Tongue
+---
+S&P
+Parsley
+Wedge of Lemon
+3.0 oz
+
+===
+Bistro Hanger Steak
+---
+Miso
+Sesame Seeds
+Parsley
+3.5 oz
+
+===
+Bone-in Kalbi Short Rib
+---
+Premarinated, Parsley, 4 pc
+
+===
+Filet Mignon
+---
+Garlic, Sesame Seeds, Parsley, 3.5 oz
+
+===
+Garlic Shoyu Ribeye
+---
+Premarinated, Sesame Seeds, Parsley, 3.5 oz
+
+===
+Harami Skirt Steak
+---
+Miso, Sesame Seeds, Parsley, 3.5 oz (premium)
+
+===
+Harami in Secret Pot
+---
+Miso + Tail Soup, 2 Shishito Peppers, Bamboo Leaf, 8 oz
+
+===
+Horumon Intestine
+---
+Shio, Sesame Seeds, Parsley, 3.5 oz
+
+===
+Kalbi Chuck Rib
+---
+Tare, Sesame Seeds, Parsley, 3.5 oz
+
+===
+Kobe Style Kalbi Short Rib
+---
+Tare, Bamboo leaf, 1 slice onion, 1 pc tomato, 1 pc shishito, 1 pc button mushroom, sesame seeds, 3.5 oz (premium)
+
+===
+Premium New York Steak
+---
+Garlic, sesame seeds, parsley, 3.5 oz (premium)
+
+===
+Premium Sirloin
+---
+Tare, sesame seeds, parsley, 3.5 oz (premium)
+
+===
+Prime Garlic Shoyu Steak
+---
+Premarinated, Sesame seeds, Parsley, 3.5 oz (premium)
+
+===
+Prime Kalbi Short Rib
+---
+Tare, Sesame seeds, parsley, 3.5 oz (premium)
+
+===
+Sweet & Smoky BBQ Flank
+---
+Premarinated, Sesame seeds, parsley, 3.5 oz
+
+===
+Toro Beef
+---
+Tare, Sesame seeds, parsley, 3.5 oz
+
+===
+Yakishabu
+---
+Miso, sesame seeds, parsley, 3.5 oz
+
+===
+Chicken Breast
+---
+Basil or Garlic, sesame seeds, parsley, 3.5 oz
+
+===
+Duck Breast
+---
+Shio, sesame seeds, parsley, 3.5 oz
+
+===
+Garlic Shoyu Chicken
+---
+Premarinated, sesame seeds, parsley, 3.5 oz
+
+===
+Japanese Pork Sausages
+---
+no marinade, parsley, 4 pc
+
+===
+Pork Belly
+---
+Shio, sesame seeds, parsley, 3.5 oz
+
+===
+Pork Toro
+---
+Shio, sesame seeds, parsley, 3.5 oz
+
+===
+Spicy Pork
+---
+spicy gochujang, sesame seeds, parsley, 3.5 oz
+
+===
+BBQ Calamari Miso
+---
+miso, sesame seeds, parsley, 3.5 oz
+
+===
+BBQ Scallops
+---
+shio, sesame seeds, parsley, 4 pc
+
+===
+Miso Butter Salmon
+---
+butter and miso, shishito pepper, 3.5 oz
+
+===
+Shrimp Garlic
+---
+Garlic, sesame seeds, parsley, 4 pc
+
+===
+Egg Soup
+---
+tail soup, 
+beaten egg, 
+black pepper, 
+chopped green onions, 
+sesame seeds
+
+===
+Miso Soup
+---
+Miso soup, 
+wakame seaweed, 
+tofu, 
+green onions
+
+===
+Spicy Kalbi Soup
+---
+sesame oil, 
+kalbi, 
+zucchini, 
+button mushroom, 
+tail soup, 
+kalbi soup base, 
+spinach, 
+beaten egg, 
+green onions, 
+sesame seeds
+
+===
+Spicy Tofu Chigae Soup
+---
+tail soup, 
+ground chicken, 
+kimchee, 
+chigae paste, 
+tofu, 
+raw egg, 
+green onions, 
+sesame seeds
+
+===
+Chashu Bowl
+---
+rice, 
+chashu pork, 
+bbq sauce, 
+green onions, 
+sesame seeds
+
+===
+Garlic Fried Rice
+---
+sesame, 
+oil, 
+butter, 
+onion, 
+garlic, 
+rice, 
+shio sauce, 
+soy sauce, 
+egg yolk, 
+black pepper, 
+green onions, 
+garlic chips
+
+===
+Spicy Kalbi Bibimbap
+---
+Sesame oil, 
+prime kalbi, 
+rice, garlic, 
+red bell peppers, 
+corn, 
+shishito pepper, 
+bbq sauce, 
+spicy gochujang sauce, 
+green onion, 
+sesame seeds
+
+===
+Sukiyaki Bibimbap w/ beef
+---
+sesame oil, 
+butter, 
+yakishabu, 
+rice, 
+onion, 
+bbq sauce, 
+green onions, 
+sesame seeds
+
+===
+Sukiyaki Bibimbap w/ shrimp
+---
+sesame oil, butter, shrimp, rice, onion, bbq sauce, green onions, sesame seeds
+
+===
+Sukiyaki Bibimbap w/ veggie
+---
+sesame oil, 
+butter, 
+onion, 
+mushroom, 
+rice, 
+bbq sauce, 
+spinach, 
+green onion, 
+sesame seeds
+
+===
+Umami Scallion Rice
+---
+rice, 
+bbq sauce, 
+green onions, 
+sesame oil, 
+sesame seeds
+
+===
+Garlic Noodles (chicken/shrimp/veggies)
+---
+butter, 
+garlic paste, 
+tail soup, 
+bbq sauce, 
+ground chicken/shrimp/mushroom&spinach leaf, 
+garlic slice, 
+okinawa soba noodle, 
+red bell peppers, 
+green onions, 
+sesame seeds
+
+===
+Goma Negi Shio Ramen
+---
+sesame oil, 
+tail soup, 
+shio sauce, 
+ramen noodles, 
+boiled egg, 
+chashu pork, 
+green onions, 
+sesame seeds
+
+===
+Miso Butter Ramen
+---
+tail soup, 
+miso ramen soup base, 
+ramen noodle, 
+chashu pork, 
+corn, 
+boiled egg, 
+green onions, 
+sesame seeds, 
+butter
+
+===
+Spicy Kalbi Ramen
+---
+sesame oil, 
+kalbi chuck rib, 
+button mushroom, 
+zucchini, 
+tail soup, 
+kalbi soup base, 
+spinach, 
+ramen noodles, 
+boiled egg, 
+green onions, 
+sesame seeds
+
+===
+Asparagus
+---
+butter, 
+shio sauce, 
+asparagus
+
+===
+Assorted Veggies
+---
+butter, 
+corn, 
+zucchini, 
+sliced onion, 
+button mushroom, 
+shishito pepper, 
+grape tomato, 
+sea salt
+
+===
+Brocooli
+---
+butter, 
+broccoli, 
+shio sauce
+
+===
+Corn
+---
+butter, 
+corn, 
+soy sauce
+
+===
+Garlic Mushroom
+---
+Butter, 
+button mushroom, 
+shio sauce, 
+garlic paste
+
+===
+Spinach Garlic
+---
+butter, 
+spinach, 
+garlic slice, 
+shio sauce
+
+===
+Sweet Onion
+---
+sliced onions, bbq sauce, sesame seeds
+
+===
+Zucchini
+---
+sliced zucchini, shio sauce, sesame seeds
+
+===
+Cheese Wontons
+---
+cabbage, cheese wonton, chili mayo
+
+===
+Edamame
+---
+edamame, sea salt
+
+===
+Fried Bacon Chips
+---
+cabbage, 
+karaage powder, 
+pork belly, 
+sea salt, 
+lemon wedge
+
+===
+Fried Crunchy Calamari
+---
+cabbage, 
+karaage powder, 
+calamari, 
+chili mayo, 
+parsley, 
+lemon wedge
+
+===
+Fried Pork Dumplings
+---
+cabbage, 
+pork dumplings, 
+ponzu sauce
+
+===
+Japanese Fried Chicken
+---
+cabbage, 
+karaage powder, 
+garlic shoyu chicken, 
+parsley, 
+chili mayo, 
+lemon wedge
+
+===
+Miso Chili Wings
+---
+cabbage, 
+chicken wing, 
+crunchy garlic sauce, 
+miso sauce, 
+sesame seeds, 
+parsley
+
+===
+Tofu Nuggets
+---
+cabbage, 
+tofu nuggets, 
+chili mayo
+
+===
+Spicy Tuna Volcano
+---
+Volvano rice ball, 
+spicy tuna, 
+bbq sauce, 
+green onions, 
+sesame seeds
+
+===
+Steamed Chili Dumplings
+---
+gyoza pork dumplings, 
+crunchy garlic sauce, 
+ponzu sauce, 
+green onions, 
+sesame seeds
+
+===
+Yuzu Shishito Peppers
+---
+shishito peppers, 
+butter, 
+sesame oil, 
+yuzu sauce, 
+shio sauce, 
+sesame seeds
+
+===
+Avocado Salad
+---
+mixed greens, 
+wasabi yuzy dressing, 
+avocado, 
+japanese mayo, 
+cucumber slice, 
+grape tomato
+
+===
+Gyu-Kaku Salad
+---
+mixed greens, 
+cabbage, 
+daikon, 
+Gyu-Kaku house dressing, 
+red bell pepper, 
+cucumber slice, 
+grape tomato, 
+boiled egg
+
+===
+Addicting Cabbage Salad
+---
+cabbage, 
+shio sauce, 
+sesame oil, 
+sesame seeds
+
+===
+Cabbage Kim-chee
+---
+cabbage kimchee, 
+sesame seeds
+
+===
+Shio Negi Tofu
+---
+tofu, 
+shio sauce, 
+sesame oil, 
+green onion, 
+sesame seeds
+
+===
+Shrimp & Mushroom Ahijo
+---
+olive oil, 
+garlic cloves, 
+butter, 
+shrimp, 
+button mushroom, 
+shio sauce, 
+basil pesto, 
+red pepper flakes
+
+===
+Spicy Addicting Cucumber
+---
+cucumber, 
+crunchy garlic sauce, 
+shio sauce, 
+sesame oil, 
+sea salt, 
+sesame seeds
+
+===
+Spicy Cold Tofu
+---
+tofu, 
+cabbage kimchee, 
+crunchy garlic sauce, 
+ponzu, 
+green onions, 
+sesame seeds
+
+===
+Tuna Poke
+---
+mixed greens, 
+tuna, 
+onion, 
+poke sauce, 
+green onions, 
+sesame seeds
+
+===
+Scallion Sauce
+---
+green onions, sesame oil, shio sauce
+
+===
+Tail Soup
+---
+tail soup base, sesame oil, water
+
+===
+Miso Soup (recipe)
+---
+Miso, hondashi, water
+
+===
+Tuna Poke Sauce
+---
+soy sauce, sriracha, sesame oil
+
+===
+Shio (Gluten Free)
+---
+Light white soy-hints of Garlic & Ginger, sesame oil, great with lemon
+
+===
+Tare (Gluten Free)
+---
+Sweet soy w/ hints of Ginger & Fruit juices,
+
+===
+Miso
+---
+Sweet & Zesty Miso BBQ sauce
+
+===
+Garlic (Gluten Free)
+---
+Garlic Puree w/ shio marinade, sesame oil, great with lemon
+
+===
+Basil (Gluten Free)
+---
+Italian Basil w/ shio marinade, sesame oil
+
+===
+Spicy Gochujang
+---
+Sweet & Spicy Red Pepper w/ garlic & ginger
+
+===
+Teriyaki
+---
+sweet soy glaze
+
+===
+Sweet Soy Sauce (gluten free)
+---
+Great with rice and everything! (soy sauce and sugar)
+
+===
+Spicy (gluten free)
+---
+sweeter than spicy, great with rice & everything!
+
+===
+Ponzu
+---
+Sweet citrus, great for dry marinades (s&p)

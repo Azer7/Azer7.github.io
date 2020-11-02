@@ -34,12 +34,12 @@
             overflow: hidden;
             border-bottom: $calendar-border;
             border-right: $calendar-border;
-            cursor: pointer;
+            cursor: default;
             background: black;
 
             .date-number {
                 z-index: 99;
-                padding: 4px 0 0 0;
+                padding: 2px 0 0 0;
                 text-align: center;
                 border-radius: 100%;
                 width: 35px;
@@ -88,8 +88,6 @@
             --shown-partial-transform: 88%;
             // --shown-full-transform: 82%;
             --shown-full-transform: 74.6%;
-            cursor: default;
-
             width: 200%;
             transition: 0.3s ease-in-out;
 
@@ -98,6 +96,8 @@
                 left: 0;
                 background: #ff9557;
                 transform: rotate(20deg) translateX(calc(var(--hidden-transform) * -1));
+                cursor: pointer;
+
                 // border-bottom: var(--date-height-px) solid #ff9557;
                 // border-left: 0px solid transparent;
                 // border-right: var(--date-diagonal-offset) solid transparent;  
@@ -108,6 +108,8 @@
                 right: 0;
                 background: #57b6ff;
                 transform: rotate(20deg) translateX(var(--hidden-transform));
+                cursor: pointer;
+
                 // border-bottom: var(--date-height-px) solid #57b6ff;
                 // border-left: var(--date-diagonal-offset) solid transparent;
                 // border-right: 0px solid transparent;
@@ -137,6 +139,12 @@
         }
 
         .date.full {
+
+            .date-number {
+                &:hover {
+                    filter: brightness(85%);
+                }
+            }
 
             .trapezoid.detection:hover+.trapezoid,
             .trapezoid.display:hover {

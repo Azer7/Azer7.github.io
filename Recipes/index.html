@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sketch</title>
+    <link rel=icon href="/favicon.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @font-face {
+            font-family: thicccBoi;
+            src: url(ThicccBoi/THICCCBOI-Regular.woff2);
+            font-weight: normal;
+        }
+
+        body {
+            font-family: thicccBoi;
+            -webkit-font-smoothing: antialiased;
+            
+        }
+
+        .recipe-heading {
+            margin: 25px 0 5px 0;
+        }
+
+        .recipe-content {
+            margin: 0px;
+        }
+    </style>
+
+    <script>
+        String.prototype.trimChar = function (charlist) {
+            if (charlist === undefined)
+                charlist = "\s";
+
+            trimmed = this;
+            var trimmed = trimmed.replace(new RegExp("[" + charlist + "]+$"), "");
+            trimmed = trimmed.replace(new RegExp("^[" + charlist + "]+"), "");
+
+            return trimmed;
+        };
+
+        Promise.all([
+            fetch('gyu-kaku.txt').then(x => x.text()),
+        ]).then(([itemFileText]) => {
+            var recipes = itemFileText.split("===");
+            var itemsEl = document.getElementById("recipe-items");
+
+            itemsEl.innerHTML = "";
+            for (var i = 0; i < recipes.length; i++) {
+                var recipeHeading, recipeContent;
+                [recipeHeading, recipeContent] = recipes[i].split("---");
+                recipeHeading = recipeHeading.replaceAll("\r\n", "");
+                recipeHeading = recipeHeading.replaceAll("\n", "");
+
+                recipeContent = recipeContent.replaceAll("\r\n", ",");
+                recipeContent = recipeContent.replaceAll("\n", ",");
+                recipeContent = recipeContent.replaceAll(",,", ",");
+                recipeContent = recipeContent.replaceAll(", ,", ",");
+
+                recipeContent = recipeContent.trimChar(",");
+
+                recipeContent = recipeContent.replaceAll(",", ", ");
+
+                var recipeEl = document.createElement("div");
+
+                var recipeHeadingEl = document.createElement("h3");
+                recipeHeadingEl.classList.add("recipe-heading");
+                recipeHeadingEl.innerHTML = recipeHeading;
+
+                var recipeContentEl = document.createElement("p");
+                recipeContentEl.classList.add("recipe-content");
+                recipeContentEl.innerHTML = recipeContent;
+
+                recipeEl.appendChild(recipeHeadingEl);
+                recipeEl.appendChild(recipeContentEl);
+
+                itemsEl.appendChild(recipeEl);
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <h1 id="title">Gyu-Kaku Recipes</h1>
+    <div id="recipe-items">
+    </div>
+</body>
+
+</html>
